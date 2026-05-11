@@ -3,1131 +3,1484 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MC3D — Portfolio</title>
+  <title>MC3D — Design & Stampa 3D</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ─── Reset & base ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:        #0c0c0e;
-      --surface:   #141418;
-      --card:      #1a1a20;
-      --border:    #2a2a35;
-      --gold:      #c8a84b;
-      --gold-dim:  #8a6e2a;
-      --text:      #e8e8ea;
-      --muted:     #7a7a8a;
-      --white:     #ffffff;
-      --radius:    6px;
-      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --black:   #0a0a0b;
+      --dark:    #111114;
+      --surface: #18181d;
+      --card:    #1e1e24;
+      --border:  #2c2c35;
+      --gold:    #c9a84c;
+      --gold2:   #e8c96a;
+      --red:     #c0392b;
+      --text:    #e8e8ea;
+      --muted:   #888898;
+      --light:   #f5f5f7;
+      --white:   #ffffff;
+      --r:       4px;
+      --ease:    cubic-bezier(.4,0,.2,1);
     }
     html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    h1, h2, h3, h4 {
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
+    body { background: var(--dark); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; overflow-x: hidden; }
+    h1,h2,h3,h4,h5 { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: .04em; }
     a { color: inherit; text-decoration: none; }
     img { display: block; width: 100%; object-fit: cover; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-    /* ─── Scrollbar ─── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+    /* ── ANNOUNCEMENT BAR ── */
+    .announce {
+      background: var(--black);
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid #1e1e26;
+    }
+    .announce span { color: var(--muted); margin: 0 12px; }
 
-    /* ─── Header / Nav ─── */
+    /* ── HEADER ── */
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: sticky;
+      top: 0; z-index: 500;
+      background: rgba(10,10,11,.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 64px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 48px;
-      height: 70px;
-      background: rgba(12, 12, 14, 0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      transition: background var(--transition);
+      gap: 40px;
     }
     .logo {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--white);
-      text-transform: uppercase;
-    }
-    .logo span { color: var(--gold); }
-    nav { display: flex; gap: 36px; align-items: center; }
-    nav a {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
+      letter-spacing: .1em;
+      white-space: nowrap;
       cursor: pointer;
-      transition: color var(--transition);
+    }
+    .logo em { font-style: normal; color: var(--gold); }
+    .main-nav { display: flex; gap: 2px; flex: 1; }
+    .nav-item {
       position: relative;
     }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--gold);
-      transition: width var(--transition);
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 14px;
+      height: 64px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .2s;
+      white-space: nowrap;
     }
-    nav a:hover, nav a.active { color: var(--white); }
-    nav a:hover::after, nav a.active::after { width: 100%; }
-
-    /* ─── Pages (view management) ─── */
-    .page {
+    .nav-link:hover, .nav-link.active { color: var(--white); }
+    .nav-link svg { width: 10px; transition: transform .2s; }
+    .nav-item:hover .nav-link svg { transform: rotate(180deg); }
+    /* Dropdown */
+    .dropdown {
       display: none;
-      min-height: 100vh;
-      padding-top: 70px;
+      position: absolute;
+      top: 100%; left: 0;
+      min-width: 200px;
+      background: var(--black);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      padding: 8px 0;
+      z-index: 600;
     }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      transition: color .2s, background .2s;
+    }
+    .dropdown a:hover { color: var(--white); background: rgba(255,255,255,.04); }
+    .header-actions { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+    .icon-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      transition: color .2s;
+      border-radius: 50%;
+    }
+    .icon-btn:hover { color: var(--white); }
+    .icon-btn svg { width: 20px; }
+
+    /* ── PAGE MANAGER ── */
+    .page { display: none; }
     .page.active { display: block; }
 
-    /* ─── HERO ─── */
-    #home.page { display: block; }
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,168,75,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(100,80,180,0.06) 0%, transparent 60%),
-        linear-gradient(180deg, #0c0c0e 0%, #111116 100%);
-    }
-    /* Animated grid lines */
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(200,168,75,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,168,75,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      animation: grid-drift 30s linear infinite;
-    }
-    @keyframes grid-drift {
-      0%   { transform: translateY(0); }
-      100% { transform: translateY(60px); }
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 0 24px; }
-    .hero-eyebrow {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: clamp(44px, 7vw, 88px);
-      line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 24px;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--gold);
-    }
-    .hero p {
-      font-size: 17px;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 48px;
-      line-height: 1.7;
-    }
-    .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      padding: 14px 36px;
-      background: var(--gold);
-      color: #0c0c0e;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
-    }
-    .btn-primary:hover { background: #e0bc60; transform: translateY(-2px); }
-    .btn-outline {
-      padding: 14px 36px;
-      background: transparent;
-      color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: border-color var(--transition), color var(--transition), transform var(--transition);
-    }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-    /* Scroll indicator */
-    .scroll-hint {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      animation: bounce 2s ease-in-out infinite;
-    }
-    .scroll-hint svg { width: 20px; opacity: 0.5; }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(8px); }
-    }
+    /* ════════════════════════
+       HOME PAGE
+    ════════════════════════ */
 
-    /* ─── Home sections teaser ─── */
-    .teaser-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 80px 48px;
-    }
-    .teaser-card {
+    /* Hero Slider */
+    .hero-slider {
       position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      aspect-ratio: 4/3;
-      background: var(--card);
-    }
-    .teaser-thumb {
       width: 100%;
-      height: 100%;
-      background: var(--card);
-      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+      height: calc(100vh - 98px);
+      min-height: 500px;
+      overflow: hidden;
+      background: var(--black);
     }
-    .teaser-card:hover .teaser-thumb { transform: scale(1.05); }
-    .teaser-overlay {
+    .slide {
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(12,12,14,0.9) 0%, rgba(12,12,14,0.1) 60%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 32px;
-      transition: background var(--transition);
+      opacity: 0;
+      transition: opacity 1s var(--ease);
     }
-    .teaser-card:hover .teaser-overlay {
-      background: linear-gradient(0deg, rgba(12,12,14,0.95) 0%, rgba(12,12,14,0.3) 60%);
-    }
-    .teaser-tag {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-    .teaser-overlay h3 {
-      font-size: 28px;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-    .teaser-overlay p { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
-    .teaser-arrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      transition: gap var(--transition);
-    }
-    .teaser-card:hover .teaser-arrow { gap: 14px; }
-    .teaser-arrow svg { width: 16px; }
-
-    /* ─── Section page header ─── */
-    .page-header {
-      padding: 80px 48px 48px;
-      border-bottom: 1px solid var(--border);
+    .slide.active { opacity: 1; }
+    .slide-bg {
+      width: 100%; height: 100%;
       position: relative;
-      overflow: hidden;
     }
-    .page-header::before {
+    /* Gradient overlays for text readability */
+    .slide-bg::after {
       content: '';
       position: absolute;
-      top: -40px; left: -40px;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(200,168,75,0.06) 0%, transparent 70%);
-      pointer-events: none;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(10,10,11,.85) 0%, rgba(10,10,11,.3) 55%, rgba(10,10,11,.1) 100%),
+                  linear-gradient(0deg, rgba(10,10,11,.6) 0%, transparent 40%);
     }
-    .back-btn {
+    .slide-content {
+      position: absolute;
+      bottom: 80px; left: 80px;
+      z-index: 2;
+      max-width: 540px;
+    }
+    .slide-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      border-radius: var(--r);
+    }
+    .slide-content h2 {
+      font-size: clamp(36px, 5vw, 72px);
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 12px;
+      text-shadow: 0 2px 20px rgba(0,0,0,.5);
+    }
+    .slide-content p {
+      font-size: 15px;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .slide-cta {
       display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 30px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      border-radius: var(--r);
+      transition: background .2s, gap .2s;
+    }
+    .slide-cta:hover { background: var(--gold2); gap: 16px; }
+    .slide-cta svg { width: 16px; }
+    /* Slider controls */
+    .slider-dots {
+      position: absolute;
+      bottom: 30px; left: 80px;
+      display: flex;
+      gap: 8px;
+      z-index: 3;
+    }
+    .dot {
+      width: 28px; height: 3px;
+      background: rgba(255,255,255,.25);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background .3s, width .3s;
+    }
+    .dot.active { background: var(--gold); width: 48px; }
+    .slider-arrows {
+      position: absolute;
+      bottom: 20px; right: 60px;
+      display: flex;
+      gap: 8px;
+      z-index: 3;
+    }
+    .arrow-btn {
+      width: 44px; height: 44px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.6);
+      transition: border-color .2s, color .2s;
+    }
+    .arrow-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .arrow-btn svg { width: 18px; }
+
+    /* Section headings */
+    .section-head {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 60px 40px 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .section-head h3 {
+      font-size: clamp(24px, 3vw, 36px);
+      color: var(--white);
+    }
+    .section-head h3 span { color: var(--gold); }
+    .view-all {
+      display: flex;
       align-items: center;
       gap: 8px;
       font-family: 'Rajdhani', sans-serif;
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--muted);
-      cursor: pointer;
-      margin-bottom: 24px;
-      transition: color var(--transition);
-      border: none;
-      background: none;
+      transition: color .2s;
     }
-    .back-btn:hover { color: var(--gold); }
-    .back-btn svg { width: 16px; }
-    .page-header h2 {
-      font-size: clamp(36px, 5vw, 64px);
+    .view-all:hover { color: var(--gold); }
+    .view-all svg { width: 14px; }
+
+    /* Product grid */
+    .product-grid {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 40px 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+      position: relative;
+    }
+    .product-card:hover {
+      border-color: rgba(201,168,76,.35);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.45);
+    }
+    .card-image {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      position: relative;
+      background: var(--surface);
+    }
+    .card-image img,
+    .card-image .thumb-art {
+      width: 100%;
+      height: 100%;
+      transition: transform .5s var(--ease);
+    }
+    .product-card:hover .card-image img,
+    .product-card:hover .card-image .thumb-art { transform: scale(1.06); }
+    /* Badge */
+    .card-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      padding: 4px 10px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      z-index: 2;
+    }
+    .badge-new     { background: var(--gold); color: var(--black); }
+    .badge-featured{ background: var(--red);  color: var(--white); }
+    .badge-soon    { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+    /* Card body */
+    .card-body { padding: 14px 16px 18px; }
+    .card-series {
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+    .card-title {
+      font-size: 17px;
       color: var(--white);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .card-sub {
+      font-size: 12px;
+      color: var(--muted);
       margin-bottom: 12px;
     }
-    .page-header h2 span { color: var(--gold); }
-    .page-header p { color: var(--muted); max-width: 500px; font-size: 15px; }
-
-    /* ─── Gallery grid ─── */
-    .gallery-container { padding: 48px; max-width: 1400px; margin: 0 auto; }
-    .filter-bar {
+    .card-meta {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 40px;
     }
-    .filter-btn {
-      padding: 8px 20px;
-      background: transparent;
+    .chip {
+      padding: 3px 8px;
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 100px;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
       color: var(--muted);
+    }
+
+    /* Banner divider */
+    .banner-strip {
+      max-width: 1440px;
+      margin: 0 auto 60px;
+      padding: 0 40px;
+    }
+    .banner-inner {
+      position: relative;
+      border-radius: var(--r);
+      overflow: hidden;
+      aspect-ratio: 21/6;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .banner-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(10,10,11,.8) 30%, rgba(10,10,11,.1) 100%);
+      z-index: 1;
+    }
+    .banner-art {
+      position: absolute;
+      inset: 0;
+    }
+    .banner-text {
+      position: relative;
+      z-index: 2;
+      padding: 0 60px;
+    }
+    .banner-text .eyebrow {
+      font-size: 11px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .banner-text h3 { font-size: clamp(22px, 3vw, 42px); color: var(--white); margin-bottom: 16px; }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border: 1px solid var(--gold);
+      border-radius: var(--r);
+      color: var(--gold);
       font-family: 'Rajdhani', sans-serif;
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: .15em;
       text-transform: uppercase;
-      cursor: pointer;
-      transition: all var(--transition);
+      transition: background .2s, color .2s, gap .2s;
     }
-    .filter-btn:hover, .filter-btn.active {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(200,168,75,0.06);
-    }
-    .gallery-grid {
+    .btn-ghost:hover { background: var(--gold); color: var(--black); gap: 14px; }
+    .btn-ghost svg { width: 14px; }
+
+    /* Two-col banners */
+    .dual-banner {
+      max-width: 1440px;
+      margin: 0 auto 80px;
+      padding: 0 40px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
     }
-    .item-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    }
-    .item-card:hover {
-      border-color: var(--gold-dim);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,168,75,0.1);
-    }
-    .item-thumb {
-      aspect-ratio: 4/3;
-      width: 100%;
+    .dual-card {
       position: relative;
+      aspect-ratio: 4/3;
       overflow: hidden;
+      border-radius: var(--r);
+      cursor: pointer;
     }
-    .item-thumb img { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); height: 100%; object-fit: cover; }
-    .item-card:hover .item-thumb img { transform: scale(1.06); }
-    .item-info { padding: 20px; }
-    .item-category {
-      font-size: 11px;
-      letter-spacing: 0.2em;
+    .dual-card .thumb-art {
+      width: 100%; height: 100%;
+      transition: transform .5s var(--ease);
+    }
+    .dual-card:hover .thumb-art { transform: scale(1.04); }
+    .dual-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(10,10,11,.88) 0%, rgba(10,10,11,.1) 55%);
+    }
+    .dual-card-text {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px;
+      z-index: 2;
+    }
+    .dual-card-text .eyebrow {
+      font-size: 10px;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 6px;
     }
-    .item-info h4 { font-size: 20px; color: var(--white); margin-bottom: 8px; }
-    .item-info p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .item-meta {
-      display: flex;
-      gap: 16px;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    .meta-chip {
-      font-size: 11px;
-      letter-spacing: 0.1em;
+    .dual-card-text h3 { font-size: clamp(20px, 2.5vw, 32px); color: var(--white); margin-bottom: 10px; }
+    .dual-card-text p { font-size: 13px; color: rgba(255,255,255,.6); margin-bottom: 16px; }
+    .link-arr {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--gold);
+      transition: gap .2s;
+    }
+    .dual-card:hover .link-arr { gap: 14px; }
+    .link-arr svg { width: 14px; }
+
+    /* ════════════════════════
+       COLLECTION PAGE
+    ════════════════════════ */
+    .collection-hero {
+      width: 100%;
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .collection-hero .hero-art {
+      width: 100%;
+      height: 100%;
+      opacity: .4;
+    }
+    .collection-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, var(--dark) 0%, transparent 60%);
+    }
+    .collection-hero-text {
+      position: absolute;
+      bottom: 32px; left: 0; right: 0;
+      text-align: center;
+      z-index: 2;
+    }
+    .collection-hero-text .eyebrow {
+      font-size: 11px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .collection-hero-text h2 { font-size: clamp(30px, 4vw, 52px); color: var(--white); }
+    .collection-hero-text h2 em { font-style: normal; color: var(--gold); }
+
+    /* Toolbar */
+    .collection-toolbar {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 28px 40px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
     }
-    .meta-chip svg { width: 13px; opacity: 0.6; }
+    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-pill {
+      padding: 7px 18px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: all .2s;
+    }
+    .filter-pill:hover, .filter-pill.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,.07);
+    }
+    .sort-select {
+      padding: 7px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      outline: none;
+    }
+    .sort-select option { background: var(--card); }
+    .count-label { font-size: 13px; color: var(--muted); white-space: nowrap; }
 
-    /* ─── Detail Modal ─── */
+    /* Collection grid */
+    .collection-grid-wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+    }
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    /* ════════════════════════
+       DETAIL MODAL
+    ════════════════════════ */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      z-index: 200;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
+      z-index: 900;
+      background: rgba(0,0,0,.88);
+      backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity var(--transition);
+      transition: opacity .3s;
     }
     .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal {
+    .modal-box {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      max-width: 960px;
+      border-radius: 8px;
+      max-width: 1000px;
       width: 100%;
-      max-height: 90vh;
+      max-height: 92vh;
       overflow-y: auto;
-      transform: translateY(24px);
-      transition: transform var(--transition);
+      transform: scale(.97) translateY(16px);
+      transition: transform .3s var(--ease);
     }
-    .modal-overlay.open .modal { transform: translateY(0); }
-    .modal-inner { display: grid; grid-template-columns: 1fr 1fr; }
-    .modal-image {
-      aspect-ratio: 1;
+    .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .modal-img-wrap {
+      aspect-ratio: 3/4;
       background: var(--card);
       overflow: hidden;
-      border-radius: 10px 0 0 10px;
+      border-radius: 8px 0 0 8px;
     }
-    .modal-image img { width: 100%; height: 100%; object-fit: cover; }
-    .modal-body { padding: 40px; display: flex; flex-direction: column; }
+    .modal-img-wrap .thumb-art { width: 100%; height: 100%; }
+    .modal-content { padding: 48px 40px; display: flex; flex-direction: column; overflow-y: auto; }
     .modal-eyebrow {
       font-size: 11px;
-      letter-spacing: 0.2em;
+      letter-spacing: .22em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-    .modal-body h2 { font-size: 36px; color: var(--white); margin-bottom: 16px; }
-    .modal-body .desc { font-size: 14px; color: var(--muted); line-height: 1.75; flex: 1; }
-    .modal-specs {
+    .modal-content h2 { font-size: 38px; color: var(--white); margin-bottom: 8px; line-height: 1.1; }
+    .modal-series { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .modal-divider { height: 1px; background: var(--border); margin: 20px 0; }
+    .modal-desc { font-size: 14px; color: var(--muted); line-height: 1.8; flex: 1; }
+    .modal-specs-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 24px 0;
+      gap: 10px;
+      margin-top: 24px;
     }
-    .spec-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; }
-    .spec-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-    .spec-value { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600; color: var(--white); }
-    .modal-close {
+    .spec-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 12px 14px; }
+    .spec-box .spec-label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .spec-box .spec-val { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600; color: var(--white); }
+    .modal-close-btn {
       position: absolute;
-      top: 16px; right: 16px;
-      width: 36px; height: 36px;
+      top: 14px; right: 14px;
+      width: 34px; height: 34px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       color: var(--muted);
-      transition: color var(--transition), border-color var(--transition);
+      transition: color .2s, border-color .2s;
+      z-index: 10;
     }
-    .modal-close:hover { color: var(--white); border-color: var(--gold); }
+    .modal-close-btn:hover { color: var(--white); border-color: var(--gold); }
+    .modal-close-btn svg { width: 14px; }
     .modal-overlay { position: fixed; }
 
-    /* ─── Contact page ─── */
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+    /* ════════════════════════
+       CONTACT PAGE
+    ════════════════════════ */
+    .contact-hero {
+      background: var(--black);
+      text-align: center;
+      padding: 80px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-hero .eyebrow { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .contact-hero h2 { font-size: clamp(28px, 4vw, 52px); color: var(--white); margin-bottom: 12px; }
+    .contact-hero p { color: var(--muted); max-width: 480px; margin: 0 auto; font-size: 15px; }
+    .contact-wrap {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 64px 48px;
+      padding: 72px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
     }
-    .contact-info h3 { font-size: 24px; color: var(--white); margin-bottom: 16px; }
-    .contact-info p { color: var(--muted); line-height: 1.8; margin-bottom: 32px; font-size: 14px; }
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .contact-icon {
-      width: 40px; height: 40px;
-      background: rgba(200,168,75,0.08);
-      border: 1px solid rgba(200,168,75,0.2);
-      border-radius: var(--radius);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+    .contact-aside h4 { font-size: 20px; color: var(--white); margin-bottom: 12px; }
+    .contact-aside p { font-size: 13px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; }
+    .c-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 22px; }
+    .c-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: rgba(201,168,76,.08);
+      border: 1px solid rgba(201,168,76,.2);
+      border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
       color: var(--gold);
     }
-    .contact-icon svg { width: 18px; }
-    .contact-item-text .label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-    .contact-item-text .value { font-size: 15px; color: var(--text); }
-    /* Form */
-    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .c-icon svg { width: 17px; }
+    .c-label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .c-val { font-size: 14px; color: var(--text); }
+    .contact-form { display: flex; flex-direction: column; gap: 18px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 8px; }
-    .form-group label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .fg { display: flex; flex-direction: column; gap: 7px; }
+    .fg label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .fg input, .fg select, .fg textarea {
+      padding: 11px 14px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px 16px;
+      border-radius: var(--r);
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       outline: none;
-      transition: border-color var(--transition);
       resize: none;
+      transition: border-color .2s;
     }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus { border-color: var(--gold); }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: var(--muted); }
-    .form-group select option { background: var(--card); }
-    .form-group textarea { min-height: 130px; }
-    .form-submit {
-      padding: 14px 36px;
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--gold); }
+    .fg input::placeholder, .fg textarea::placeholder { color: var(--muted); }
+    .fg select option { background: var(--card); }
+    .fg textarea { min-height: 120px; }
+    .btn-gold {
+      padding: 13px 32px;
       background: var(--gold);
-      color: #0c0c0e;
+      color: var(--black);
       font-family: 'Rajdhani', sans-serif;
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.15em;
+      letter-spacing: .15em;
       text-transform: uppercase;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
+      border-radius: var(--r);
       align-self: flex-start;
-      transition: background var(--transition), transform var(--transition);
+      transition: background .2s, transform .2s;
     }
-    .form-submit:hover { background: #e0bc60; transform: translateY(-2px); }
-    .form-success {
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+    .form-ok {
       display: none;
-      padding: 16px 20px;
-      background: rgba(200,168,75,0.08);
-      border: 1px solid rgba(200,168,75,0.3);
-      border-radius: var(--radius);
+      padding: 14px 18px;
+      background: rgba(201,168,76,.08);
+      border: 1px solid rgba(201,168,76,.25);
+      border-radius: var(--r);
       color: var(--gold);
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    /* ─── Footer ─── */
+    /* ════════════════════════
+       FOOTER
+    ════════════════════════ */
     footer {
+      background: var(--black);
       border-top: 1px solid var(--border);
-      padding: 40px 48px;
+    }
+    .footer-top {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-brand .logo { font-size: 22px; margin-bottom: 14px; display: block; }
+    .footer-brand p { font-size: 13px; color: var(--muted); line-height: 1.8; max-width: 260px; }
+    .footer-col h5 {
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 13px; color: var(--muted); transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 20px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
     }
-    .footer-logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .footer-logo span { color: var(--gold); }
-    footer p { font-size: 12px; color: var(--muted); }
+    .footer-bottom p { font-size: 12px; color: var(--muted); }
 
-    /* ─── Thumb placeholders (CSS art) ─── */
-    .thumb-obj-1  { background: linear-gradient(135deg, #1e1e2e 0%, #2a1e3e 50%, #1a2040 100%); }
-    .thumb-obj-2  { background: linear-gradient(135deg, #1a2040 0%, #0e1e30 50%, #1e2820 100%); }
-    .thumb-obj-3  { background: linear-gradient(135deg, #2e1a1a 0%, #3a2010 50%, #201824 100%); }
-    .thumb-obj-4  { background: linear-gradient(135deg, #121e2e 0%, #1e2a10 50%, #2a1e10 100%); }
-    .thumb-obj-5  { background: linear-gradient(135deg, #1e2a2e 0%, #0e2030 50%, #1a1e3a 100%); }
-    .thumb-obj-6  { background: linear-gradient(135deg, #2a2010 0%, #1e1830 50%, #101e2a 100%); }
-    .thumb-dio-1  { background: linear-gradient(135deg, #0e1e10 0%, #1e2a10 50%, #2a2e10 100%); }
-    .thumb-dio-2  { background: linear-gradient(135deg, #1e0e10 0%, #2e1820 50%, #101828 100%); }
-    .thumb-dio-3  { background: linear-gradient(135deg, #100e1e 0%, #201030 50%, #0e1820 100%); }
-    .thumb-dio-4  { background: linear-gradient(135deg, #2e2010 0%, #1e1810 50%, #101e28 100%); }
-
-    /* Thumb design elements */
-    .thumb-wrap {
+    /* ── Thumb art CSS ── */
+    .thumb-art {
       width: 100%;
       height: 100%;
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       overflow: hidden;
     }
-    .thumb-wrap::before {
+    .thumb-art::before {
       content: '';
       position: absolute;
-      width: 60%;
-      height: 60%;
-      border: 1px solid rgba(200,168,75,0.15);
+      width: 55%;
+      height: 55%;
+      border: 1px solid rgba(201,168,76,.12);
       border-radius: 50%;
-      animation: rotate 20s linear infinite;
+      animation: spin 25s linear infinite;
     }
-    .thumb-wrap::after {
+    .thumb-art::after {
       content: '';
       position: absolute;
       width: 30%;
       height: 30%;
-      border: 1px solid rgba(200,168,75,0.25);
+      border: 1px solid rgba(201,168,76,.2);
       border-radius: 50%;
-      animation: rotate 10s linear infinite reverse;
+      animation: spin 12s linear infinite reverse;
     }
-    @keyframes rotate { to { transform: rotate(360deg); } }
-    .thumb-icon {
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .thumb-art .ta-icon {
       position: relative;
       z-index: 1;
-      color: rgba(200,168,75,0.4);
-      font-size: 48px;
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
+      font-size: 38px;
+      color: rgba(201,168,76,.35);
+      letter-spacing: .1em;
     }
+    /* Colour variants */
+    .ta-1 { background: linear-gradient(135deg,#131320 0%,#1c1528 60%,#0f1525 100%); }
+    .ta-2 { background: linear-gradient(135deg,#0f1a20 0%,#0e2010 60%,#182010 100%); }
+    .ta-3 { background: linear-gradient(135deg,#20100f 0%,#2a1808 60%,#1a1020 100%); }
+    .ta-4 { background: linear-gradient(135deg,#0e1528 0%,#1e1008 60%,#180e28 100%); }
+    .ta-5 { background: linear-gradient(135deg,#1a1020 0%,#0a1a28 60%,#1a2010 100%); }
+    .ta-6 { background: linear-gradient(135deg,#201510 0%,#100e28 60%,#0e1818 100%); }
+    .ta-7 { background: linear-gradient(135deg,#0e2018 0%,#181028 60%,#2a1808 100%); }
+    .ta-8 { background: linear-gradient(135deg,#100e20 0%,#201810 60%,#0e1820 100%); }
+    .ta-9 { background: linear-gradient(135deg,#1a0e28 0%,#0e2010 60%,#201028 100%); }
+    .ta-10{ background: linear-gradient(135deg,#0a1828 0%,#280e10 60%,#101828 100%); }
 
-    /* ─── Responsive ─── */
-    @media (max-width: 900px) {
-      header { padding: 0 24px; }
-      nav { gap: 20px; }
-      .teaser-grid { grid-template-columns: 1fr; padding: 48px 24px; gap: 16px; }
-      .gallery-container { padding: 32px 24px; }
-      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-      .contact-layout { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px; }
-      .page-header { padding: 64px 24px 36px; }
-      .modal-inner { grid-template-columns: 1fr; }
-      .modal-image { border-radius: 10px 10px 0 0; aspect-ratio: 16/9; }
-      .form-row { grid-template-columns: 1fr; }
-      footer { padding: 32px 24px; }
+    /* ── Responsive ── */
+    @media(max-width:1100px) {
+      .product-grid { grid-template-columns: repeat(3,1fr); }
+      .collection-grid { grid-template-columns: repeat(3,1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 600px) {
-      nav a span { display: none; }
-      .hero h1 { font-size: 40px; }
+    @media(max-width:768px) {
+      .header-inner { padding: 0 20px; gap: 16px; }
+      .main-nav { display: none; }
+      .hero-slider { height: 70vh; }
+      .slide-content { left: 28px; bottom: 60px; }
+      .slider-dots { left: 28px; }
+      .slider-arrows { right: 20px; }
+      .section-head { padding: 40px 20px 20px; }
+      .product-grid { grid-template-columns: repeat(2,1fr); padding: 0 20px 40px; gap: 12px; }
+      .collection-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
+      .collection-grid-wrap { padding: 24px 20px 60px; }
+      .collection-toolbar { padding: 20px; }
+      .banner-strip { padding: 0 20px; }
+      .banner-inner { aspect-ratio: 16/7; }
+      .banner-text { padding: 0 28px; }
+      .dual-banner { grid-template-columns: 1fr; padding: 0 20px; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; padding: 40px 20px; }
+      .footer-bottom { padding: 16px 20px; }
+      .modal-grid { grid-template-columns: 1fr; }
+      .modal-img-wrap { border-radius: 8px 8px 0 0; aspect-ratio: 16/9; }
+      .modal-content { padding: 28px 24px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ─── Header ─── -->
+<!-- ── ANNOUNCEMENT BAR ── -->
+<div class="announce">
+  Portfolio Design &amp; Stampa 3D
+  <span>|</span>
+  Modelli Artigianali su Commissione
+  <span>|</span>
+  Contattami per Progetti Personalizzati
+</div>
+
+<!-- ── HEADER ── -->
 <header>
-  <div class="logo" onclick="showPage('home')" style="cursor:pointer">MC<span>3D</span></div>
-  <nav>
-    <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
-    <a onclick="showPage('objects')" id="nav-objects"><span>Oggetti </span>3D</a>
-    <a onclick="showPage('dioramas')" id="nav-dioramas"><span>Diorami </span>3D</a>
-    <a onclick="showPage('contact')" id="nav-contact">Contatti</a>
-  </nav>
+  <div class="header-inner">
+    <div class="logo" onclick="showPage('home')">MC<em>3D</em></div>
+    <nav class="main-nav">
+      <div class="nav-item">
+        <a class="nav-link active" id="nav-home" onclick="showPage('home')">Home</a>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" id="nav-objects" onclick="showPage('objects')">
+          Oggetti 3D
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="dropdown">
+          <a onclick="filterAndShow('objects','all')">Tutti gli oggetti</a>
+          <a onclick="filterAndShow('objects','funzionale')">Funzionali</a>
+          <a onclick="filterAndShow('objects','decorativo')">Decorativi</a>
+          <a onclick="filterAndShow('objects','meccanico')">Meccanici</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" id="nav-dioramas" onclick="showPage('dioramas')">
+          Diorami 3D
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="dropdown">
+          <a onclick="filterAndShow('dioramas','all')">Tutti i diorami</a>
+          <a onclick="filterAndShow('dioramas','fantasy')">Fantasy</a>
+          <a onclick="filterAndShow('dioramas','storico')">Storici</a>
+          <a onclick="filterAndShow('dioramas','sci-fi')">Sci-Fi</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" id="nav-contact" onclick="showPage('contact')">Contatti</a>
+      </div>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="showPage('contact')" title="Contatti">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
 </header>
 
-<!-- ─── MODAL ─── -->
-<div class="modal-overlay" id="modal" onclick="closeModal(event)">
-  <div class="modal" role="dialog" aria-modal="true">
-    <button class="modal-close" onclick="closeModalDirect()" aria-label="Chiudi">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M18 6L6 18M6 6l12 12"/>
-      </svg>
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modal" onclick="handleModalClick(event)">
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" onclick="closeModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <div class="modal-inner">
-      <div class="modal-image">
-        <div class="thumb-wrap" id="modal-thumb" style="height:100%"></div>
+    <div class="modal-grid">
+      <div class="modal-img-wrap">
+        <div class="thumb-art" id="modal-art" style="height:100%"></div>
       </div>
-      <div class="modal-body">
-        <div class="modal-eyebrow" id="modal-category"></div>
+      <div class="modal-content">
+        <div class="modal-eyebrow" id="modal-cat"></div>
         <h2 id="modal-title"></h2>
-        <p class="desc" id="modal-desc"></p>
-        <div class="modal-specs" id="modal-specs"></div>
+        <div class="modal-series" id="modal-sub"></div>
+        <div class="modal-divider"></div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-specs-grid" id="modal-specs"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE: HOME
-══════════════════════════════════════ -->
+<!-- ════════════════════════════════
+     HOME PAGE
+════════════════════════════════ -->
 <div id="home" class="page active">
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Design &amp; Stampa 3D</div>
-      <h1>Dare <em>forma</em><br>alle idee</h1>
-      <p>Progetti di modellazione e stampa 3D: oggetti funzionali, diorami da collezione e sculture personalizzate.</p>
-      <div class="hero-ctas">
-        <button class="btn-primary" onclick="showPage('objects')">Esplora i Progetti</button>
-        <button class="btn-outline" onclick="showPage('contact')">Contattami</button>
-      </div>
-    </div>
-    <div class="scroll-hint">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 5v14M5 12l7 7 7-7"/>
-      </svg>
-      Scorri
-    </div>
-  </section>
 
-  <!-- Teaser cards -->
-  <div class="teaser-grid">
-    <div class="teaser-card" onclick="showPage('objects')">
-      <div class="teaser-thumb thumb-obj-1">
-        <div class="thumb-wrap"><div class="thumb-icon">OBJ</div></div>
+  <!-- Hero Slider -->
+  <div class="hero-slider" id="heroSlider">
+
+    <div class="slide active">
+      <div class="slide-bg thumb-art ta-1" style="height:100%">
+        <div class="ta-icon" style="font-size:80px;color:rgba(201,168,76,.08)">MC3D</div>
       </div>
-      <div class="teaser-overlay">
-        <div class="teaser-tag">Collezione</div>
-        <h3>Oggetti 3D</h3>
-        <p>Pezzi funzionali e decorativi realizzati con modellazione parametrica e FDM/resin.</p>
-        <span class="teaser-arrow">
-          Vedi tutti
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
+      <div class="slide-content">
+        <div class="slide-badge">In Evidenza</div>
+        <h2>Orologio<br>Tourbillon</h2>
+        <p>47 componenti in resina SLA.<br>Meccanismo decorativo con gabbia rotante a 360°.</p>
+        <a class="slide-cta" onclick="openItemById('o6')">
+          Scopri il Progetto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
 
-    <div class="teaser-card" onclick="showPage('dioramas')">
-      <div class="teaser-thumb thumb-dio-1">
-        <div class="thumb-wrap"><div class="thumb-icon">DIO</div></div>
+    <div class="slide">
+      <div class="slide-bg thumb-art ta-7" style="height:100%">
+        <div class="ta-icon" style="font-size:80px;color:rgba(201,168,76,.08)">DIO</div>
       </div>
-      <div class="teaser-overlay">
-        <div class="teaser-tag">Collezione</div>
+      <div class="slide-content">
+        <div class="slide-badge">Nuovo</div>
+        <h2>La Forgia<br>del Drago</h2>
+        <p>Diorama fantasy 30×30cm.<br>Stampa FDM + resina, pittura acrilica a mano.</p>
+        <a class="slide-cta" onclick="openItemById('d1')">
+          Scopri il Progetto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-bg thumb-art ta-5" style="height:100%">
+        <div class="ta-icon" style="font-size:80px;color:rgba(201,168,76,.08)">OBJ</div>
+      </div>
+      <div class="slide-content">
+        <div class="slide-badge">Su Commissione</div>
+        <h2>Progetta<br>con me</h2>
+        <p>Dall'idea al filamento.<br>Oggetti funzionali e decorativi su misura.</p>
+        <a class="slide-cta" onclick="showPage('contact')">
+          Contattami
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="slider-dots" id="sliderDots"></div>
+    <div class="slider-arrows">
+      <button class="arrow-btn" onclick="prevSlide()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="arrow-btn" onclick="nextSlide()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Oggetti in evidenza -->
+  <div class="section-head">
+    <h3>Oggetti <span>3D</span></h3>
+    <a class="view-all" onclick="showPage('objects')">
+      Vedi tutti
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="product-grid" id="home-objects"></div>
+
+  <!-- Banner diorami -->
+  <div class="banner-strip">
+    <div class="banner-inner" onclick="showPage('dioramas')">
+      <div class="banner-art thumb-art ta-7" style="position:absolute;inset:0;height:100%">
+        <div class="ta-icon" style="font-size:120px;color:rgba(201,168,76,.06)">DIORAMI</div>
+      </div>
+      <div class="banner-text">
+        <div class="eyebrow">Collezione</div>
         <h3>Diorami 3D</h3>
-        <p>Scene narrative e ambientazioni in scala, dipinte a mano e rifinite nei minimi dettagli.</p>
-        <span class="teaser-arrow">
-          Vedi tutti
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
+        <a class="btn-ghost" onclick="showPage('dioramas')">
+          Esplora la Collezione
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
+  </div>
 
-    <div class="teaser-card" onclick="showPage('contact')">
-      <div class="teaser-thumb" style="background: linear-gradient(135deg, #0e1e28 0%, #1a1428 50%, #0e1a20 100%)">
-        <div class="thumb-wrap"><div class="thumb-icon">MSG</div></div>
+  <!-- Diorami preview -->
+  <div class="section-head">
+    <h3>Diorami <span>3D</span></h3>
+    <a class="view-all" onclick="showPage('dioramas')">
+      Vedi tutti
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="product-grid" id="home-dioramas"></div>
+
+  <!-- Dual CTA banners -->
+  <div class="dual-banner">
+    <div class="dual-card" onclick="showPage('objects')">
+      <div class="thumb-art ta-3" style="position:absolute;inset:0;height:100%;width:100%">
+        <div class="ta-icon" style="font-size:72px;color:rgba(201,168,76,.07)">3D</div>
       </div>
-      <div class="teaser-overlay">
-        <div class="teaser-tag">Collaborazione</div>
-        <h3>Contatti</h3>
-        <p>Hai un'idea? Realizziamo insieme il tuo progetto personalizzato.</p>
-        <span class="teaser-arrow">
-          Scrivimi
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
+      <div class="dual-card-text">
+        <div class="eyebrow">Portfolio</div>
+        <h3>Oggetti 3D</h3>
+        <p>Pezzi funzionali, meccanici e decorativi stampati con precisione.</p>
+        <span class="link-arr">Vedi la collezione <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </div>
+    <div class="dual-card" onclick="showPage('contact')">
+      <div class="thumb-art ta-9" style="position:absolute;inset:0;height:100%;width:100%">
+        <div class="ta-icon" style="font-size:72px;color:rgba(201,168,76,.07)">✉</div>
+      </div>
+      <div class="dual-card-text">
+        <div class="eyebrow">Commissioni</div>
+        <h3>Hai un'idea?</h3>
+        <p>Realizziamo insieme il tuo progetto personalizzato su misura.</p>
+        <span class="link-arr">Contattami <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </div>
   </div>
 
   <footer>
-    <div class="footer-logo">MC<span>3D</span></div>
-    <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">MC<em>3D</em></span>
+        <p>Design e stampa 3D artigianale. Oggetti funzionali, decorativi e diorami da collezione realizzati con cura.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Collezioni</h5>
+        <ul>
+          <li><a onclick="showPage('objects')">Oggetti 3D</a></li>
+          <li><a onclick="filterAndShow('objects','funzionale')">Funzionali</a></li>
+          <li><a onclick="filterAndShow('objects','decorativo')">Decorativi</a></li>
+          <li><a onclick="filterAndShow('objects','meccanico')">Meccanici</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Diorami</h5>
+        <ul>
+          <li><a onclick="showPage('dioramas')">Tutti i Diorami</a></li>
+          <li><a onclick="filterAndShow('dioramas','fantasy')">Fantasy</a></li>
+          <li><a onclick="filterAndShow('dioramas','storico')">Storici</a></li>
+          <li><a onclick="filterAndShow('dioramas','sci-fi')">Sci-Fi</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Info</h5>
+        <ul>
+          <li><a onclick="showPage('contact')">Contatti</a></li>
+          <li><a onclick="showPage('contact')">Commissioni</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+      <p>Tutti i diritti riservati</p>
+    </div>
   </footer>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE: OGGETTI 3D
-══════════════════════════════════════ -->
+<!-- ════════════════════════════════
+     OBJECTS PAGE
+════════════════════════════════ -->
 <div id="objects" class="page">
-  <div class="page-header">
-    <button class="back-btn" onclick="showPage('home')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 12H5M12 5l-7 7 7 7"/>
-      </svg>
-      Home
-    </button>
-    <h2>Oggetti <span>3D</span></h2>
-    <p>Pezzi funzionali, decorativi e personalizzati — dall'idea al filamento.</p>
+  <div class="collection-hero">
+    <div class="hero-art thumb-art ta-4" style="height:100%;opacity:.35">
+      <div class="ta-icon" style="font-size:100px;color:rgba(201,168,76,.08)">OBJ</div>
+    </div>
+    <div class="collection-hero-text">
+      <div class="eyebrow">Portfolio</div>
+      <h2>Oggetti <em>3D</em></h2>
+    </div>
   </div>
 
-  <div class="gallery-container">
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterCards(this, 'objects', 'all')">Tutti</button>
-      <button class="filter-btn" onclick="filterCards(this, 'objects', 'funzionale')">Funzionali</button>
-      <button class="filter-btn" onclick="filterCards(this, 'objects', 'decorativo')">Decorativi</button>
-      <button class="filter-btn" onclick="filterCards(this, 'objects', 'meccanico')">Meccanici</button>
+  <div class="collection-toolbar">
+    <div class="filter-group" id="obj-filters">
+      <button class="filter-pill active" onclick="filterCards(this,'objects','all')">Tutti</button>
+      <button class="filter-pill" onclick="filterCards(this,'objects','funzionale')">Funzionali</button>
+      <button class="filter-pill" onclick="filterCards(this,'objects','decorativo')">Decorativi</button>
+      <button class="filter-pill" onclick="filterCards(this,'objects','meccanico')">Meccanici</button>
     </div>
+    <span class="count-label" id="obj-count"></span>
+  </div>
 
-    <div class="gallery-grid" id="objects-grid">
-      <!-- injected by JS -->
-    </div>
+  <div class="collection-grid-wrap">
+    <div class="collection-grid" id="objects-grid"></div>
   </div>
 
   <footer>
-    <div class="footer-logo">MC<span>3D</span></div>
-    <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">MC<em>3D</em></span>
+        <p>Design e stampa 3D artigianale. Oggetti funzionali, decorativi e diorami da collezione.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Collezioni</h5>
+        <ul>
+          <li><a onclick="showPage('objects')">Oggetti 3D</a></li>
+          <li><a onclick="showPage('dioramas')">Diorami 3D</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Info</h5>
+        <ul>
+          <li><a onclick="showPage('contact')">Contatti</a></li>
+          <li><a onclick="showPage('contact')">Commissioni</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+    </div>
   </footer>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE: DIORAMI 3D
-══════════════════════════════════════ -->
+<!-- ════════════════════════════════
+     DIORAMAS PAGE
+════════════════════════════════ -->
 <div id="dioramas" class="page">
-  <div class="page-header">
-    <button class="back-btn" onclick="showPage('home')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 12H5M12 5l-7 7 7 7"/>
-      </svg>
-      Home
-    </button>
-    <h2>Diorami <span>3D</span></h2>
-    <p>Scene in scala realizzate con cura maniacale per i dettagli, dalla modellazione alla finitura pittorica.</p>
+  <div class="collection-hero">
+    <div class="hero-art thumb-art ta-7" style="height:100%;opacity:.35">
+      <div class="ta-icon" style="font-size:100px;color:rgba(201,168,76,.08)">DIO</div>
+    </div>
+    <div class="collection-hero-text">
+      <div class="eyebrow">Portfolio</div>
+      <h2>Diorami <em>3D</em></h2>
+    </div>
   </div>
 
-  <div class="gallery-container">
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterCards(this, 'dioramas', 'all')">Tutti</button>
-      <button class="filter-btn" onclick="filterCards(this, 'dioramas', 'fantasy')">Fantasy</button>
-      <button class="filter-btn" onclick="filterCards(this, 'dioramas', 'storico')">Storici</button>
-      <button class="filter-btn" onclick="filterCards(this, 'dioramas', 'sci-fi')">Sci-Fi</button>
+  <div class="collection-toolbar">
+    <div class="filter-group" id="dio-filters">
+      <button class="filter-pill active" onclick="filterCards(this,'dioramas','all')">Tutti</button>
+      <button class="filter-pill" onclick="filterCards(this,'dioramas','fantasy')">Fantasy</button>
+      <button class="filter-pill" onclick="filterCards(this,'dioramas','storico')">Storici</button>
+      <button class="filter-pill" onclick="filterCards(this,'dioramas','sci-fi')">Sci-Fi</button>
     </div>
+    <span class="count-label" id="dio-count"></span>
+  </div>
 
-    <div class="gallery-grid" id="dioramas-grid">
-      <!-- injected by JS -->
-    </div>
+  <div class="collection-grid-wrap">
+    <div class="collection-grid" id="dioramas-grid"></div>
   </div>
 
   <footer>
-    <div class="footer-logo">MC<span>3D</span></div>
-    <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">MC<em>3D</em></span>
+        <p>Design e stampa 3D artigianale. Diorami da collezione realizzati con cura maniacale.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Collezioni</h5>
+        <ul>
+          <li><a onclick="showPage('objects')">Oggetti 3D</a></li>
+          <li><a onclick="showPage('dioramas')">Diorami 3D</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Info</h5>
+        <ul>
+          <li><a onclick="showPage('contact')">Contatti</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+    </div>
   </footer>
 </div>
 
-<!-- ══════════════════════════════════════
-     PAGE: CONTATTI
-══════════════════════════════════════ -->
+<!-- ════════════════════════════════
+     CONTACT PAGE
+════════════════════════════════ -->
 <div id="contact" class="page">
-  <div class="page-header">
-    <button class="back-btn" onclick="showPage('home')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 12H5M12 5l-7 7 7 7"/>
-      </svg>
-      Home
-    </button>
-    <h2>Parliamo di <span>un progetto</span></h2>
-    <p>Compila il modulo oppure scrivimi direttamente — rispondo entro 24 ore.</p>
+  <div class="contact-hero">
+    <div class="eyebrow">Commissioni &amp; Collaborazioni</div>
+    <h2>Parliamo del tuo progetto</h2>
+    <p>Hai un'idea per un oggetto personalizzato o un diorama? Scrivimi — rispondo entro 24 ore.</p>
   </div>
 
-  <div class="contact-layout">
-    <div class="contact-info">
-      <h3>Realizziamo la tua idea</h3>
-      <p>Che si tratti di un oggetto funzionale, un pezzo da collezione o un diorama personalizzato, sono qui per trasformare il tuo concept in realtà stampata.</p>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
+  <div class="contact-wrap">
+    <div class="contact-aside">
+      <h4>Realizziamo la tua idea</h4>
+      <p>Oggetti funzionali, sculture decorative, diorami da collezione — ogni progetto è unico e realizzato con cura artigianale.</p>
+      <div class="c-item">
+        <div class="c-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
           </svg>
         </div>
-        <div class="contact-item-text">
-          <div class="label">Email</div>
-          <div class="value">studio3d@esempio.it</div>
+        <div>
+          <div class="c-label">Email</div>
+          <div class="c-val">studio@mc3d.it</div>
         </div>
       </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-            <circle cx="12" cy="10" r="3"/>
+      <div class="c-item">
+        <div class="c-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
         </div>
-        <div class="contact-item-text">
-          <div class="label">Sede</div>
-          <div class="value">Italia</div>
+        <div>
+          <div class="c-label">Sede</div>
+          <div class="c-val">Italia</div>
         </div>
       </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
+      <div class="c-item">
+        <div class="c-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
         </div>
-        <div class="contact-item-text">
-          <div class="label">Risposta</div>
-          <div class="value">Entro 24 ore</div>
+        <div>
+          <div class="c-label">Risposta</div>
+          <div class="c-val">Entro 24 ore</div>
         </div>
       </div>
     </div>
 
     <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
       <div class="form-row">
-        <div class="form-group">
-          <label for="fname">Nome</label>
-          <input type="text" id="fname" placeholder="Mario" required />
+        <div class="fg">
+          <label for="fn">Nome</label>
+          <input type="text" id="fn" placeholder="Mario" required />
         </div>
-        <div class="form-group">
-          <label for="lname">Cognome</label>
-          <input type="text" id="lname" placeholder="Rossi" required />
+        <div class="fg">
+          <label for="ln">Cognome</label>
+          <input type="text" id="ln" placeholder="Rossi" required />
         </div>
       </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="mario@esempio.it" required />
+      <div class="fg">
+        <label for="em">Email</label>
+        <input type="email" id="em" placeholder="mario@esempio.it" required />
       </div>
-      <div class="form-group">
-        <label for="subject">Tipo di progetto</label>
-        <select id="subject">
+      <div class="fg">
+        <label for="proj">Tipo di progetto</label>
+        <select id="proj">
           <option value="">Seleziona…</option>
-          <option value="oggetto">Oggetto 3D personalizzato</option>
-          <option value="diorama">Diorama su commissione</option>
-          <option value="consulenza">Consulenza di modellazione</option>
-          <option value="altro">Altro</option>
+          <option>Oggetto 3D personalizzato</option>
+          <option>Diorama su commissione</option>
+          <option>Consulenza di modellazione</option>
+          <option>Altro</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="message">Messaggio</label>
-        <textarea id="message" placeholder="Descrivi il tuo progetto…" required></textarea>
+      <div class="fg">
+        <label for="msg">Messaggio</label>
+        <textarea id="msg" placeholder="Descrivi il tuo progetto…" required></textarea>
       </div>
-      <button type="submit" class="form-submit">Invia Messaggio</button>
-      <div class="form-success" id="formSuccess">
-        Messaggio inviato! Ti rispondo presto.
-      </div>
+      <button type="submit" class="btn-gold">Invia Messaggio</button>
+      <div class="form-ok" id="formOk">Messaggio inviato! Ti rispondo presto.</div>
     </form>
   </div>
 
   <footer>
-    <div class="footer-logo">MC<span>3D</span></div>
-    <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">MC<em>3D</em></span>
+        <p>Design e stampa 3D artigianale. Realizziamo insieme la tua idea.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Collezioni</h5>
+        <ul>
+          <li><a onclick="showPage('objects')">Oggetti 3D</a></li>
+          <li><a onclick="showPage('dioramas')">Diorami 3D</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Info</h5>
+        <ul>
+          <li><a onclick="showPage('contact')">Contatti</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+    </div>
   </footer>
 </div>
 
-<!-- ─── JS ─── -->
+<!-- ════ JS ════ -->
 <script>
-/* ── Data ── */
+/* ── DATA ── */
 const OBJECTS = [
-  {
-    id: 'o1', category: 'funzionale', thumb: 'thumb-obj-1',
-    title: 'Porta-cavi da scrivania',
-    short: 'Sistema modulare per organizzare i cavi della postazione di lavoro.',
-    desc: 'Progettato in Fusion 360 con connettori snap-fit, questo sistema modulare permette di gestire fino a 8 cavi mantenendo la scrivania in ordine. Stampato in PETG nero opaco per resistenza termica e flessibilità nei clip.',
-    specs: { Materiale: 'PETG', Scala: '1:1', Finitura: 'Opaca', Durata: '14 ore' }
-  },
-  {
-    id: 'o2', category: 'decorativo', thumb: 'thumb-obj-2',
-    title: 'Lampada Voronoi',
-    short: 'Paralume geometrico con pattern Voronoi per effetti di luce drammatici.',
-    desc: 'La struttura Voronoi è generata algoritmicamente e ottimizzata per la stampa FDM senza supporti. La diffusione della luce crea pattern ombra unici. Compatibile con lampadine E14 standard.',
-    specs: { Materiale: 'PLA trasparente', Scala: '1:1', Finitura: 'Naturale', Durata: '22 ore' }
-  },
-  {
-    id: 'o3', category: 'meccanico', thumb: 'thumb-obj-3',
-    title: 'Meccanismo a Camme',
-    short: 'Modello cinematico funzionante con camme e bilancieri in movimento.',
-    desc: 'Replica funzionante di un meccanismo a camme a quattro lobi con biella oscillante. Tutti i componenti stampati con tolleranze di ±0.1mm. Ottimo per studio e dimostrazione di principi meccanici.',
-    specs: { Materiale: 'PLA+', Scala: '1:2', Finitura: 'Lisciata', Durata: '9 ore' }
-  },
-  {
-    id: 'o4', category: 'decorativo', thumb: 'thumb-obj-4',
-    title: 'Vaso Topografico',
-    short: 'Vaso con rilievi topografici ispirati alle carte geografiche militari.',
-    desc: 'Il profilo del vaso segue le curve di livello di una mappa topografica reale. La texture in rilievo è stampata direttamente senza post-processing. Impermeabilizzato con resina epossidica interna.',
-    specs: { Materiale: 'PLA', Scala: '1:1', Finitura: 'Grezza', Durata: '18 ore' }
-  },
-  {
-    id: 'o5', category: 'funzionale', thumb: 'thumb-obj-5',
-    title: 'Supporto Monitor Articolato',
-    short: 'Braccio articolato a 3 assi per monitor fino a 27 pollici.',
-    desc: 'Sistema di braccio articolato con tre giunti a frizione regolabile. Progettato per distribuire il peso su una struttura in alluminio inserita nella stampa. Testato con carichi fino a 8 kg.',
-    specs: { Materiale: 'ASA + inserto Al', Scala: '1:1', Finitura: 'Levigata', Durata: '31 ore' }
-  },
-  {
-    id: 'o6', category: 'meccanico', thumb: 'thumb-obj-6',
-    title: 'Orologio Tourbillon',
-    short: 'Meccanismo tourbillon decorativo con 47 componenti stampati.',
-    desc: 'Replica decorativa di un meccanismo tourbillon orologiero con gabbia rotante a 360°. Composto da 47 pezzi distinti stampati in resina SLA con tolleranze di ±0.05mm. Assembly richiede pinze di precisione.',
-    specs: { Materiale: 'Resina SLA', Scala: '2:1', Finitura: 'Levigata + verniciata', Durata: '6 ore (resina)' }
-  }
+  { id:'o1', badge:'new',      cat:'funzionale', ta:'ta-2', title:'Porta-cavi da Scrivania',   sub:'Sistema Modulare',      short:'Organizzatore snap-fit per 8 cavi, stampato in PETG nero.',          desc:'Progettato in Fusion 360 con connettori snap-fit, questo sistema modulare permette di gestire fino a 8 cavi mantenendo la scrivania in ordine. Stampato in PETG nero opaco per resistenza termica e flessibilità nei clip.',          specs:{ Materiale:'PETG',           Scala:'1:1',  Finitura:'Opaca',              Durata:'14 ore'          } },
+  { id:'o2', badge:'featured', cat:'decorativo',  ta:'ta-1', title:'Lampada Voronoi',            sub:'Design Generativo',     short:'Paralume con pattern Voronoi — diffusione luce drammatica.',          desc:'La struttura Voronoi è generata algoritmicamente e ottimizzata per la stampa FDM senza supporti. La diffusione della luce crea pattern ombra unici. Compatibile con lampadine E14 standard.',                                         specs:{ Materiale:'PLA trasparente', Scala:'1:1',  Finitura:'Naturale',           Durata:'22 ore'          } },
+  { id:'o3', badge:'',         cat:'meccanico',   ta:'ta-3', title:'Meccanismo a Camme',         sub:'Cinematismo',           short:'Modello funzionante con 4 camme e biella oscillante.',                desc:'Replica funzionante di un meccanismo a camme a quattro lobi con biella oscillante. Tutti i componenti stampati con tolleranze di ±0.1mm. Ottimo per studio e dimostrazione di principi meccanici.',                                   specs:{ Materiale:'PLA+',            Scala:'1:2',  Finitura:'Lisciata',           Durata:'9 ore'           } },
+  { id:'o4', badge:'',         cat:'decorativo',  ta:'ta-5', title:'Vaso Topografico',           sub:'Arte Procedurale',      short:'Vaso con rilievi da carte geografiche reali, impermeabilizzato.',     desc:'Il profilo del vaso segue le curve di livello di una mappa topografica reale. La texture in rilievo è stampata direttamente senza post-processing. Impermeabilizzato con resina epossidica interna.',                              specs:{ Materiale:'PLA',             Scala:'1:1',  Finitura:'Grezza',             Durata:'18 ore'          } },
+  { id:'o5', badge:'new',      cat:'funzionale',  ta:'ta-4', title:'Braccio Monitor Articolato', sub:'Ergonomia',             short:'Supporto a 3 assi per monitor fino a 27″, testato a 8 kg.',           desc:'Sistema di braccio articolato con tre giunti a frizione regolabile. Progettato per distribuire il peso su una struttura in alluminio inserita nella stampa. Testato con carichi fino a 8 kg.',                                       specs:{ Materiale:'ASA + inserto Al', Scala:'1:1',  Finitura:'Levigata',           Durata:'31 ore'          } },
+  { id:'o6', badge:'featured', cat:'meccanico',   ta:'ta-6', title:'Orologio Tourbillon',        sub:'Alta Orologeria',       short:'47 componenti in resina SLA — meccanismo tourbillon funzionante.',    desc:'Replica decorativa di un meccanismo tourbillon orologiero con gabbia rotante a 360°. Composto da 47 pezzi distinti stampati in resina SLA con tolleranze di ±0.05mm. Assembly richiede pinze di precisione.',                       specs:{ Materiale:'Resina SLA',      Scala:'2:1',  Finitura:'Levigata + verniciata', Durata:'6 ore (resina)'} },
 ];
 
 const DIORAMAS = [
-  {
-    id: 'd1', category: 'fantasy', thumb: 'thumb-dio-1',
-    title: 'La Forgia del Drago',
-    short: 'Scena fantasy con drago addormentato su un cumulo di tesori in una grotta.',
-    desc: 'Diorama da 30×30 cm ambientato in una caverna fantasy. Il drago è modellato in ZBrush e stampato in resina. Le rocce e i dettagli della grotta sono stampe FDM con texture applicata. Finito con pittura acrilica a mano con tecniche di wet-blending.',
-    specs: { Dimensioni: '30×30×25 cm', Scala: '1:35', Tecnica: 'FDM + Resina', Pittura: 'Acrilica a mano' }
-  },
-  {
-    id: 'd2', category: 'storico', thumb: 'thumb-dio-2',
-    title: 'Trincea 1917',
-    short: 'Scena della Prima Guerra Mondiale: soldati in trincea sotto un cielo plumbeo.',
-    desc: 'Ricostruzione storica accurata di una trincea della Grande Guerra. Le figure in scala 1:35 sono modellate con riferimenti fotografici d\'epoca. Il fango, i sacchetti di sabbia e i danni da artiglieria sono realizzati con gesso, sabbia e resine epossidiche.',
-    specs: { Dimensioni: '40×25×20 cm', Scala: '1:35', Tecnica: 'FDM + Scultura', Pittura: 'Olio + acrilico' }
-  },
-  {
-    id: 'd3', category: 'sci-fi', thumb: 'thumb-dio-3',
-    title: 'Base Lunare Alpha',
-    short: 'Stazione scientifica su un pianeta arido con astronauti al lavoro.',
-    desc: 'Diorama sci-fi ambientato su una superficie lunare. La base modulare è progettata ispirandosi alle architetture NASA Artemis. Superficie in gesso e polvere di pietra pomice. Illuminazione LED integrata con fibra ottica per i pannelli solari.',
-    specs: { Dimensioni: '50×35×30 cm', Scala: '1:48', Tecnica: 'Resina + LED', Pittura: 'Acrilica + weathering' }
-  },
-  {
-    id: 'd4', category: 'fantasy', thumb: 'thumb-dio-4',
-    title: 'Il Guardiano della Foresta',
-    short: 'Spirito silvano emerge tra alberi antichi ricoperti di muschio incandescente.',
-    desc: 'Grande pezzo da 45 cm di altezza con un Ent-like guardian che emerge da una foresta secolare. Gli alberi sono fili di alluminio rivestiti con texture stampata. Il muschio luminescente usa materiale fluorescente miscelato con gel acrilico.',
-    specs: { Dimensioni: '45×35×45 cm', Scala: '1:24', Tecnica: 'FDM + Alluminio', Pittura: 'Acrilica + fluorescente' }
-  }
+  { id:'d1', badge:'new',      cat:'fantasy', ta:'ta-7', title:'La Forgia del Drago',     sub:'Fantasy Collection',  short:'Drago su tesori in caverna — 30×30 cm, FDM + resina, pittura a mano.',  desc:'Diorama da 30×30 cm ambientato in una caverna fantasy. Il drago è modellato in ZBrush e stampato in resina. Le rocce e i dettagli della grotta sono stampe FDM con texture applicata. Finito con pittura acrilica a mano con tecniche di wet-blending.',  specs:{ Dimensioni:'30×30×25 cm', Scala:'1:35', Tecnica:'FDM + Resina',      Pittura:'Acrilica a mano'       } },
+  { id:'d2', badge:'',         cat:'storico', ta:'ta-8', title:'Trincea 1917',             sub:'Storico Collection',  short:'Prima Guerra Mondiale in scala 1:35, con fango epossidico e olio.',     desc:'Ricostruzione storica accurata di una trincea della Grande Guerra. Le figure in scala 1:35 sono modellate con riferimenti fotografici d\'epoca. Il fango, i sacchetti di sabbia e i danni da artiglieria sono realizzati con gesso, sabbia e resine epossidiche.',  specs:{ Dimensioni:'40×25×20 cm', Scala:'1:35', Tecnica:'FDM + Scultura',    Pittura:'Olio + acrilico'       } },
+  { id:'d3', badge:'featured', cat:'sci-fi',  ta:'ta-9', title:'Base Lunare Alpha',        sub:'Sci-Fi Collection',   short:'Stazione scientifica con LED e fibra ottica su superficie lunare.',      desc:'Diorama sci-fi ambientato su una superficie lunare. La base modulare è progettata ispirandosi alle architetture NASA Artemis. Superficie in gesso e polvere di pietra pomice. Illuminazione LED integrata con fibra ottica per i pannelli solari.',            specs:{ Dimensioni:'50×35×30 cm', Scala:'1:48', Tecnica:'Resina + LED',      Pittura:'Acrilica + weathering' } },
+  { id:'d4', badge:'new',      cat:'fantasy', ta:'ta-10',title:'Guardiano della Foresta',  sub:'Fantasy Collection',  short:'Ent silvano 45cm con muschio fluorescente e alberi in alluminio.',       desc:'Grande pezzo da 45 cm di altezza con un guardian silvano che emerge da una foresta secolare. Gli alberi sono fili di alluminio rivestiti con texture stampata. Il muschio luminescente usa materiale fluorescente miscelato con gel acrilico.',                  specs:{ Dimensioni:'45×35×45 cm', Scala:'1:24', Tecnica:'FDM + Alluminio',   Pittura:'Acrilica + fluorescente'} },
 ];
 
-let currentFilter = { objects: 'all', dioramas: 'all' };
+const ALL_ITEMS = [...OBJECTS, ...DIORAMAS];
 
-/* ── Page navigation ── */
+/* ── Active filters ── */
+let activeFilter = { objects:'all', dioramas:'all' };
+
+/* ── Page nav ── */
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  const navEl = document.getElementById('nav-' + id);
-  if (navEl) navEl.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+  const el = document.getElementById('nav-' + id);
+  if (el) el.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ── Render cards ── */
-function renderThumb(cls) {
-  return `<div class="thumb-wrap ${cls}"><div class="thumb-icon">${cls.includes('obj') ? '3D' : '▦'}</div></div>`;
+function filterAndShow(section, cat) {
+  activeFilter[section] = cat;
+  showPage(section);
+  // update pills
+  const container = section === 'objects' ? document.getElementById('obj-filters') : document.getElementById('dio-filters');
+  container.querySelectorAll('.filter-pill').forEach(p => {
+    const pCat = p.getAttribute('onclick').match(/'([^']+)'\)$/)[1];
+    p.classList.toggle('active', pCat === cat);
+  });
+  renderGrid(section);
 }
 
-function renderCard(item, section) {
+/* ── Card renderer ── */
+function badgeHTML(badge) {
+  if (!badge) return '';
+  const map = { new:'badge-new', featured:'badge-featured', soon:'badge-soon' };
+  const labels = { new:'Nuovo', featured:'In Evidenza', soon:'Prossimamente' };
+  return `<div class="card-badge ${map[badge]}">${labels[badge]}</div>`;
+}
+
+function renderCard(item) {
   return `
-    <div class="item-card" data-category="${item.category}" onclick='openModal(${JSON.stringify(item)})'>
-      <div class="item-thumb">
-        <div class="thumb-wrap ${item.thumb}" style="height:100%">
-          <div class="thumb-icon">${section === 'objects' ? '3D' : '▦'}</div>
+    <div class="product-card" onclick='openModal(${JSON.stringify(item)})'>
+      <div class="card-image">
+        ${badgeHTML(item.badge)}
+        <div class="thumb-art ${item.ta}" style="height:100%">
+          <div class="ta-icon">${item.ta.includes('ta-7')||item.ta.includes('ta-8')||item.ta.includes('ta-9')||item.ta.includes('ta-10') ? '▦' : '3D'}</div>
         </div>
       </div>
-      <div class="item-info">
-        <div class="item-category">${item.category}</div>
-        <h4>${item.title}</h4>
-        <p>${item.short}</p>
-        <div class="item-meta">
-          <span class="meta-chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
-            </svg>
-            ${Object.values(item.specs)[3] || ''}
-          </span>
-          <span class="meta-chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-            ${Object.values(item.specs)[2] || ''}
-          </span>
+      <div class="card-body">
+        <div class="card-series">${item.sub}</div>
+        <div class="card-title">${item.title}</div>
+        <div class="card-sub">${item.short}</div>
+        <div class="card-meta">
+          <span class="chip">${item.cat}</span>
+          <span class="chip">${Object.values(item.specs)[0]}</span>
         </div>
       </div>
     </div>`;
 }
 
 function renderGrid(section) {
-  const data = section === 'objects' ? OBJECTS : DIORAMAS;
-  const filter = currentFilter[section];
-  const grid = document.getElementById(section + '-grid');
-  grid.innerHTML = data
-    .filter(i => filter === 'all' || i.category === filter)
-    .map(i => renderCard(i, section))
-    .join('');
+  const data   = section === 'objects' ? OBJECTS : DIORAMAS;
+  const filter = activeFilter[section];
+  const items  = filter === 'all' ? data : data.filter(i => i.cat === filter);
+  document.getElementById(section + '-grid').innerHTML = items.map(renderCard).join('');
+  const countEl = document.getElementById(section === 'objects' ? 'obj-count' : 'dio-count');
+  if (countEl) countEl.textContent = items.length + ' ' + (items.length === 1 ? 'progetto' : 'progetti');
 }
 
-/* ── Filter ── */
 function filterCards(btn, section, cat) {
-  currentFilter[section] = cat;
-  btn.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  activeFilter[section] = cat;
+  btn.closest('.filter-group').querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   renderGrid(section);
 }
 
+/* Home previews — show 4 items each */
+function renderHomePreviews() {
+  document.getElementById('home-objects').innerHTML   = OBJECTS.slice(0,4).map(renderCard).join('');
+  document.getElementById('home-dioramas').innerHTML  = DIORAMAS.slice(0,4).map(renderCard).join('');
+}
+
 /* ── Modal ── */
 function openModal(item) {
-  const overlay = document.getElementById('modal');
-  document.getElementById('modal-category').textContent = item.category;
+  document.getElementById('modal-cat').textContent   = item.sub;
   document.getElementById('modal-title').textContent = item.title;
-  document.getElementById('modal-desc').textContent = item.desc;
-  document.getElementById('modal-thumb').className = 'thumb-wrap ' + item.thumb;
-  document.getElementById('modal-thumb').style.height = '100%';
-  document.getElementById('modal-thumb').innerHTML = `<div class="thumb-icon">▦</div>`;
-  const specsHtml = Object.entries(item.specs).map(([k,v]) => `
-    <div class="spec-item">
+  document.getElementById('modal-sub').textContent   = item.cat.charAt(0).toUpperCase() + item.cat.slice(1);
+  document.getElementById('modal-desc').textContent  = item.desc;
+  const art = document.getElementById('modal-art');
+  art.className = 'thumb-art ' + item.ta;
+  art.style.height = '100%';
+  art.innerHTML = `<div class="ta-icon" style="font-size:64px">${item.ta.includes('ta-7')||item.ta.includes('ta-8')||item.ta.includes('ta-9')||item.ta.includes('ta-10') ? '▦' : '3D'}</div>`;
+  document.getElementById('modal-specs').innerHTML = Object.entries(item.specs).map(([k,v]) => `
+    <div class="spec-box">
       <div class="spec-label">${k}</div>
-      <div class="spec-value">${v}</div>
+      <div class="spec-val">${v}</div>
     </div>`).join('');
-  document.getElementById('modal-specs').innerHTML = specsHtml;
-  overlay.classList.add('open');
+  document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function closeModal(e) {
-  if (e.target === document.getElementById('modal')) closeModalDirect();
+function openItemById(id) {
+  const item = ALL_ITEMS.find(i => i.id === id);
+  if (item) openModal(item);
 }
-function closeModalDirect() {
+
+function handleModalClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+function closeModal() {
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ── Hero Slider ── */
+const slides = document.querySelectorAll('.slide');
+let current = 0, timer;
+
+function buildDots() {
+  const dotsEl = document.getElementById('sliderDots');
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goSlide(i);
+    dotsEl.appendChild(d);
+  });
+}
+function goSlide(n) {
+  slides[current].classList.remove('active');
+  document.querySelectorAll('.dot')[current].classList.remove('active');
+  current = (n + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  document.querySelectorAll('.dot')[current].classList.add('active');
+  clearInterval(timer);
+  timer = setInterval(() => goSlide(current + 1), 5000);
+}
+function nextSlide() { goSlide(current + 1); }
+function prevSlide() { goSlide(current - 1); }
 
 /* ── Contact form ── */
 function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.form-submit');
-  btn.textContent = 'Invio in corso…';
-  btn.disabled = true;
+  const btn = e.target.querySelector('.btn-gold');
+  btn.textContent = 'Invio…'; btn.disabled = true;
   setTimeout(() => {
-    document.getElementById('formSuccess').style.display = 'block';
-    btn.textContent = 'Invia Messaggio';
-    btn.disabled = false;
+    document.getElementById('formOk').style.display = 'block';
+    btn.textContent = 'Invia Messaggio'; btn.disabled = false;
     e.target.reset();
   }, 1200);
 }
 
 /* ── Init ── */
+buildDots();
+timer = setInterval(() => goSlide(current + 1), 5000);
 renderGrid('objects');
 renderGrid('dioramas');
+renderHomePreviews();
 </script>
 </body>
 </html>

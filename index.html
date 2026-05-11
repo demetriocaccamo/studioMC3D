@@ -608,8 +608,35 @@
       background: var(--card);
       overflow: hidden;
       border-radius: 8px 0 0 8px;
+      display: flex;
+      flex-direction: column;
     }
-    .modal-img-wrap .thumb-art { width: 100%; height: 100%; }
+    .modal-img-wrap .thumb-art { width: 100%; flex: 1; }
+    /* Gallery */
+    .modal-gallery { flex: 1; position: relative; overflow: hidden; background: var(--black); }
+    .modal-gallery img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity .4s;
+    }
+    .modal-gallery img.active { opacity: 1; }
+    .modal-gallery img.bg-white { object-fit: contain; background: #f8f8f8; padding: 12px; }
+    .modal-thumbs {
+      display: flex; gap: 6px; padding: 8px;
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .modal-thumb {
+      flex: 1; aspect-ratio: 1;
+      overflow: hidden; border-radius: 3px;
+      border: 2px solid transparent;
+      cursor: pointer; transition: border-color .2s;
+      background: var(--card);
+    }
+    .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-thumb.active { border-color: var(--gold); }
+    .modal-thumb.bg-white img { object-fit: contain; background: #f8f8f8; }
     .modal-content { padding: 48px 40px; display: flex; flex-direction: column; overflow-y: auto; }
     .modal-eyebrow {
       font-size: 11px;
@@ -911,7 +938,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
     <div class="modal-grid">
-      <div class="modal-img-wrap">
+      <div class="modal-img-wrap" id="modal-img-wrap">
         <div class="thumb-art" id="modal-art" style="height:100%"></div>
       </div>
       <div class="modal-content">
@@ -1314,6 +1341,14 @@
 <script>
 /* ── DATA ── */
 const OBJECTS = [
+  { id:'o7', badge:'new', cat:'decorativo', ta:'ta-3',
+    imgs:['img/torre-f1-1.jpg','img/torre-f1-2.jpg','img/torre-f1-3.jpg'], imgfit:'contain',
+    title:'Torre di Controllo F1 Vintage',
+    sub:'Motorsport Collection',
+    short:'Torre box anni \'70 in scala 1:32 con livree Goodyear, Champion, Castrol e Martini.',
+    desc:'Replica della torre di controllo dei box di un circuito F1 degli anni \'70, in scala 1:32. Struttura a tre livelli con texture mattoni stampata direttamente nel PLA grigio, finestre in PETG verde fumé e base in MDF verniciata nera. Le livree vintage (Goodyear, Champion, Castrol, Martini) sono applicate con decalcomanie a immersione e fissate con vernice opaca. Compatibile con i principali tracciati slot car in scala 1:32.',
+    specs:{ Materiale:'PLA + PETG', Scala:'1:32', Finitura:'Verniciata + decalcomanie', Altezza:'~28 cm' }
+  },
   { id:'o1', badge:'new',      cat:'funzionale', ta:'ta-2', title:'Porta-cavi da Scrivania',   sub:'Sistema Modulare',      short:'Organizzatore snap-fit per 8 cavi, stampato in PETG nero.',          desc:'Progettato in Fusion 360 con connettori snap-fit, questo sistema modulare permette di gestire fino a 8 cavi mantenendo la scrivania in ordine. Stampato in PETG nero opaco per resistenza termica e flessibilità nei clip.',          specs:{ Materiale:'PETG',           Scala:'1:1',  Finitura:'Opaca',              Durata:'14 ore'          } },
   { id:'o2', badge:'featured', cat:'decorativo',  ta:'ta-1', title:'Lampada Voronoi',            sub:'Design Generativo',     short:'Paralume con pattern Voronoi — diffusione luce drammatica.',          desc:'La struttura Voronoi è generata algoritmicamente e ottimizzata per la stampa FDM senza supporti. La diffusione della luce crea pattern ombra unici. Compatibile con lampadine E14 standard.',                                         specs:{ Materiale:'PLA trasparente', Scala:'1:1',  Finitura:'Naturale',           Durata:'22 ore'          } },
   { id:'o3', badge:'',         cat:'meccanico',   ta:'ta-3', title:'Meccanismo a Camme',         sub:'Cinematismo',           short:'Modello funzionante con 4 camme e biella oscillante.',                desc:'Replica funzionante di un meccanismo a camme a quattro lobi con biella oscillante. Tutti i componenti stampati con tolleranze di ±0.1mm. Ottimo per studio e dimostrazione di principi meccanici.',                                   specs:{ Materiale:'PLA+',            Scala:'1:2',  Finitura:'Lisciata',           Durata:'9 ore'           } },
@@ -1365,13 +1400,14 @@ function badgeHTML(badge) {
 }
 
 function renderCard(item) {
+  const thumb = item.imgs
+    ? `<img src="${item.imgs[0]}" alt="${item.title}" loading="lazy" style="height:100%;object-fit:${item.imgfit||'cover'};${item.imgfit==='contain'?'background:#f8f8f8;padding:8px':''}">`
+    : `<div class="thumb-art ${item.ta}" style="height:100%"><div class="ta-icon">${item.ta&&(item.ta.includes('ta-7')||item.ta.includes('ta-8')||item.ta.includes('ta-9')||item.ta.includes('ta-10')) ? '▦' : '3D'}</div></div>`;
   return `
     <div class="product-card" onclick='openModal(${JSON.stringify(item)})'>
       <div class="card-image">
         ${badgeHTML(item.badge)}
-        <div class="thumb-art ${item.ta}" style="height:100%">
-          <div class="ta-icon">${item.ta.includes('ta-7')||item.ta.includes('ta-8')||item.ta.includes('ta-9')||item.ta.includes('ta-10') ? '▦' : '3D'}</div>
-        </div>
+        ${thumb}
       </div>
       <div class="card-body">
         <div class="card-series">${item.sub}</div>
@@ -1413,10 +1449,23 @@ function openModal(item) {
   document.getElementById('modal-title').textContent = item.title;
   document.getElementById('modal-sub').textContent   = item.cat.charAt(0).toUpperCase() + item.cat.slice(1);
   document.getElementById('modal-desc').textContent  = item.desc;
-  const art = document.getElementById('modal-art');
-  art.className = 'thumb-art ' + item.ta;
-  art.style.height = '100%';
-  art.innerHTML = `<div class="ta-icon" style="font-size:64px">${item.ta.includes('ta-7')||item.ta.includes('ta-8')||item.ta.includes('ta-9')||item.ta.includes('ta-10') ? '▦' : '3D'}</div>`;
+
+  const wrap = document.getElementById('modal-img-wrap');
+  if (item.imgs && item.imgs.length) {
+    const isFit = item.imgfit === 'contain';
+    wrap.innerHTML = `
+      <div class="modal-gallery" id="mgallery">
+        ${item.imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''} ${isFit?'bg-white':''}" alt="${item.title} ${i+1}">`).join('')}
+      </div>
+      ${item.imgs.length > 1 ? `<div class="modal-thumbs">
+        ${item.imgs.map((src,i) => `<div class="modal-thumb ${i===0?'active':''} ${isFit?'bg-white':''}" onclick="gallerySel(${i})"><img src="${src}" alt=""></div>`).join('')}
+      </div>` : ''}`;
+  } else {
+    const ta = item.ta || 'ta-1';
+    const icon = ta.match(/ta-(7|8|9|10)$/) ? '▦' : '3D';
+    wrap.innerHTML = `<div class="thumb-art ${ta}" style="height:100%"><div class="ta-icon" style="font-size:64px">${icon}</div></div>`;
+  }
+
   document.getElementById('modal-specs').innerHTML = Object.entries(item.specs).map(([k,v]) => `
     <div class="spec-box">
       <div class="spec-label">${k}</div>
@@ -1424,6 +1473,11 @@ function openModal(item) {
     </div>`).join('');
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function gallerySel(idx) {
+  document.querySelectorAll('#mgallery img').forEach((img,i) => img.classList.toggle('active', i===idx));
+  document.querySelectorAll('.modal-thumbs .modal-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
 }
 
 function openItemById(id) {

@@ -155,15 +155,28 @@
     .slide-bg {
       width: 100%; height: 100%;
       position: relative;
+      overflow: hidden;
     }
+    .slide-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.04);
+      transition: transform 6s ease;
+    }
+    .slide.active .slide-bg img { transform: scale(1); }
     /* Gradient overlays for text readability */
     .slide-bg::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(10,10,11,.85) 0%, rgba(10,10,11,.3) 55%, rgba(10,10,11,.1) 100%),
-                  linear-gradient(0deg, rgba(10,10,11,.6) 0%, transparent 40%);
+      background: linear-gradient(90deg, rgba(10,10,11,.88) 0%, rgba(10,10,11,.4) 55%, rgba(10,10,11,.15) 100%),
+                  linear-gradient(0deg, rgba(10,10,11,.7) 0%, transparent 45%);
+      z-index: 1;
     }
+    .slide-content { z-index: 2; }
     .slide-content {
       position: absolute;
       bottom: 80px; left: 80px;
@@ -962,14 +975,14 @@
   <div class="hero-slider" id="heroSlider">
 
     <div class="slide active">
-      <div class="slide-bg thumb-art ta-1" style="height:100%">
-        <div class="ta-icon" style="font-size:80px;color:rgba(201,168,76,.08)">MC3D</div>
+      <div class="slide-bg">
+        <img src="img/torre-f1-3.jpg" alt="Torre di Controllo F1 Vintage" />
       </div>
       <div class="slide-content">
         <div class="slide-badge">In Evidenza</div>
-        <h2>Orologio<br>Tourbillon</h2>
-        <p>47 componenti in resina SLA.<br>Meccanismo decorativo con gabbia rotante a 360°.</p>
-        <a class="slide-cta" onclick="openItemById('o6')">
+        <h2>Torre di Controllo<br>F1 Vintage</h2>
+        <p>Scala 1:32 · PLA + PETG<br>Livree Goodyear, Champion, Castrol, Martini.</p>
+        <a class="slide-cta" onclick="openItemById('o7')">
           Scopri il Progetto
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -977,14 +990,14 @@
     </div>
 
     <div class="slide">
-      <div class="slide-bg thumb-art ta-7" style="height:100%">
-        <div class="ta-icon" style="font-size:80px;color:rgba(201,168,76,.08)">DIO</div>
+      <div class="slide-bg">
+        <img src="img/tribuna-f1-2.jpg" alt="Tribuna da Circuito F1" />
       </div>
       <div class="slide-content">
         <div class="slide-badge">Nuovo</div>
-        <h2>La Forgia<br>del Drago</h2>
-        <p>Diorama fantasy 30×30cm.<br>Stampa FDM + resina, pittura acrilica a mano.</p>
-        <a class="slide-cta" onclick="openItemById('d1')">
+        <h2>Tribuna<br>da Circuito F1</h2>
+        <p>3 settori · Scala 1:32<br>Firestone, Agip, Jack Daniels, Ferrari Club Modena.</p>
+        <a class="slide-cta" onclick="openItemById('o8')">
           Scopri il Progetto
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -992,13 +1005,13 @@
     </div>
 
     <div class="slide">
-      <div class="slide-bg thumb-art ta-5" style="height:100%">
-        <div class="ta-icon" style="font-size:80px;color:rgba(201,168,76,.08)">OBJ</div>
+      <div class="slide-bg">
+        <img src="img/barriere-2.jpg" alt="Barriere da Circuito" />
       </div>
       <div class="slide-content">
         <div class="slide-badge">Su Commissione</div>
-        <h2>Progetta<br>con me</h2>
-        <p>Dall'idea al filamento.<br>Oggetti funzionali e decorativi su misura.</p>
+        <h2>Scenografie<br>per Slot Car</h2>
+        <p>Moduli intercambiabili · Scala 1:32<br>Pezzi unici su misura per il tuo tracciato.</p>
         <a class="slide-cta" onclick="showPage('contact')">
           Contattami
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1057,9 +1070,7 @@
   <!-- Dual CTA banners -->
   <div class="dual-banner">
     <div class="dual-card" onclick="showPage('objects')">
-      <div class="thumb-art ta-3" style="position:absolute;inset:0;height:100%;width:100%">
-        <div class="ta-icon" style="font-size:72px;color:rgba(201,168,76,.07)">3D</div>
-      </div>
+      <img src="img/tribuna2-f1-1.jpg" alt="Oggetti 3D" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
       <div class="dual-card-text">
         <div class="eyebrow">Portfolio</div>
         <h3>Oggetti 3D</h3>
@@ -1068,9 +1079,7 @@
       </div>
     </div>
     <div class="dual-card" onclick="showPage('contact')">
-      <div class="thumb-art ta-9" style="position:absolute;inset:0;height:100%;width:100%">
-        <div class="ta-icon" style="font-size:72px;color:rgba(201,168,76,.07)">✉</div>
-      </div>
+      <img src="img/barriere-3.jpg" alt="Commissioni" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
       <div class="dual-card-text">
         <div class="eyebrow">Commissioni</div>
         <h3>Hai un'idea?</h3>

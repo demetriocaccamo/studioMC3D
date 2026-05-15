@@ -987,6 +987,75 @@
     .ta-9 { background: linear-gradient(135deg,#1a0e28 0%,#0e2010 60%,#201028 100%); }
     .ta-10{ background: linear-gradient(135deg,#0a1828 0%,#280e10 60%,#101828 100%); }
 
+    /* ── Hamburger button ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px 2px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text);
+      transition: transform .3s var(--ease), opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
+
+    /* ── Mobile nav overlay ── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 58px; left: 0; right: 0; bottom: 0;
+      background: var(--black);
+      z-index: 450;
+      flex-direction: column;
+      overflow-y: auto;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-link {
+      display: block;
+      padding: 18px 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: color .2s, background .2s;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link:active { color: var(--amber); background: rgba(200,136,42,.04); }
+    .mobile-nav-sub {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+    }
+    .mobile-nav-sub a {
+      display: block;
+      padding: 12px 24px 12px 36px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: .06em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .mobile-nav-sub a:hover { color: var(--amber); }
+    .mobile-nav-contact {
+      padding: 24px;
+      margin-top: auto;
+    }
+    .mobile-nav-contact .btn-gold { width: 100%; text-align: center; justify-content: center; display: flex; }
+
     /* ── Responsive ── */
     @media(max-width:1100px) {
       .product-grid { grid-template-columns: repeat(3,1fr); }
@@ -994,28 +1063,78 @@
       .footer-top { grid-template-columns: 1fr 1fr; }
     }
     @media(max-width:768px) {
-      .header-inner { padding: 0 20px; gap: 16px; }
+      /* Announcement bar — nascosta su mobile */
+      .announce { display: none; }
+      .mobile-nav { top: 58px; }
+
+      /* Header */
+      .header-inner { padding: 0 16px; gap: 12px; height: 58px; }
       .main-nav { display: none; }
-      .hero-slider { height: 72vh; }
-      .slide-content { left: 24px; bottom: 64px; max-width: calc(100vw - 48px); }
-      .slider-dots { left: 24px; }
-      .slider-arrows { right: 16px; }
-      .section-head { padding: 44px 20px 24px; }
-      .product-grid { grid-template-columns: repeat(2,1fr); padding: 16px 16px 48px; gap: 12px; }
-      .collection-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
-      .collection-grid-wrap { padding: 28px 16px 60px; }
-      .collection-toolbar { padding: 18px 16px; }
-      .banner-strip { padding: 0 16px; margin-bottom: 48px; }
-      .banner-inner { aspect-ratio: 16/7; }
-      .banner-text { padding: 0 24px; }
-      .dual-banner { grid-template-columns: 1fr; padding: 0 16px; gap: 12px; }
-      .contact-wrap { grid-template-columns: 1fr; gap: 40px; padding: 44px 20px; }
+      .hamburger { display: flex; }
+      .mobile-nav { top: 58px; }
+
+      /* Hero */
+      .hero-slider { height: 65vh; min-height: 380px; }
+      .slide-content { left: 20px; right: 20px; bottom: 52px; max-width: none; }
+      .slide-content h2 { font-size: clamp(30px, 8.5vw, 50px); }
+      .slide-content p { font-size: 13px; margin-bottom: 22px; }
+      .slide-cta { padding: 11px 24px; font-size: 10px; }
+      .slider-dots { left: 20px; bottom: 24px; }
+      .slider-arrows { right: 14px; bottom: 16px; }
+      .arrow-btn { width: 38px; height: 38px; }
+
+      /* Section head */
+      .section-head { padding: 28px 16px 18px; }
+      .section-head h3 { font-size: clamp(22px, 6.5vw, 34px); }
+
+      /* Product grid */
+      .product-grid { grid-template-columns: repeat(2,1fr); padding: 16px 16px 36px; gap: 10px; }
+
+      /* Banner strip */
+      .banner-strip { padding: 0 16px; margin-bottom: 0; }
+      .banner-inner { aspect-ratio: 16/8; }
+      .banner-text { padding: 0 20px; }
+      .banner-text h3 { font-size: clamp(20px, 5.5vw, 30px); margin-bottom: 14px; }
+      .btn-ghost { padding: 9px 20px; font-size: 9px; }
+
+      /* Collection grid */
+      .collection-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+      .collection-grid-wrap { padding: 20px 16px 48px; }
+      .collection-toolbar { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+      .filter-group { gap: 5px; }
+      .count-label { font-size: 10px; }
+
+      /* Collection hero */
+      .collection-hero { height: 180px; }
+
+      /* Dual banner */
+      .dual-banner { grid-template-columns: 1fr; padding: 0 16px; gap: 10px; margin-bottom: 40px; }
+      .dual-card-text { padding: 22px; }
+      .dual-card-text h3 { font-size: clamp(20px, 5.5vw, 28px); }
+      .dual-card-text p { display: none; }
+
+      /* Contact */
+      .contact-hero { padding: 52px 20px; }
+      .contact-hero h2 { font-size: clamp(28px, 7vw, 40px); }
+      .contact-wrap { grid-template-columns: 1fr; gap: 32px; padding: 32px 16px; }
       .form-row { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr; padding: 40px 20px; }
-      .footer-bottom { padding: 16px 20px; }
+
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr; padding: 32px 16px; gap: 28px; }
+      .footer-bottom { padding: 14px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
+
+      /* Modal */
+      .modal-overlay { padding: 12px; }
       .modal-grid { grid-template-columns: 1fr; }
-      .modal-img-wrap { aspect-ratio: 16/9; }
-      .modal-content { padding: 28px 24px; }
+      .modal-img-wrap { aspect-ratio: 4/3; }
+      .modal-content { padding: 22px 18px 28px; }
+      .modal-content h2 { font-size: 28px; }
+      .modal-specs-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+      .spec-box { padding: 10px 12px; }
+    }
+    @media(max-width:420px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .collection-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1072,9 +1191,33 @@
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
         </svg>
       </button>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" title="Menu" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
+
+<!-- ── MOBILE NAV ── -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-link" onclick="mobileGo('home')">Home</div>
+  <div class="mobile-nav-link" onclick="mobileGo('objects')">Oggetti 3D</div>
+  <div class="mobile-nav-sub">
+    <a onclick="mobileFilter('objects','funzionale')">Funzionali</a>
+    <a onclick="mobileFilter('objects','decorativo')">Decorativi</a>
+    <a onclick="mobileFilter('objects','meccanico')">Meccanici</a>
+  </div>
+  <div class="mobile-nav-link" onclick="mobileGo('dioramas')">Diorami 3D</div>
+  <div class="mobile-nav-sub">
+    <a onclick="mobileFilter('dioramas','fantasy')">Fantasy</a>
+    <a onclick="mobileFilter('dioramas','storico')">Storici</a>
+    <a onclick="mobileFilter('dioramas','sci-fi')">Sci-Fi</a>
+  </div>
+  <div class="mobile-nav-link" onclick="mobileGo('contact')">Contatti</div>
+  <div class="mobile-nav-contact">
+    <button class="btn-gold" onclick="mobileGo('contact')">Richiedi un Preventivo →</button>
+  </div>
+</div>
 
 <!-- ── MODAL ── -->
 <div class="modal-overlay" id="modal" onclick="handleModalClick(event)">
@@ -1539,6 +1682,28 @@ const ALL_ITEMS = [...OBJECTS, ...DIORAMAS];
 
 /* ── Active filters ── */
 let activeFilter = { objects:'all', dioramas:'all' };
+
+/* ── Mobile nav ── */
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburgerBtn');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function mobileGo(id) {
+  closeMobileNav();
+  showPage(id);
+}
+function mobileFilter(section, cat) {
+  closeMobileNav();
+  filterAndShow(section, cat);
+}
 
 /* ── Page nav ── */
 function showPage(id) {

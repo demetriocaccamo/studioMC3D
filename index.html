@@ -1151,6 +1151,71 @@
       .product-grid { grid-template-columns: 1fr; }
       .collection-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── Zoom Lightbox ── */
+    .zoom-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      background: rgba(0,0,0,.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+      overflow: hidden;
+    }
+    .zoom-overlay.open { opacity: 1; pointer-events: all; }
+    .zoom-img {
+      max-width: 95vw;
+      max-height: 95vh;
+      object-fit: contain;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      will-change: transform;
+      display: block;
+    }
+    .zoom-img.dragging { cursor: grabbing; }
+    .zoom-close-btn {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background .2s, border-color .2s;
+    }
+    .zoom-close-btn:hover { background: rgba(200,136,42,.3); border-color: var(--amber); }
+    .zoom-close-btn svg { width: 14px; }
+    .zoom-scale-badge {
+      position: absolute;
+      top: 18px; left: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.35);
+      pointer-events: none;
+    }
+    .zoom-hint {
+      position: absolute;
+      bottom: 18px; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .15em;
+      color: rgba(255,255,255,.28);
+      text-transform: uppercase;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .modal-gallery img { cursor: zoom-in; }
+    @media(max-width:768px) { .zoom-hint { display: none; } }
   </style>
 </head>
 <body>
@@ -1254,6 +1319,16 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- ── ZOOM LIGHTBOX ── -->
+<div class="zoom-overlay" id="zoomOverlay">
+  <button class="zoom-close-btn" id="zoomCloseBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <img class="zoom-img" id="zoomImg" src="" alt="" draggable="false">
+  <div class="zoom-scale-badge" id="zoomScaleBadge">1.0×</div>
+  <div class="zoom-hint">Rotella: zoom &nbsp;·&nbsp; Trascina: sposta &nbsp;·&nbsp; Doppio clic: reset &nbsp;·&nbsp; ESC: chiudi</div>
 </div>
 
 <!-- ════════════════════════════════
@@ -1846,7 +1921,7 @@ function openModal(item) {
     const isDark = item.landscape;
     wrap.innerHTML = `
       <div class="modal-gallery" id="mgallery">
-        ${item.imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''} ${isFit?'bg-white':isDark?'bg-dark':''}" alt="${item.title} ${i+1}">`).join('')}
+        ${item.imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''} ${isFit?'bg-white':isDark?'bg-dark':''}" alt="${item.title} ${i+1}" onclick="openZoom(this.src,this.alt)">`).join('')}
       </div>
       ${item.imgs.length > 1 ? `<div class="modal-thumbs">
         ${item.imgs.map((src,i) => `<div class="modal-thumb ${i===0?'active':''} ${isFit?'bg-white':isDark?'bg-dark':''}" onclick="gallerySel(${i})"><img src="${src}" alt=""></div>`).join('')}
@@ -1919,6 +1994,100 @@ function handleSubmit(e) {
     e.target.reset();
   }, 1200);
 }
+
+/* ── Zoom Lightbox ── */
+(function () {
+  let zScale = 1, zTx = 0, zTy = 0;
+  let zDrag = false, zLastX = 0, zLastY = 0;
+  const MIN_S = 1, MAX_S = 6;
+
+  const zOverlay = document.getElementById('zoomOverlay');
+  const zImg     = document.getElementById('zoomImg');
+  const zBadge   = document.getElementById('zoomScaleBadge');
+  const zClose   = document.getElementById('zoomCloseBtn');
+
+  function zApply() {
+    zImg.style.transform = `translate(${zTx}px,${zTy}px) scale(${zScale})`;
+    zBadge.textContent   = zScale.toFixed(1) + '×';
+  }
+  function zClamp() {
+    if (zScale <= MIN_S) { zTx = 0; zTy = 0; return; }
+    const mX = window.innerWidth  * (zScale - 1) / 2;
+    const mY = window.innerHeight * (zScale - 1) / 2;
+    zTx = Math.max(-mX, Math.min(mX, zTx));
+    zTy = Math.max(-mY, Math.min(mY, zTy));
+  }
+
+  window.openZoom = function (src, alt) {
+    zImg.src = src; zImg.alt = alt || '';
+    zScale = 1; zTx = 0; zTy = 0;
+    zApply();
+    zOverlay.classList.add('open');
+  };
+  function closeZoom() { zOverlay.classList.remove('open'); }
+  window.closeZoom = closeZoom;
+
+  zClose.addEventListener('click', e => { e.stopPropagation(); closeZoom(); });
+  zOverlay.addEventListener('click', e => { if (e.target === zOverlay) closeZoom(); });
+
+  /* Rotella: zoom */
+  zOverlay.addEventListener('wheel', e => {
+    e.preventDefault();
+    zScale = Math.min(MAX_S, Math.max(MIN_S, zScale * (e.deltaY > 0 ? 0.85 : 1.18)));
+    zClamp(); zApply();
+  }, { passive: false });
+
+  /* Mouse drag */
+  zOverlay.addEventListener('mousedown', e => {
+    if (zClose.contains(e.target)) return;
+    if (zScale > 1) { zDrag = true; zLastX = e.clientX; zLastY = e.clientY; zImg.classList.add('dragging'); }
+  });
+  window.addEventListener('mousemove', e => {
+    if (!zDrag) return;
+    zTx += e.clientX - zLastX; zTy += e.clientY - zLastY;
+    zLastX = e.clientX; zLastY = e.clientY;
+    zClamp(); zApply();
+  });
+  window.addEventListener('mouseup', () => { zDrag = false; zImg.classList.remove('dragging'); });
+
+  /* Doppio clic: zoom 2.5× / reset */
+  zImg.addEventListener('dblclick', () => {
+    zScale = zScale < 2 ? 2.5 : MIN_S;
+    if (zScale === MIN_S) { zTx = 0; zTy = 0; } else zClamp();
+    zApply();
+  });
+
+  /* Touch: drag + pinch */
+  let tPinch0 = 0, tScale0 = 1, tX0 = 0, tY0 = 0, tTx0 = 0, tTy0 = 0;
+  zOverlay.addEventListener('touchstart', e => {
+    const t = e.touches;
+    if (t.length === 2) {
+      tPinch0 = Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
+      tScale0 = zScale;
+    } else {
+      tX0 = t[0].clientX; tY0 = t[0].clientY; tTx0 = zTx; tTy0 = zTy;
+    }
+  }, { passive: true });
+  zOverlay.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const t = e.touches;
+    if (t.length === 2) {
+      const d = Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
+      zScale = Math.min(MAX_S, Math.max(MIN_S, tScale0 * d / tPinch0));
+    } else if (t.length === 1 && zScale > 1) {
+      zTx = tTx0 + t[0].clientX - tX0;
+      zTy = tTy0 + t[0].clientY - tY0;
+    }
+    zClamp(); zApply();
+  }, { passive: false });
+
+  /* ESC chiude lo zoom prima del modal (capture phase) */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && zOverlay.classList.contains('open')) {
+      closeZoom(); e.stopPropagation();
+    }
+  }, true);
+})();
 
 /* ── Init ── */
 buildDots();

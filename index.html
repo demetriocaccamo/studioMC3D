@@ -1257,9 +1257,8 @@
         </a>
         <div class="dropdown">
           <a onclick="filterAndShow('dioramas','all')">Tutti i diorami</a>
-          <a onclick="filterAndShow('dioramas','fantasy')">Fantasy</a>
+          <a onclick="filterAndShow('dioramas','shadow-box')">Shadow Box</a>
           <a onclick="filterAndShow('dioramas','storico')">Storici</a>
-          <a onclick="filterAndShow('dioramas','sci-fi')">Sci-Fi</a>
         </div>
       </div>
       <div class="nav-item">
@@ -1290,9 +1289,8 @@
   </div>
   <div class="mobile-nav-link" onclick="mobileGo('dioramas')">Diorami 3D</div>
   <div class="mobile-nav-sub">
-    <a onclick="mobileFilter('dioramas','fantasy')">Fantasy</a>
+    <a onclick="mobileFilter('dioramas','shadow-box')">Shadow Box</a>
     <a onclick="mobileFilter('dioramas','storico')">Storici</a>
-    <a onclick="mobileFilter('dioramas','sci-fi')">Sci-Fi</a>
   </div>
   <div class="mobile-nav-link" onclick="mobileGo('contact')">Contatti</div>
   <div class="mobile-nav-contact">
@@ -1480,9 +1478,8 @@
         <h5>Diorami</h5>
         <ul>
           <li><a onclick="showPage('dioramas')">Tutti i Diorami</a></li>
-          <li><a onclick="filterAndShow('dioramas','fantasy')">Fantasy</a></li>
+          <li><a onclick="filterAndShow('dioramas','shadow-box')">Shadow Box</a></li>
           <li><a onclick="filterAndShow('dioramas','storico')">Storici</a></li>
-          <li><a onclick="filterAndShow('dioramas','sci-fi')">Sci-Fi</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1572,9 +1569,8 @@
   <div class="collection-toolbar">
     <div class="filter-group" id="dio-filters">
       <button class="filter-pill active" onclick="filterCards(this,'dioramas','all')">Tutti</button>
-      <button class="filter-pill" onclick="filterCards(this,'dioramas','fantasy')">Fantasy</button>
+      <button class="filter-pill" onclick="filterCards(this,'dioramas','shadow-box')">Shadow Box</button>
       <button class="filter-pill" onclick="filterCards(this,'dioramas','storico')">Storici</button>
-      <button class="filter-pill" onclick="filterCards(this,'dioramas','sci-fi')">Sci-Fi</button>
     </div>
     <span class="count-label" id="dio-count"></span>
   </div>
@@ -1757,21 +1753,21 @@ const OBJECTS = [
 ];
 
 const DIORAMAS = [
-  { id:'d11', badge:'new', cat:'storico', imgs:['img/edificio-reina-1.jpg'], imgfit:'contain', landscape:true,
+  { id:'d11', badge:'new', cat:'shadow-box', imgs:['img/edificio-reina-1.jpg'], imgfit:'contain', landscape:true,
     title:'Edificio Reina — Facciata Urbana',
     sub:'Architettura in Cornice',
     short:'Facciata multipiano con Hostal Orca e pannello ornamentale — shadow box 50×50 cm, ispirazione: Felix Diaz Escauriaza.',
     desc:'Shadow box in cornice nera 50×50 cm che riproduce la facciata di un palazzo urbano spagnolo con iscrizione "EDIFICIO REINA RG2A MMXIV". Il lato sinistro restituisce l\'architettura classica del centro storico: cinque piani con persiane in legno marrone, balconi in ferro battuto, vasi fioriti e segnaletica verticale rossa dell\'Hostal Orca. Il coronamento superiore è scandito da una terrazza con balaustrata, vasi ornamentali e timpano in mattoni. Il lato destro costituisce un pannello decorativo autonomo: colonne bianche con cornici dorate separano specchi ornamentali ricamati con figure di animali in bordeaux scuro — gatti, uccelli, lucertole, mani — secondo il vocabolario visivo dell\'illustratore Felix Diaz Escauriaza. La composizione dialoga tra rigore architettonico e ornamento tribale, creando un oggetto al confine tra diorama e arte murale tridimensionale.',
     specs:{ Formato:'Shadow box 50×50 cm', Tecnica:'FDM + pittura a mano', Finitura:'Acrilico + decalcomanie', Ispirazione:'Felix Diaz Escauriaza' }
   },
-  { id:'d10', badge:'new', cat:'storico', imgs:['img/farmacia1.jpg'], imgfit:'contain', landscape:true,
+  { id:'d10', badge:'new', cat:'shadow-box', imgs:['img/farmacia1.jpg'], imgfit:'contain', landscape:true,
     title:'Farmacia — Palazzo Urbano anni \'60',
     sub:'Diorama Urbano',
     short:'Facciata di palazzo italiano con farmacia al piano terra e autobus SGEA — shadow box 25×25 cm, stampa 3D dipinta a mano.',
     desc:'Diorama urbano in cornice bianca 25×25 cm che riproduce un angolo di città italiana degli anni \'60. La facciata del palazzo in intonaco ocra è scandita da persiane in legno verde scuro e cornici bianche; al piano terra campeggia l\'insegna "FARMACIA" su vetrina scura con allestimento interno visibile. Sul lato destro, balconi in ferro battuto su sei livelli ospitano vasi fioriti e piantine — dettaglio che restituisce la vivacità del quotidiano. Sulla strada, un autobus SGEA blu e bianco — modello diecast selezionato — completa la scena di quartiere. Pittura a mano con washing su intonaco, dry-brushing sulle persiane e invecchiamento delle facciate con polveri pigmentate.',
     specs:{ Formato:'Shadow box 25×25 cm', Tecnica:'FDM + modello diecast', Finitura:'Dipinto a mano + weathering', Ambientazione:'Città italiana, anni \'60' }
   },
-  { id:'d5', badge:'new', cat:'storico', imgs:['img/venezia-1.jpg'], imgfit:'contain', landscape:true,
+  { id:'d5', badge:'new', cat:'shadow-box', imgs:['img/venezia-1.jpg'], imgfit:'contain', landscape:true,
     title:'Palazzo Veneziano con Motoscafo',
     sub:'Diorama Veneziano',
     short:'Quadretto in cornice: facciata veneziana e motoscafo in latta anni \'50 — stampa 3D dipinta e modificata a mano.',
@@ -1785,14 +1781,14 @@ const DIORAMAS = [
     desc:'Diorama stradale che riproduce un angolo di borgo italiano degli anni \'60. La "Casa della Gomma" campeggia con le insegne Pirelli, Michelin, Gulf, Castrol, Texaco e Champion. Sul selciato sfilano sei modelli in scala: Fiat 600 celeste, Fiat 850 Spider bianca, spider bordeaux, berlina grigia, Renault Dauphine blu e il furgone Fiat 238 giallo con livrea a strisce. Lo sfondo riproduce la campagna toscana con cipressi, casolare e strade bianche. Sul lato, un manifesto elettorale del PCI e una bacheca con avvisi di paese completano l\'atmosfera d\'epoca. Albero in resina e panchine in legno arredano il marciapiede in sampietrini.',
     specs:{ Formato:'Diorama stradale', Tecnica:'FDM + modelli diecast', Finitura:'Dipinto a mano + weathering', Ambientazione:'Borgo toscano, anni \'60' }
   },
-  { id:'d9', badge:'new', cat:'storico', imgs:['img/calciobalilla-1.jpeg'], imgfit:'contain', landscape:true,
+  { id:'d9', badge:'new', cat:'shadow-box', imgs:['img/calciobalilla-1.jpeg'], imgfit:'contain', landscape:true,
     title:'Calciatori da Balilla — Shadow Box anni \'40',
     sub:'Quadretto da Collezione',
     short:'Tre figurine lignee da calcio balilla anni \'40 su campo da gioco stampato — cornice 23×28 cm con vetro.',
     desc:'Shadow box in cornice nera 23×28 cm che valorizza tre figurine originali da calcio balilla degli anni \'40. Le statuette in legno intagliato e dipinto a mano — due giocatori in maglia a strisce bianche e nere e uno in maglia rossa, tutti con pantaloncini scuri e calzettoni — sono montate sulla barra metallica originale con i giunti a vite d\'epoca. Il pallone in resina completa la scena. Lo sfondo riproduce grafica di un campo da calcio con linee d\'area su fondo verde, creando profondità e contesto sportivo. Tecnica mista: oggetti vintage originali su stampa fotografica incorniciata.',
     specs:{ Formato:'Cornice 23×28 cm', Tecnica:'Figurine vintage + sfondo stampato', Finitura:'Shadow box con vetro', Ambientazione:'Campo da calcio, anni \'40' }
   },
-  { id:'d8', badge:'new', cat:'storico', imgs:['img/fantino-1.png'], imgfit:'contain', landscape:true,
+  { id:'d8', badge:'new', cat:'shadow-box', imgs:['img/fantino-1.png'], imgfit:'contain', landscape:true,
     title:'Il Fantino Dick — Shadow Box anni \'50',
     sub:'Quadretto da Collezione',
     short:'Giocattolo in latta anni \'50 su fotografia vintage in cornice A4 — cavallo e fantino "Dick" in livrea gialla su ippodromo in bianco e nero.',

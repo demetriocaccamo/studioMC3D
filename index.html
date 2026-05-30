@@ -1225,9 +1225,9 @@
 <div class="announce">
   Portfolio Design &amp; Stampa 3D
   <span>|</span>
-  Modelli Artigianali su Commissione
+  Modelli Artigianali e Diorami
   <span>|</span>
-  Contattami per Progetti Personalizzati
+  Contattami per Informazioni
 </div>
 
 <!-- ── HEADER ── -->
@@ -1296,7 +1296,7 @@
   </div>
   <div class="mobile-nav-link" onclick="mobileGo('contact')">Contatti</div>
   <div class="mobile-nav-contact">
-    <button class="btn-gold" onclick="mobileGo('contact')">Richiedi un Preventivo →</button>
+    <button class="btn-gold" onclick="mobileGo('contact')">Contattami →</button>
   </div>
 </div>
 
@@ -1375,9 +1375,9 @@
         <img src="img/barriere-2.jpg" alt="Barriere da Circuito" />
       </div>
       <div class="slide-content">
-        <div class="slide-badge">Su Commissione</div>
+        <div class="slide-badge">Artigianale</div>
         <h2>Scenografie<br>per Slot Car</h2>
-        <p>Moduli intercambiabili · Scala 1:32<br>Pezzi unici su misura per il tuo tracciato.</p>
+        <p>Moduli intercambiabili · Scala 1:32<br>Pezzi unici per tracciati in scala 1:32.</p>
         <a class="slide-cta" onclick="showPage('contact')">
           Contattami
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1453,9 +1453,9 @@
     <div class="dual-card" onclick="showPage('contact')">
       <img src="img/barriere-3.jpg" alt="Commissioni" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
       <div class="dual-card-text">
-        <div class="eyebrow">Commissioni</div>
-        <h3>Hai un'idea?</h3>
-        <p>Realizziamo insieme il tuo progetto personalizzato su misura.</p>
+        <div class="eyebrow">Informazioni</div>
+        <h3>Hai domande?</h3>
+        <p>Per qualsiasi informazione sulle opere in collezione, scrivimi.</p>
         <span class="link-arr">Contattami <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </div>
@@ -1489,7 +1489,7 @@
         <h5>Info</h5>
         <ul>
           <li><a onclick="showPage('contact')">Contatti</a></li>
-          <li><a onclick="showPage('contact')">Commissioni</a></li>
+          <li><a onclick="showPage('contact')">Informazioni</a></li>
         </ul>
       </div>
     </div>
@@ -1545,7 +1545,7 @@
         <h5>Info</h5>
         <ul>
           <li><a onclick="showPage('contact')">Contatti</a></li>
-          <li><a onclick="showPage('contact')">Commissioni</a></li>
+          <li><a onclick="showPage('contact')">Informazioni</a></li>
         </ul>
       </div>
     </div>
@@ -1614,15 +1614,15 @@
 ════════════════════════════════ -->
 <div id="contact" class="page">
   <div class="contact-hero">
-    <div class="eyebrow">Commissioni &amp; Collaborazioni</div>
-    <h2>Parliamo del tuo progetto</h2>
-    <p>Hai un'idea per un oggetto personalizzato o un diorama? Scrivimi.</p>
+    <div class="eyebrow">Contatti</div>
+    <h2>Scrivimi</h2>
+    <p>Per informazioni sulle opere in collezione o qualsiasi altra curiosità, sono a disposizione.</p>
   </div>
 
   <div class="contact-wrap">
     <div class="contact-aside">
-      <h4>Realizziamo la tua idea</h4>
-      <p>Oggetti funzionali, sculture decorative, diorami da collezione — ogni progetto è unico e realizzato con cura artigianale.</p>
+      <h4>Una vetrina artigianale</h4>
+      <p>Oggetti funzionali, sculture decorative, diorami da collezione — ogni pezzo è unico e realizzato con cura artigianale.</p>
       <div class="c-item">
         <div class="c-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -1674,18 +1674,18 @@
         <input type="email" id="em" placeholder="mario@esempio.it" required />
       </div>
       <div class="fg">
-        <label for="proj">Tipo di progetto</label>
+        <label for="proj">Oggetto della richiesta</label>
         <select id="proj">
           <option value="">Seleziona…</option>
-          <option>Oggetto 3D personalizzato</option>
-          <option>Diorama su commissione</option>
-          <option>Consulenza di modellazione</option>
+          <option>Informazioni su un'opera</option>
+          <option>Informazioni tecniche</option>
+          <option>Collaborazione</option>
           <option>Altro</option>
         </select>
       </div>
       <div class="fg">
         <label for="msg">Messaggio</label>
-        <textarea id="msg" placeholder="Descrivi il tuo progetto…" required></textarea>
+        <textarea id="msg" placeholder="Scrivi il tuo messaggio…" required></textarea>
       </div>
       <button type="submit" class="btn-gold">Invia Messaggio</button>
       <div class="form-ok" id="formOk">Messaggio inviato! Ti rispondo presto.</div>
@@ -1893,7 +1893,7 @@ function renderGrid(section) {
   const items  = filter === 'all' ? data : data.filter(i => i.cat === filter);
   document.getElementById(section + '-grid').innerHTML = items.map(renderCard).join('');
   const countEl = document.getElementById(section === 'objects' ? 'obj-count' : 'dio-count');
-  if (countEl) countEl.textContent = items.length + ' ' + (items.length === 1 ? 'progetto' : 'progetti');
+  if (countEl) countEl.textContent = items.length + ' ' + (items.length === 1 ? 'modello' : 'modelli');
 }
 
 function filterCards(btn, section, cat) {

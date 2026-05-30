@@ -1214,7 +1214,8 @@
       white-space: nowrap;
       pointer-events: none;
     }
-    .modal-gallery img { cursor: zoom-in; }
+    .modal-gallery { cursor: zoom-in; }
+    .modal-gallery img:not(.active) { pointer-events: none; }
     @media(max-width:768px) { .zoom-hint { display: none; } }
   </style>
 </head>
@@ -1920,8 +1921,8 @@ function openModal(item) {
     const isFit = item.imgfit === 'contain' && !item.landscape;
     const isDark = item.landscape;
     wrap.innerHTML = `
-      <div class="modal-gallery" id="mgallery">
-        ${item.imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''} ${isFit?'bg-white':isDark?'bg-dark':''}" alt="${item.title} ${i+1}" onclick="openZoom(this.src,this.alt)">`).join('')}
+      <div class="modal-gallery" id="mgallery" onclick="(function(){var a=document.querySelector('#mgallery img.active');if(a)openZoom(a.src,a.alt)})()">
+        ${item.imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''} ${isFit?'bg-white':isDark?'bg-dark':''}" alt="${item.title} ${i+1}">`).join('')}
       </div>
       ${item.imgs.length > 1 ? `<div class="modal-thumbs">
         ${item.imgs.map((src,i) => `<div class="modal-thumb ${i===0?'active':''} ${isFit?'bg-white':isDark?'bg-dark':''}" onclick="gallerySel(${i})"><img src="${src}" alt=""></div>`).join('')}

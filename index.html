@@ -105,8 +105,6 @@
       white-space: nowrap;
     }
     .nav-link:hover, .nav-link.active { color: var(--white); }
-    .nav-link svg { width: 9px; transition: transform .2s; }
-    .nav-item:hover .nav-link svg { transform: rotate(180deg); }
     /* Dropdown */
     .dropdown {
       display: none;
@@ -1241,7 +1239,6 @@
       <div class="nav-item">
         <a class="nav-link" id="nav-objects" onclick="showPage('objects')">
           Oggetti 3D
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </a>
         <div class="dropdown">
           <a onclick="filterAndShow('objects','all')">Tutti gli oggetti</a>
@@ -1252,7 +1249,6 @@
       <div class="nav-item">
         <a class="nav-link" id="nav-dioramas" onclick="showPage('dioramas')">
           Diorami 3D
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </a>
         <div class="dropdown">
           <a onclick="filterAndShow('dioramas','all')">Tutti i diorami</a>

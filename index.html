@@ -1669,7 +1669,7 @@
         </div>
         <div>
           <div class="c-label">Email</div>
-          <div class="c-val">studio@mc3d.it</div>
+          <div class="c-val"><a href="mailto:info@studiomc3d.it" style="color:inherit">info@studiomc3d.it</a></div>
         </div>
       </div>
       <div class="c-item">
@@ -1700,20 +1700,20 @@
       <div class="form-row">
         <div class="fg">
           <label for="fn">Nome</label>
-          <input type="text" id="fn" placeholder="Mario" required />
+          <input type="text" id="fn" name="nome" placeholder="Mario" required />
         </div>
         <div class="fg">
           <label for="ln">Cognome</label>
-          <input type="text" id="ln" placeholder="Rossi" required />
+          <input type="text" id="ln" name="cognome" placeholder="Rossi" required />
         </div>
       </div>
       <div class="fg">
         <label for="em">Email</label>
-        <input type="email" id="em" placeholder="mario@esempio.it" required />
+        <input type="email" id="em" name="email" placeholder="mario@esempio.it" required />
       </div>
       <div class="fg">
         <label for="proj">Oggetto della richiesta</label>
-        <select id="proj">
+        <select id="proj" name="oggetto">
           <option value="">Seleziona…</option>
           <option>Informazioni su un'opera</option>
           <option>Informazioni tecniche</option>
@@ -1723,10 +1723,13 @@
       </div>
       <div class="fg">
         <label for="msg">Messaggio</label>
-        <textarea id="msg" placeholder="Scrivi il tuo messaggio…" required></textarea>
+        <textarea id="msg" name="messaggio" placeholder="Scrivi il tuo messaggio…" required></textarea>
       </div>
       <button type="submit" class="btn-gold">Invia Messaggio</button>
       <div class="form-ok" id="formOk">Messaggio inviato! Ti rispondo presto.</div>
+      <div class="form-ok" id="formErr" style="border-color:rgba(184,50,40,.4);background:rgba(184,50,40,.07);color:#e05548;display:none">
+        Errore nell'invio. Scrivi direttamente a <a href="mailto:info@studiomc3d.it" style="color:inherit;text-decoration:underline">info@studiomc3d.it</a>
+      </div>
     </form>
   </div>
 
@@ -2030,15 +2033,30 @@ function nextSlide() { goSlide(current + 1); }
 function prevSlide() { goSlide(current - 1); }
 
 /* ── Contact form ── */
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.btn-gold');
-  btn.textContent = 'Invio…'; btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('formOk').style.display = 'block';
-    btn.textContent = 'Invia Messaggio'; btn.disabled = false;
-    e.target.reset();
-  }, 1200);
+  const btn  = e.target.querySelector('.btn-gold');
+  const ok   = document.getElementById('formOk');
+  const err  = document.getElementById('formErr');
+  ok.style.display = 'none';
+  err.style.display = 'none';
+  btn.textContent = 'Invio in corso…'; btn.disabled = true;
+  try {
+    const res = await fetch('https://formspree.io/f/xpqnvako', {
+      method: 'POST',
+      body: new FormData(e.target),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      ok.style.display = 'block';
+      e.target.reset();
+    } else {
+      err.style.display = 'block';
+    }
+  } catch (_) {
+    err.style.display = 'block';
+  }
+  btn.textContent = 'Invia Messaggio'; btn.disabled = false;
 }
 
 /* ── Zoom Lightbox ── */

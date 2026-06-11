@@ -30,8 +30,8 @@
       background: var(--dark);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 16px;
+      line-height: 1.7;
       overflow-x: hidden;
     }
     h1,h2,h3,h4,h5 {
@@ -96,9 +96,9 @@
       padding: 0 16px;
       height: 66px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: .16em;
+      letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--muted);
       transition: color .2s;
@@ -224,7 +224,7 @@
       color: var(--amber2);
     }
     .slide-content p {
-      font-size: 15px;
+      font-size: 17px;
       color: rgba(248,244,236,.85);
       margin-bottom: 32px;
       line-height: 1.8;
@@ -297,7 +297,7 @@
     }
     .section-eyebrow {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
+      font-size: 11px;
       letter-spacing: .22em;
       text-transform: uppercase;
       color: var(--amber);
@@ -320,7 +320,7 @@
       align-items: center;
       gap: 8px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
       letter-spacing: .18em;
       text-transform: uppercase;
@@ -403,22 +403,22 @@
     .card-body { padding: 18px 20px 22px; border-top: 1px solid var(--border); }
     .card-series {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
+      font-size: 10px;
       letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--amber);
-      margin-bottom: 7px;
+      margin-bottom: 8px;
     }
     .card-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700;
       color: var(--white);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       line-height: 1.15;
     }
     .card-sub {
-      font-size: 13px;
+      font-size: 14px;
       color: rgba(248,244,236,.72);
       margin-bottom: 14px;
       letter-spacing: .03em;
@@ -429,11 +429,11 @@
       flex-wrap: wrap;
     }
     .chip {
-      padding: 3px 9px;
+      padding: 4px 10px;
       background: var(--surface);
       border: 1px solid var(--border);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 8px;
+      font-size: 9px;
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--muted);
@@ -913,7 +913,7 @@
       gap: 48px;
     }
     .footer-brand .logo { font-size: 20px; margin-bottom: 16px; display: block; }
-    .footer-brand p { font-size: 13px; color: var(--muted); line-height: 1.9; max-width: 260px; font-weight: 300; }
+    .footer-brand p { font-size: 15px; color: var(--muted); line-height: 1.9; max-width: 260px; font-weight: 300; }
     .footer-col h5 {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
@@ -923,7 +923,7 @@
       margin-bottom: 18px;
     }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-    .footer-col ul li a { font-size: 13px; color: var(--muted); transition: color .2s; font-weight: 300; cursor: pointer; }
+    .footer-col ul li a { font-size: 15px; color: var(--muted); transition: color .2s; font-weight: 300; cursor: pointer; }
     .footer-col ul li a:hover { color: var(--amber); }
     .footer-bottom {
       border-top: 1px solid var(--border);
@@ -1218,9 +1218,187 @@
     .modal-gallery { cursor: zoom-in; }
     .modal-gallery img:not(.active) { pointer-events: none; }
     @media(max-width:768px) { .zoom-hint { display: none; } }
+
+    /* ══════════════════════════
+       WOW EFFECTS
+    ══════════════════════════ */
+
+
+    /* ── Page intro loader ── */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      transition: opacity .6s var(--ease), visibility .6s;
+    }
+    .page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 96px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--white);
+      opacity: 0;
+      transform: translateY(16px);
+      animation: loaderIn .7s .2s var(--ease) forwards;
+    }
+    .loader-logo em { font-style: italic; color: var(--amber); font-weight: 400; }
+    .loader-bar {
+      width: 120px; height: 1px;
+      background: var(--border);
+      overflow: hidden;
+    }
+    .loader-bar::after {
+      content: '';
+      display: block;
+      height: 100%;
+      background: var(--amber);
+      animation: loaderBar .9s .3s var(--ease) forwards;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    @keyframes loaderIn { to { opacity:1; transform:translateY(0); } }
+    @keyframes loaderBar { to { transform:scaleX(1); } }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+    @media(prefers-reduced-motion:reduce) {
+      .reveal { opacity:1; transform:none; transition:none; }
+    }
+
+    /* ── Card WOW hover ── */
+    .product-card {
+      transition: transform .4s var(--ease), box-shadow .4s var(--ease),
+                  border-color .4s var(--ease);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 32px 72px rgba(0,0,0,.6), 0 0 0 1px rgba(200,136,42,.25),
+                  0 0 40px rgba(200,136,42,.08);
+      border-color: rgba(200,136,42,.5);
+    }
+    .product-card:hover .card-image img,
+    .product-card:hover .card-image .thumb-art { transform: scale(1.1); }
+
+    /* Card image overlay on hover */
+    .card-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(200,136,42,.18) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .product-card:hover .card-image::after { opacity: 1; }
+
+    /* ── Hero canvas particelle ── */
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .5;
+    }
+
+    /* ── Hero text animate-in ── */
+    .slide.active .slide-badge {
+      animation: slideUp .5s .1s var(--ease) both;
+    }
+    .slide.active .slide-content h2 {
+      animation: slideUp .6s .2s var(--ease) both;
+    }
+    .slide.active .slide-content p {
+      animation: slideUp .6s .32s var(--ease) both;
+    }
+    .slide.active .slide-cta {
+      animation: slideUp .5s .44s var(--ease) both;
+    }
+    @keyframes slideUp {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── Announce bar shimmer ── */
+    .announce {
+      background: linear-gradient(90deg,
+        var(--black) 0%, #1a150a 50%, var(--black) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    /* ── Section head line reveal ── */
+    .section-head::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--amber), transparent);
+      position: absolute;
+      bottom: -1px; left: 48px;
+      transition: width 1s var(--ease);
+    }
+    .section-head { position: relative; overflow: visible; }
+    .section-head.visible::after { width: 200px; }
+
+    /* ── Dual card WOW ── */
+    .dual-card {
+      transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+    }
+    .dual-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 28px 60px rgba(0,0,0,.55), 0 0 30px rgba(200,136,42,.1);
+    }
+
+    /* ── Logo hover pulse ── */
+    .logo {
+      transition: color .2s, text-shadow .3s;
+    }
+    .logo:hover {
+      text-shadow: 0 0 28px rgba(200,136,42,.4);
+    }
+
+    /* ── Btn glow ── */
+    .slide-cta:hover {
+      box-shadow: 0 0 24px rgba(200,136,42,.4);
+    }
+    .btn-gold:hover {
+      box-shadow: 0 0 20px rgba(200,136,42,.35);
+    }
   </style>
 </head>
 <body>
+
+<!-- ── PAGE LOADER ── -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo">MC<em>3D</em></div>
+  <div class="loader-bar"></div>
+</div>
 
 <!-- ── ANNOUNCEMENT BAR ── -->
 <div class="announce">
@@ -1336,6 +1514,7 @@
 
   <!-- Hero Slider -->
   <div class="hero-slider" id="heroSlider">
+    <canvas id="heroCanvas"></canvas>
 
     <div class="slide active">
       <div class="slide-bg">
@@ -1799,6 +1978,13 @@ const DIORAMAS = [
     desc:'Diorama in scala 1:43 che riproduce l\'atmosfera di un\'autostazione italiana degli anni \'70. Sotto la tettoia in lamiera ondulata che copre i binari 6 e 7, due pullman d\'epoca si fronteggiano: a sinistra il Fiat/SITA in livrea blu e gialla con cartello "SALERNO", a destra il Fiat 309 Menarini bianco e azzurro con targhetta "BLAX SAR RENARINI". Sul marciapiede in sampietrini, un palo centrale ospita un orologio a doppia faccia stile Mondaine e una bacheca con manifesti pubblicitari d\'epoca — il celebre poster del rabarbaro Zucco e la campagna "Non accontentarti di niente di meno". Figuranti in scala 1:43 animano la scena: passeggeri in attesa, un viaggiatore seduto e personale di stazione. Sotto la tettoia, una fila di luci LED a incandescenza restituisce l\'illuminazione calda dei terminal di epoca. Pittura a mano con weathering e invecchiamento su strutture e pavimentazione.',
     specs:{ Scala:'1:43', Tecnica:'Stampa 3D + modelli diecast', Finitura:'Dipinto a mano + LED + weathering', Ambientazione:'Autostazione italiana, anni \'70' }
   },
+  { id:'d12', badge:'new', cat:'shadow-box', imgs:['img/burano-1.jpg','img/burano-2.jpg'], imgfit:'contain', landscape:true,
+    title:'Burano: Forme e Colori',
+    sub:'Shadow Box Pop Art',
+    short:'Le casette colorate di Burano reinterpretate in stile pop art e paper craft — shadow box 50×50 cm, stampa 3D.',
+    desc:'Shadow box in cornice nera 50×50 cm che cattura l\'essenza cromatica di Burano, l\'isola veneziana celebre per le sue facciate dipinte con colori primari squillanti. La composizione affianca quattro case contigue — blu, giallo, verde, rosso — reinterpretate in chiave pop art e paper craft: volumi netti, palette ipersatura, dettagli stilizzati. Persiane in legno scuro, comignoli slanciati, antenne TV, cactus in vaso, tende a strisce e sedie da esterno animano la scena con la stessa vivacità pittoresca del borgo lagunare. Il cielo azzurro con nuvole sagomate a strati completa l\'effetto di profondità tipico del shadow box. Un omaggio all\'architettura popolare veneziana tradotto nel linguaggio grafico del paper craft tridimensionale.',
+    specs:{ Formato:'Shadow box 50×50 cm', Tecnica:'Stampa 3D, PLA multicolore', Finitura:'Verniciato a mano', Ispirazione:'Burano, Venezia' }
+  },
   { id:'d11', badge:'new', cat:'shadow-box', imgs:['img/reina_roja.jpg'], imgfit:'contain', landscape:true,
     title:'Edificio Reina — Facciata Urbana',
     sub:'Architettura in Cornice',
@@ -2153,6 +2339,104 @@ timer = setInterval(() => goSlide(current + 1), 5000);
 renderGrid('objects');
 renderGrid('dioramas');
 renderHomePreviews();
+
+/* ══════════════════════════════════════
+   WOW EFFECTS — loader, cursor, reveal, particles
+══════════════════════════════════════ */
+
+/* ── Page Loader ── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('pageLoader').classList.add('hidden');
+  }, 1100);
+});
+
+
+/* ── Scroll Reveal ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+function initReveal() {
+  /* Section heads */
+  document.querySelectorAll('.section-head').forEach(el => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
+  /* Card grids — stagger */
+  document.querySelectorAll('.product-card, .dual-card').forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (0.08 * (i % 4)) + 's';
+    revealObserver.observe(el);
+  });
+  /* Banner strip */
+  document.querySelectorAll('.banner-strip, .dual-banner').forEach(el => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
+}
+/* Esegui dopo che le grid sono renderizzate */
+setTimeout(initReveal, 200);
+
+/* ── Particles Hero ── */
+const canvas = document.getElementById('heroCanvas');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resizeCanvas() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const COLORS = ['rgba(200,136,42,', 'rgba(232,170,74,', 'rgba(248,220,140,'];
+  for (let i = 0; i < 55; i++) {
+    particles.push({
+      x: Math.random() * (typeof W !== 'undefined' ? W : 1400),
+      y: Math.random() * (typeof H !== 'undefined' ? H : 700),
+      r: Math.random() * 1.8 + 0.4,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: -(Math.random() * 0.4 + 0.15),
+      alpha: Math.random() * 0.5 + 0.15,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)]
+    });
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + p.alpha + ')';
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; }
+      if (p.x < -4) p.x = W + 4;
+      if (p.x > W + 4) p.x = -4;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+}
+
+/* ── Hero Parallax leggero ── */
+const heroSlider = document.getElementById('heroSlider');
+if (heroSlider && window.matchMedia('(pointer:fine)').matches) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    heroSlider.querySelectorAll('.slide-bg img').forEach(img => {
+      img.style.transform = `scale(1.05) translateY(${y * 0.18}px)`;
+    });
+  }, { passive: true });
+}
 </script>
 </body>
 </html>

@@ -150,7 +150,7 @@
        HOME PAGE
     ════════════════════════ */
 
-    /* Hero Slider */
+    /* Hero Video */
     .hero-slider {
       position: relative;
       width: 100%;
@@ -159,36 +159,19 @@
       overflow: hidden;
       background: var(--black);
     }
-    .slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 1.2s var(--ease);
-    }
-    .slide.active { opacity: 1; }
-    .slide-bg {
-      width: 100%; height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-    .slide-bg img {
+    .hero-video {
       position: absolute;
       inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center;
-      transform: scale(1.05);
-      transition: transform 8s ease;
     }
-    .slide.active .slide-bg img { transform: scale(1); }
-    /* Gradient overlays */
-    .slide-bg::after {
-      content: '';
+    .hero-video-overlay {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(12,10,7,.92) 0%, rgba(12,10,7,.55) 50%, rgba(12,10,7,.1) 100%),
-        linear-gradient(0deg, rgba(12,10,7,.85) 0%, transparent 50%);
+        linear-gradient(90deg, rgba(12,10,7,.88) 0%, rgba(12,10,7,.45) 55%, rgba(12,10,7,.08) 100%),
+        linear-gradient(0deg, rgba(12,10,7,.80) 0%, transparent 50%);
       z-index: 1;
     }
     .slide-content {
@@ -247,37 +230,6 @@
     }
     .slide-cta:hover { background: var(--amber2); gap: 18px; }
     .slide-cta svg { width: 14px; }
-    /* Slider controls */
-    .slider-dots {
-      position: absolute;
-      bottom: 36px; left: 80px;
-      display: flex;
-      gap: 6px;
-      z-index: 3;
-    }
-    .dot {
-      width: 24px; height: 2px;
-      background: rgba(248,244,236,.2);
-      cursor: pointer;
-      transition: background .3s, width .3s;
-    }
-    .dot.active { background: var(--amber); width: 52px; }
-    .slider-arrows {
-      position: absolute;
-      bottom: 24px; right: 64px;
-      display: flex;
-      gap: 6px;
-      z-index: 3;
-    }
-    .arrow-btn {
-      width: 44px; height: 44px;
-      border: 1px solid rgba(248,244,236,.15);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(248,244,236,.5);
-      transition: border-color .2s, color .2s, background .2s;
-    }
-    .arrow-btn:hover { border-color: var(--amber); color: var(--amber); background: rgba(200,136,42,.08); }
-    .arrow-btn svg { width: 16px; }
 
     /* Section headings */
     .section-head {
@@ -1512,108 +1464,21 @@
 ════════════════════════════════ -->
 <div id="home" class="page active">
 
-  <!-- Hero Slider -->
+  <!-- Hero Video -->
   <div class="hero-slider" id="heroSlider">
     <canvas id="heroCanvas"></canvas>
-
-    <div class="slide active">
-      <div class="slide-bg">
-        <img src="img/pullman1-1.jpg" alt="Autostazione anni '70 — Binari 6 e 7" />
-      </div>
-      <div class="slide-content">
-        <div class="slide-badge">In Evidenza</div>
-        <h2>Autostazione<br><em>anni '70</em></h2>
-        <p>Scala 1:43 · FDM + diecast + LED<br>Fiat/SITA "Salerno" e Fiat 309 Menarini ai binari 6 e 7.</p>
-        <a class="slide-cta" onclick="openItemById('d12')">
-          Scopri l'Opera
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="slide">
-      <div class="slide-bg">
-        <img src="img/torre-f1-3.jpg" alt="Torre di Controllo F1 Vintage" />
-      </div>
-      <div class="slide-content">
-        <div class="slide-badge">Oggetti 3D</div>
-        <h2>Torre di Controllo<br>F1 Vintage</h2>
-        <p>Scala 1:32 · PLA + PETG<br>Livree Goodyear, Champion, Castrol, Martini.</p>
-        <a class="slide-cta" onclick="openItemById('o7')">
-          Scopri il Progetto
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="slide">
-      <div class="slide-bg">
-        <img src="img/tribuna-f1-2.jpg" alt="Tribuna da Circuito F1" />
-      </div>
-      <div class="slide-content">
-        <div class="slide-badge">Nuovo</div>
-        <h2>Tribuna<br>da Circuito F1</h2>
-        <p>3 settori · Scala 1:32<br>Firestone, Agip, Jack Daniels, Ferrari Club Modena.</p>
-        <a class="slide-cta" onclick="openItemById('o8')">
-          Scopri il Progetto
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="slide">
-      <div class="slide-bg">
-        <img src="img/barriere-2.jpg" alt="Barriere da Circuito" />
-      </div>
-      <div class="slide-content">
-        <div class="slide-badge">Artigianale</div>
-        <h2>Scenografie<br>per Slot Car</h2>
-        <p>Moduli intercambiabili · Scala 1:32<br>Pezzi unici per tracciati in scala 1:32.</p>
-        <a class="slide-cta" onclick="showPage('contact')">
-          Contattami
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="slide">
-      <div class="slide-bg">
-        <img src="img/reina_roja.jpg" alt="Edificio Reina — Shadow Box" style="object-fit:contain;background:#0c0a07;" />
-      </div>
-      <div class="slide-content">
-        <div class="slide-badge">Shadow Box</div>
-        <h2>Edificio Reina<br><em>Facciata Urbana</em></h2>
-        <p>Shadow box 50×50 cm · FDM + pittura a mano<br>Ispirazione: Felix Diaz Escauriaza.</p>
-        <a class="slide-cta" onclick="openItemById('d11')">
-          Scopri l'Opera
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="slide">
-      <div class="slide-bg">
-        <img src="img/autosalone-fiat-1.jpg" alt="Autosalone Fiat anni '80" style="object-fit:contain;background:#0c0a07;" />
-      </div>
-      <div class="slide-content">
-        <div class="slide-badge">Storico</div>
-        <h2>Autosalone Fiat<br><em>anni '80</em></h2>
-        <p>Diorama panoramico · FDM + diecast<br>Panda, 127, 1300 e Ferrari 456 in vetrina.</p>
-        <a class="slide-cta" onclick="openItemById('d6')">
-          Scopri l'Opera
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="slider-dots" id="sliderDots"></div>
-    <div class="slider-arrows">
-      <button class="arrow-btn" onclick="prevSlide()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      </button>
-      <button class="arrow-btn" onclick="nextSlide()">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="img/hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+    <div class="slide-content" style="animation: slideUp .6s .2s var(--ease) both;">
+      <div class="slide-badge">Design &amp; Stampa 3D</div>
+      <h2>Modelli <em>Artigianali</em><br>&amp; Diorami</h2>
+      <p>Scenografie in scala · FDM + diecast + LED<br>Pezzi unici realizzati a mano.</p>
+      <a class="slide-cta" onclick="showPage('objects')">
+        Esplora la Collezione
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+      </a>
     </div>
   </div>
 
@@ -2187,30 +2052,6 @@ function closeModal() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* ── Hero Slider ── */
-const slides = document.querySelectorAll('.slide');
-let current = 0, timer;
-
-function buildDots() {
-  const dotsEl = document.getElementById('sliderDots');
-  slides.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => goSlide(i);
-    dotsEl.appendChild(d);
-  });
-}
-function goSlide(n) {
-  slides[current].classList.remove('active');
-  document.querySelectorAll('.dot')[current].classList.remove('active');
-  current = (n + slides.length) % slides.length;
-  slides[current].classList.add('active');
-  document.querySelectorAll('.dot')[current].classList.add('active');
-  clearInterval(timer);
-  timer = setInterval(() => goSlide(current + 1), 5000);
-}
-function nextSlide() { goSlide(current + 1); }
-function prevSlide() { goSlide(current - 1); }
 
 /* ── Contact form ── */
 async function handleSubmit(e) {
@@ -2334,8 +2175,6 @@ async function handleSubmit(e) {
 })();
 
 /* ── Init ── */
-buildDots();
-timer = setInterval(() => goSlide(current + 1), 5000);
 renderGrid('objects');
 renderGrid('dioramas');
 renderHomePreviews();

@@ -530,4 +530,3 @@ if (heroSlider && window.matchMedia('(pointer:fine)').matches) {
     });
   }, { passive: true });
 }
-</script>

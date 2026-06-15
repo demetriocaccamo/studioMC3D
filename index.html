@@ -1826,7 +1826,7 @@ const OBJECTS = [
     specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Verniciata + decalcomanie', Dimensioni:'~25x18 cm' }
   },
   { id:'o11', badge:'new', cat:'decorativo', ta:'ta-4',
-    imgs:['img/orologio_space_invaders.jpg'], imgfit:'contain',
+    imgs:['img/orologio_space_invaders.jpg'], imgfit:'contain', imgbg:'#e8e8e8',
     title:'Orologio Space Invaders',
     sub:'Arcade Collection',
     short:'Orologio da parete circolare Ø 20 cm ispirato al classico arcade degli anni \'70, stampato in PLA nero e giallo.',
@@ -1968,7 +1968,7 @@ function badgeHTML(badge) {
 
 function renderCard(item) {
   const thumb = item.imgs
-    ? `<img src="${item.imgs[0]}" alt="${item.title}" loading="lazy" style="height:100%;object-fit:${item.imgfit||'cover'};${item.imgfit==='contain'?'background:#ffffff;padding:8px':''}">`
+    ? `<img src="${item.imgs[0]}" alt="${item.title}" loading="lazy" style="height:100%;object-fit:${item.imgfit||'cover'};${item.imgfit==='contain'?`background:${item.imgbg||'#ffffff'};padding:8px`:''}">`
     : `<div class="thumb-art ${item.ta}" style="height:100%"><div class="ta-icon">${item.ta&&(item.ta.includes('ta-7')||item.ta.includes('ta-8')||item.ta.includes('ta-9')||item.ta.includes('ta-10')) ? '▦' : '3D'}</div></div>`;
   return `
     <div class="product-card" onclick="openItemById('${item.id}')">
@@ -2021,12 +2021,13 @@ function openModal(item) {
   if (item.imgs && item.imgs.length) {
     const isFit = item.imgfit === 'contain' && !item.landscape;
     const isDark = item.landscape;
+    const bgStyle = isFit ? `background:${item.imgbg||'#ffffff'};` : '';
     wrap.innerHTML = `
       <div class="modal-gallery" id="mgallery" onclick="(function(){var a=document.querySelector('#mgallery img.active');if(a)openZoom(a.src,a.alt)})()">
-        ${item.imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''} ${isFit?'bg-white':isDark?'bg-dark':''}" alt="${item.title} ${i+1}">`).join('')}
+        ${item.imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''} ${isDark?'bg-dark':''}" style="${isFit?`object-fit:contain;${bgStyle}padding:16px`:''}" alt="${item.title} ${i+1}">`).join('')}
       </div>
       ${item.imgs.length > 1 ? `<div class="modal-thumbs">
-        ${item.imgs.map((src,i) => `<div class="modal-thumb ${i===0?'active':''} ${isFit?'bg-white':isDark?'bg-dark':''}" onclick="gallerySel(${i})"><img src="${src}" alt=""></div>`).join('')}
+        ${item.imgs.map((src,i) => `<div class="modal-thumb ${i===0?'active':''} ${isDark?'bg-dark':''}" onclick="gallerySel(${i})"><img src="${src}" style="${isFit?`object-fit:contain;${bgStyle}`:''}" alt=""></div>`).join('')}
       </div>` : ''}`;
   } else {
     const ta = item.ta || 'ta-1';

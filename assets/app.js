@@ -270,7 +270,8 @@ function openItemById(id) {
 
 function handleModalClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
 function closeModal() {
-  document.getElementById('modal').classList.remove('open');
+  const m = document.getElementById('modal');
+  if (m) m.classList.remove('open');
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
@@ -313,6 +314,8 @@ async function handleSubmit(e) {
   const zImg     = document.getElementById('zoomImg');
   const zBadge   = document.getElementById('zoomScaleBadge');
   const zClose   = document.getElementById('zoomCloseBtn');
+
+  if (!zOverlay || !zImg || !zBadge || !zClose) return;
 
   function zApply() {
     zImg.style.transform = `translate(${zTx}px,${zTy}px) scale(${zScale})`;

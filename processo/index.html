@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dal disegno in Fusion 360 alla stampa 3D — MC3D Studio</title>
+  <meta name="description" content="Come nasce ogni pezzo MC3D: dal disegno tecnico in Fusion 360 alla stampa 3D FDM, fino alla rifinitura artigianale. Il processo dietro lo studio." />
+  <link rel="canonical" href="https://www.studiomc3d.it/processo/" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://www.studiomc3d.it/processo/" />
+  <meta property="og:title"       content="Dal disegno in Fusion 360 alla stampa 3D — MC3D Studio" />
+  <meta property="og:description" content="Come nasce ogni pezzo MC3D: dal disegno tecnico in Fusion 360 alla stampa 3D FDM, fino alla rifinitura artigianale. Il processo dietro lo studio." />
+  <meta property="og:image"       content="https://www.studiomc3d.it/img/tribuna-f1-1.jpg" />
+  <meta property="og:locale"      content="it_IT" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <base href="/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .processo-wrap { max-width: 860px; margin: 0 auto; padding: 80px 48px 100px; }
+    .processo-step { display: grid; grid-template-columns: 60px 1fr; gap: 0 32px; margin-bottom: 64px; align-items: start; }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 700; color: rgba(200,136,42,.15); line-height: 1; margin-top: -8px; }
+    .step-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: var(--white); margin-bottom: 16px; line-height: 1.1; }
+    .step-body p  { font-size: 16px; color: rgba(248,244,236,.84); line-height: 1.9; font-weight: 300; }
+    .step-tag { display: inline-block; padding: 3px 12px; background: rgba(200,136,42,.1); border: 1px solid rgba(200,136,42,.25); color: var(--amber); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 14px; }
+    .processo-intro { font-size: 18px; color: rgba(248,244,236,.78); line-height: 1.9; font-weight: 300; margin-bottom: 72px; max-width: 680px; }
+    @media(max-width:768px) {
+      .processo-wrap { padding: 40px 16px 60px; }
+      .processo-step { grid-template-columns: 1fr; gap: 0; }
+      .step-num { font-size: 48px; margin-bottom: 8px; }
+      .step-body h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader"><div class="loader-logo">MC<em>3D</em></div><div class="loader-bar"></div></div>
+
+<div class="announce">Dal disegno in Fusion 360 alla stampa 3D <span>|</span> MC3D Studio</div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/">MC<em>3D</em></a>
+    <nav class="main-nav" aria-label="Navigazione principale">
+      <div class="nav-item"><a class="nav-link" href="/">Home</a></div>
+      <div class="nav-item">
+        <a class="nav-link" href="/oggetti-design/">Oggetti 3D <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown"><a href="/oggetti-design/">Tutti gli oggetti</a><a href="/modellismo-automobilistico/">Modellismo Automobilistico</a></div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="/diorami/">Diorami 3D <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown"><a href="/diorami/">Tutti i diorami</a><a href="/diorami/">Shadow Box</a><a href="/diorami/">Storici</a></div>
+      </div>
+      <div class="nav-item"><a class="nav-link active" href="/processo/">Il Processo</a></div>
+      <div class="nav-item"><a class="nav-link" href="/contatti/">Contatti</a></div>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="/contatti/" title="Contatti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" title="Menu" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a class="mobile-nav-link" href="/">Home</a>
+  <a class="mobile-nav-link" href="/oggetti-design/">Oggetti 3D</a>
+  <a class="mobile-nav-link" href="/diorami/">Diorami 3D</a>
+  <a class="mobile-nav-link" href="/processo/">Il Processo</a>
+  <a class="mobile-nav-link" href="/contatti/">Contatti</a>
+  <div class="mobile-nav-contact"><a class="btn-gold" href="/contatti/">Contattami →</a></div>
+</div>
+
+<main>
+  <div class="contact-hero">
+    <div class="eyebrow">Il Processo</div>
+    <h1>Dal disegno in Fusion 360<br>alla stampa 3D</h1>
+    <p>Come nasce ogni pezzo MC3D Studio, dal modello digitale al pezzo finito.</p>
+  </div>
+
+  <div class="processo-wrap">
+    <p class="processo-intro">
+      Ogni pezzo nasce da un disegno in Fusion 360. Non da un file scaricato, non da un modello preesistente: da zero, con le misure giuste e l'idea chiara di cosa deve diventare. Il percorso dal disegno alla stampa 3D è artigianato digitale — richiede cura, pazienza e un sacco di iterazioni.
+    </p>
+
+    <div class="processo-step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-tag">Fusion 360</div>
+        <h2>Disegno tecnico in Fusion 360</h2>
+        <p>Parto sempre dalla misurazione o dal riferimento fotografico dell'oggetto reale: una tribuna degli anni '70, una facciata veneziana, un circuito in scala. Il modello parametrico in Fusion 360 cresce per estrusioni successive — dettagli come texture mattoni, balaustre, insegne — finché la geometria non è quella che visualizzo nella testa. L'approccio parametrico permette di correggere una misura o riscalare un'intera sezione senza ripartire da zero: è fondamentale quando si lavora in scala 1:32 e ogni millimetro conta.</p>
+      </div>
+    </div>
+
+    <div class="processo-step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-tag">Bambu Studio</div>
+        <h2>Slicing e configurazione in Bambu Studio</h2>
+        <p>Il file STL esportato da Fusion 360 entra in Bambu Studio, lo slicer. Qui si decide molto più di quanto si pensi: l'orientamento del pezzo rispetto agli strati (un mattone stampato in orizzontale è più forte di uno verticale), i supporti, la densità di riempimento, la temperatura dei filamenti. Con più colori attivi e l'AMS — il sistema di cambio automatico filamento di Bambu Lab — Bambu Studio orchestra anche i cambi materiale: PLA giallo per i numeri di un quadrante, nero per il corpo, grigio per le lancette. Ogni profilo di stampa è salvato e riusato per garantire coerenza tra i pezzi della stessa serie.</p>
+      </div>
+    </div>
+
+    <div class="processo-step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-tag">Bambu Lab X1C — FDM</div>
+        <h2>Stampa FDM su Bambu Lab X1C</h2>
+        <p>La stampa avviene su Bambu Lab X1C. È la parte che mi piace di meno e di più: ci vogliono ore, a volte notti intere, e il risultato non si vede fino alla fine. La X1C lavora con una precisione sorprendente per una stampante FDM consumer, e con l'AMS gestisce fino a 16 filamenti diversi in automatico. Quando la piattaforma si abbassa e il pezzo è lì, integro, è sempre una piccola soddisfazione. Spesso è anche un punto di partenza, non di arrivo.</p>
+      </div>
+    </div>
+
+    <div class="processo-step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-tag">Rifinitura artigianale</div>
+        <h2>Rifinitura, diecast, LED e weathering</h2>
+        <p>La stampa 3D FDM lascia sempre qualcosa da fare: stucco sulle linee più evidenti, carta vetrata progressiva, primer. Per i diorami entrano in scena i modelli diecast selezionati uno a uno per coerenza di scala e periodo storico, le decalcomanie a immersione per le livree vintage, le luci LED cablate a mano per le scene notturne o illuminate. Il weathering — invecchiamento con polveri pigmentate, washing con colori acrilici diluiti, dry-brushing per esaltare i rilievi — è l'ultimo passo, il più lento. Ogni pezzo finisce quando sembra vero, o almeno abbastanza.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a class="logo" href="/">MC<em>3D</em></a><p>Design e stampa 3D artigianale. Dal disegno in Fusion 360 alla rifinitura a mano, ogni pezzo è unico.</p></div>
+    <div class="footer-col">
+      <h5>Collezioni</h5>
+      <ul>
+        <li><a href="/oggetti-design/">Oggetti di Design 3D</a></li>
+        <li><a href="/modellismo-automobilistico/">Modellismo Automobilistico</a></li>
+        <li><a href="/diorami/">Diorami</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Studio</h5>
+      <ul>
+        <li><a href="/processo/">Il Processo</a></li>
+        <li><a href="/contatti/">Contatti</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span class="copyright-year">2025</span> MC3D Studio — Design &amp; Stampa 3D Artigianale</p>
+    <p>Tutti i diritti riservati</p>
+  </div>
+</footer>
+
+<script>
+/* Minimal JS: loader + hamburger + copyright */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('pageLoader').classList.add('hidden'), 900);
+});
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburgerBtn');
+  nav.classList.toggle('open'); btn.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+document.querySelectorAll('.copyright-year').forEach(el => { el.textContent = new Date().getFullYear(); });
+</script>
+</body>
+</html>

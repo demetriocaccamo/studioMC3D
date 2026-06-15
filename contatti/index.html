@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contatti — MC3D Studio | Stampa 3D artigianale</title>
+  <meta name="description" content="Scrivimi per informazioni sulle opere in collezione o su una realizzazione su misura in stampa 3D. Risposta entro 24 ore. MC3D Studio." />
+  <link rel="canonical" href="https://www.studiomc3d.it/contatti/" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://www.studiomc3d.it/contatti/" />
+  <meta property="og:title"       content="Contatti — MC3D Studio | Stampa 3D artigianale" />
+  <meta property="og:description" content="Scrivimi per informazioni sulle opere in collezione o su una realizzazione su misura in stampa 3D. Risposta entro 24 ore. MC3D Studio." />
+  <meta property="og:image"       content="https://www.studiomc3d.it/img/barriere-3.jpg" />
+  <meta property="og:locale"      content="it_IT" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <base href="/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<script>window.__initialPage = 'contact';</script>
+
+<div class="page-loader" id="pageLoader"><div class="loader-logo">MC<em>3D</em></div><div class="loader-bar"></div></div>
+
+<div class="announce">Stampa 3D artigianale <span>|</span> Risposta entro 24h <span>|</span> info@studiomc3d.it</div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/">MC<em>3D</em></a>
+    <nav class="main-nav" aria-label="Navigazione principale">
+      <div class="nav-item"><a class="nav-link" id="nav-home" href="/">Home</a></div>
+      <div class="nav-item">
+        <a class="nav-link" id="nav-objects" href="/oggetti-design/">Oggetti 3D <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown"><a href="/oggetti-design/">Tutti gli oggetti</a><a href="/modellismo-automobilistico/">Modellismo Automobilistico</a></div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" id="nav-dioramas" href="/diorami/">Diorami 3D <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown"><a href="/diorami/">Tutti i diorami</a><a href="/diorami/">Shadow Box</a><a href="/diorami/">Storici</a></div>
+      </div>
+      <div class="nav-item"><a class="nav-link" id="nav-processo" href="/processo/">Il Processo</a></div>
+      <div class="nav-item"><a class="nav-link active" id="nav-contact" href="/contatti/">Contatti</a></div>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="/contatti/" title="Contatti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" title="Menu" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a class="mobile-nav-link" href="/">Home</a>
+  <a class="mobile-nav-link" href="/oggetti-design/">Oggetti 3D</a>
+  <a class="mobile-nav-link" href="/diorami/">Diorami 3D</a>
+  <a class="mobile-nav-link" href="/processo/">Il Processo</a>
+  <a class="mobile-nav-link" href="/contatti/">Contatti</a>
+  <div class="mobile-nav-contact"><a class="btn-gold" href="/contatti/">Contattami →</a></div>
+</div>
+
+<div id="home" class="page">
+  <div class="product-grid" id="home-objects"></div>
+  <div class="product-grid" id="home-dioramas"></div>
+</div>
+<div id="objects" class="page">
+  <div class="collection-toolbar"><div class="filter-group" id="obj-filters"><button class="filter-pill active" onclick="filterCards(this,'objects','all')">Tutti</button></div><span class="count-label" id="obj-count"></span></div>
+  <div class="collection-grid-wrap"><div class="collection-grid" id="objects-grid"></div></div>
+</div>
+<div id="dioramas" class="page">
+  <div class="collection-toolbar"><div class="filter-group" id="dio-filters"><button class="filter-pill active" onclick="filterCards(this,'dioramas','all')">Tutti</button></div><span class="count-label" id="dio-count"></span></div>
+  <div class="collection-grid-wrap"><div class="collection-grid" id="dioramas-grid"></div></div>
+</div>
+
+<div id="contact" class="page active">
+  <div class="contact-hero">
+    <div class="eyebrow">Contatti</div>
+    <h1>Scrivimi</h1>
+    <p>Per informazioni sulle opere in collezione o su una realizzazione su misura in stampa 3D. Risposta entro 24 ore.</p>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="contact-aside">
+      <h4>MC3D Studio</h4>
+      <p>Oggetti di design stampati in 3D, modellismo automobilistico in scala 1:32 e diorami da collezione — ogni pezzo nasce da un disegno in Fusion 360 ed è realizzato con cura artigianale.</p>
+      <div class="c-item">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="c-label">Email</div><div class="c-val"><a href="mailto:info@studiomc3d.it" style="color:inherit">info@studiomc3d.it</a></div></div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="c-label">Sede</div><div class="c-val">Italia</div></div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div><div class="c-label">Risposta</div><div class="c-val">Entro 24 ore</div></div>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+      <div class="fg"><label for="fn">Nome</label><input type="text" id="fn" name="nome" placeholder="Mario" required /></div>
+      <div class="fg"><label for="em">Email</label><input type="email" id="em" name="email" placeholder="mario@esempio.it" required /></div>
+      <div class="fg">
+        <label for="proj">Oggetto della richiesta</label>
+        <select id="proj" name="oggetto">
+          <option value="">Seleziona…</option>
+          <option>Informazioni su un'opera</option>
+          <option>Informazioni tecniche</option>
+          <option>Collaborazione</option>
+          <option>Altro</option>
+        </select>
+      </div>
+      <div class="fg"><label for="msg">Messaggio</label><textarea id="msg" name="messaggio" placeholder="Scrivi il tuo messaggio…" required></textarea></div>
+      <button type="submit" class="btn-gold">Invia Messaggio</button>
+      <div class="form-ok" id="formOk">Messaggio inviato! Ti rispondo presto.</div>
+      <div class="form-ok" id="formErr" style="border-color:rgba(184,50,40,.4);background:rgba(184,50,40,.07);color:#e05548;display:none">Errore nell'invio. Scrivi direttamente a <a href="mailto:info@studiomc3d.it" style="color:inherit;text-decoration:underline">info@studiomc3d.it</a></div>
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a class="logo" href="/">MC<em>3D</em></a><p>Design e stampa 3D artigianale. Ogni pezzo nasce da un disegno in Fusion 360.</p></div>
+      <div class="footer-col"><h5>Collezioni</h5><ul><li><a href="/oggetti-design/">Oggetti di Design</a></li><li><a href="/modellismo-automobilistico/">Modellismo</a></li><li><a href="/diorami/">Diorami</a></li></ul></div>
+      <div class="footer-col"><h5>Studio</h5><ul><li><a href="/processo/">Il Processo</a></li><li><a href="/contatti/">Contatti</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; <span class="copyright-year">2025</span> MC3D Studio — Design &amp; Stampa 3D Artigianale</p></div>
+  </footer>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

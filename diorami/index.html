@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diorami in scala stampati in 3D — MC3D Studio</title>
+  <meta name="description" content="Diorami e shadow box in scala: scenografie con diecast e LED, progettate in Fusion 360 e rifinite a mano. Pezzi da collezione. MC3D Studio." />
+  <link rel="canonical" href="https://www.studiomc3d.it/diorami/" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://www.studiomc3d.it/diorami/" />
+  <meta property="og:title"       content="Diorami in scala stampati in 3D — MC3D Studio" />
+  <meta property="og:description" content="Diorami e shadow box in scala: scenografie con diecast e LED, progettate in Fusion 360 e rifinite a mano. Pezzi da collezione. MC3D Studio." />
+  <meta property="og:image"       content="https://www.studiomc3d.it/img/pullman1-1.jpg" />
+  <meta property="og:locale"      content="it_IT" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <base href="/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<script>window.__initialPage = 'dioramas';</script>
+
+<div class="page-loader" id="pageLoader"><div class="loader-logo">MC<em>3D</em></div><div class="loader-bar"></div></div>
+
+<div class="announce">Diorami da Collezione <span>|</span> Shadow Box &amp; Scenografie <span>|</span> <a href="/contatti/" style="color:inherit">Contattami</a></div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/">MC<em>3D</em></a>
+    <nav class="main-nav" aria-label="Navigazione principale">
+      <div class="nav-item"><a class="nav-link" id="nav-home" href="/">Home</a></div>
+      <div class="nav-item">
+        <a class="nav-link" id="nav-objects" href="/oggetti-design/">Oggetti 3D <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown"><a href="/oggetti-design/">Tutti gli oggetti</a><a href="/modellismo-automobilistico/">Modellismo Automobilistico</a></div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link active" id="nav-dioramas" href="/diorami/">Diorami 3D <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown">
+          <a href="/diorami/">Tutti i diorami</a>
+          <a href="/diorami/" onclick="filterAndShow('dioramas','shadow-box');return false;">Shadow Box</a>
+          <a href="/diorami/" onclick="filterAndShow('dioramas','storico');return false;">Storici</a>
+        </div>
+      </div>
+      <div class="nav-item"><a class="nav-link" id="nav-processo" href="/processo/">Il Processo</a></div>
+      <div class="nav-item"><a class="nav-link" id="nav-contact" href="/contatti/">Contatti</a></div>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="/contatti/" title="Contatti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" title="Menu" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a class="mobile-nav-link" href="/">Home</a>
+  <a class="mobile-nav-link" href="/oggetti-design/">Oggetti 3D</a>
+  <a class="mobile-nav-link" href="/diorami/">Diorami 3D</a>
+  <div class="mobile-nav-sub"><a href="/diorami/">Tutti</a><a href="/diorami/">Shadow Box</a><a href="/diorami/">Storici</a></div>
+  <a class="mobile-nav-link" href="/processo/">Il Processo</a>
+  <a class="mobile-nav-link" href="/contatti/">Contatti</a>
+  <div class="mobile-nav-contact"><a class="btn-gold" href="/contatti/">Contattami →</a></div>
+</div>
+
+<div class="modal-overlay" id="modal" onclick="handleModalClick(event)">
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="modal-grid">
+      <div class="modal-img-wrap" id="modal-img-wrap"><div class="thumb-art" id="modal-art" style="height:100%"></div></div>
+      <div class="modal-content">
+        <div class="modal-eyebrow" id="modal-cat"></div>
+        <h2 id="modal-title"></h2>
+        <div class="modal-series" id="modal-sub"></div>
+        <div class="modal-divider"></div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-specs-grid" id="modal-specs"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="zoom-overlay" id="zoomOverlay">
+  <button class="zoom-close-btn" id="zoomCloseBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <img class="zoom-img" id="zoomImg" src="" alt="" draggable="false">
+  <div class="zoom-scale-badge" id="zoomScaleBadge">1.0×</div>
+  <div class="zoom-hint">Rotella: zoom · Trascina: sposta · Doppio clic: reset · ESC: chiudi</div>
+</div>
+
+<div id="home" class="page">
+  <div class="product-grid" id="home-objects"></div>
+  <div class="product-grid" id="home-dioramas"></div>
+</div>
+
+<div id="objects" class="page">
+  <div class="collection-toolbar"><div class="filter-group" id="obj-filters"><button class="filter-pill active" onclick="filterCards(this,'objects','all')">Tutti</button><button class="filter-pill" onclick="filterCards(this,'objects','decorativo')">Decorativi</button></div><span class="count-label" id="obj-count"></span></div>
+  <div class="collection-grid-wrap"><div class="collection-grid" id="objects-grid"></div></div>
+</div>
+
+<div id="dioramas" class="page active">
+  <div class="collection-hero">
+    <div class="hero-art thumb-art ta-7" style="height:100%;opacity:.35"><div class="ta-icon" style="font-size:100px;color:rgba(200,136,42,.07)">DIO</div></div>
+    <div class="collection-hero-text">
+      <div class="eyebrow">Portfolio</div>
+      <h1>Diorami in Scala stampati in 3D</h1>
+    </div>
+  </div>
+  <div class="collection-toolbar">
+    <div class="filter-group" id="dio-filters">
+      <button class="filter-pill active" onclick="filterCards(this,'dioramas','all')">Tutti</button>
+      <button class="filter-pill" onclick="filterCards(this,'dioramas','shadow-box')">Shadow Box</button>
+      <button class="filter-pill" onclick="filterCards(this,'dioramas','storico')">Storici</button>
+    </div>
+    <span class="count-label" id="dio-count"></span>
+  </div>
+  <div class="collection-grid-wrap"><div class="collection-grid" id="dioramas-grid"></div></div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a class="logo" href="/">MC<em>3D</em></a><p>Diorami e shadow box da collezione: scenografie con diecast e LED, progettate in Fusion 360 e rifinite a mano.</p></div>
+      <div class="footer-col"><h5>Collezioni</h5><ul><li><a href="/diorami/">Diorami</a></li><li><a href="/oggetti-design/">Oggetti di Design</a></li><li><a href="/modellismo-automobilistico/">Modellismo</a></li></ul></div>
+      <div class="footer-col"><h5>Studio</h5><ul><li><a href="/processo/">Il Processo</a></li><li><a href="/contatti/">Contatti</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; <span class="copyright-year">2025</span> MC3D Studio — Design &amp; Stampa 3D Artigianale</p></div>
+  </footer>
+</div>
+
+<div id="contact" class="page">
+  <div class="contact-hero"><div class="eyebrow">Contatti</div><h2>Scrivimi</h2></div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

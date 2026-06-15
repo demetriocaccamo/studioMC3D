@@ -3,1345 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MC3D — Design & Stampa 3D</title>
+
+  <!-- SEO: Title & Meta -->
+  <title>MC3D Studio — Stampa 3D artigianale: oggetti di design e diorami</title>
+  <meta name="description" content="Studio artigianale di stampa 3D: oggetti di design, modellismo automobilistico in scala e diorami da collezione, progettati in Fusion 360 e rifiniti a mano." />
+  <link rel="canonical" href="https://www.studiomc3d.it/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://www.studiomc3d.it/" />
+  <meta property="og:title"       content="MC3D Studio — Stampa 3D artigianale: oggetti di design e diorami" />
+  <meta property="og:description" content="Studio artigianale di stampa 3D: oggetti di design, modellismo automobilistico in scala e diorami da collezione, progettati in Fusion 360 e rifiniti a mano." />
+  <meta property="og:image"       content="https://www.studiomc3d.it/img/tribuna-f1-1.jpg" />
+  <meta property="og:locale"      content="it_IT" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <!-- JSON-LD Organization -->
+  <!-- sameAs: aggiungere i link social nel campo "sameAs" sotto quando disponibili -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MC3D Studio",
+    "url": "https://www.studiomc3d.it",
+    "logo": "https://www.studiomc3d.it/img/mc3d_logo.svg",
+    "email": "info@studiomc3d.it",
+    "description": "Studio artigianale di stampa 3D: oggetti di design, modellismo automobilistico in scala e diorami da collezione.",
+    "areaServed": "IT"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/style.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --black:   #0c0a07;
-      --dark:    #100e0b;
-      --surface: #181510;
-      --card:    #1f1c15;
-      --border:  #302b1e;
-      --amber:   #c8882a;
-      --amber2:  #e8aa4a;
-      --red:     #b83228;
-      --text:    #ede8dc;
-      --muted:   #8a8070;
-      --light:   #f5f0e8;
-      --white:   #f8f4ec;
-      --r:       0px;
-      --ease:    cubic-bezier(.4,0,.2,1);
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--dark);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-    h1,h2,h3,h4,h5 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      letter-spacing: .01em;
-    }
-    a { color: inherit; text-decoration: none; cursor: pointer; }
-    img { display: block; width: 100%; object-fit: cover; }
-    button { cursor: pointer; border: none; background: none; font-family: inherit; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--dark); }
-    ::-webkit-scrollbar-thumb { background: var(--border); }
-
-    /* ── ANNOUNCEMENT BAR ── */
-    .announce {
-      background: var(--black);
-      text-align: center;
-      padding: 9px 16px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--amber);
-      border-bottom: 1px solid var(--border);
-    }
-    .announce span { color: var(--border); margin: 0 14px; }
-
-    /* ── HEADER ── */
-    header {
-      position: sticky;
-      top: 0; z-index: 500;
-      background: rgba(12,10,7,.96);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .header-inner {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0 48px;
-      height: 66px;
-      display: flex;
-      align-items: center;
-      gap: 48px;
-    }
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      white-space: nowrap;
-      cursor: pointer;
-      text-transform: uppercase;
-    }
-    .logo em { font-style: italic; color: var(--amber); font-weight: 400; }
-    .main-nav { display: flex; gap: 0; flex: 1; }
-    .nav-item { position: relative; }
-    .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 0 16px;
-      height: 66px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color .2s;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-    .nav-link:hover, .nav-link.active { color: var(--white); }
-    .nav-link svg { width: 9px; transition: transform .2s; }
-    .nav-item:hover .nav-link svg { transform: rotate(180deg); }
-    /* Dropdown */
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 100%; left: 0;
-      min-width: 210px;
-      background: var(--black);
-      border: 1px solid var(--border);
-      border-top: 2px solid var(--amber);
-      padding: 6px 0;
-      z-index: 600;
-    }
-    .nav-item:hover .dropdown { display: block; }
-    .dropdown a {
-      display: block;
-      padding: 10px 20px;
-      font-size: 11px;
-      font-family: 'DM Sans', sans-serif;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color .2s, background .2s;
-    }
-    .dropdown a:hover { color: var(--white); background: rgba(200,136,42,.06); }
-    .header-actions { display: flex; align-items: center; gap: 16px; margin-left: auto; }
-    .icon-btn {
-      width: 36px; height: 36px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted);
-      transition: color .2s;
-    }
-    .icon-btn:hover { color: var(--white); }
-    .icon-btn svg { width: 20px; }
-
-    /* ── PAGE MANAGER ── */
-    .page { display: none; }
-    .page.active { display: block; }
-
-    /* ════════════════════════
-       HOME PAGE
-    ════════════════════════ */
-
-    /* Hero Video */
-    .hero-slider {
-      position: relative;
-      width: 100%;
-      height: calc(100vh - 100px);
-      min-height: 520px;
-      overflow: hidden;
-      background: var(--black);
-    }
-    .hero-video {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-    .hero-video-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(12,10,7,.88) 0%, rgba(12,10,7,.45) 55%, rgba(12,10,7,.08) 100%),
-        linear-gradient(0deg, rgba(12,10,7,.80) 0%, transparent 50%);
-      z-index: 1;
-    }
-    .slide-content {
-      position: absolute;
-      bottom: 90px; left: 80px;
-      z-index: 2;
-      max-width: 580px;
-    }
-    .slide-badge {
-      display: inline-block;
-      padding: 4px 14px;
-      background: var(--amber);
-      color: var(--black);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .slide-content h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(44px, 5.5vw, 80px);
-      font-weight: 700;
-      line-height: .95;
-      color: var(--white);
-      margin-bottom: 16px;
-      letter-spacing: -.01em;
-    }
-    .slide-content h2 em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--amber2);
-    }
-    .slide-content p {
-      font-size: 17px;
-      color: rgba(248,244,236,.85);
-      margin-bottom: 32px;
-      line-height: 1.8;
-      font-weight: 300;
-      max-width: 420px;
-    }
-    .slide-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 32px;
-      background: var(--amber);
-      color: var(--black);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      transition: background .25s, gap .25s;
-    }
-    .slide-cta:hover { background: var(--amber2); gap: 18px; }
-    .slide-cta svg { width: 14px; }
-
-    /* Section headings */
-    .section-head {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 72px 48px 32px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0;
-    }
-    .section-head-left {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .section-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--amber);
-    }
-    .section-head h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(28px, 3.5vw, 44px);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.0;
-    }
-    .section-head h3 em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--amber);
-    }
-    .section-head h3 span { color: var(--amber); }
-    .view-all {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color .2s;
-      padding-bottom: 4px;
-    }
-    .view-all:hover { color: var(--amber); }
-    .view-all svg { width: 12px; }
-
-    /* Product grid */
-    .product-grid {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 28px 48px 72px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      background: transparent;
-    }
-    .product-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
-      position: relative;
-    }
-    .product-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--amber);
-      opacity: 0;
-      transition: opacity .3s;
-      z-index: 3;
-    }
-    .product-card:hover::before { opacity: 1; }
-    .product-card:hover {
-      border-color: rgba(200,136,42,.4);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 56px rgba(0,0,0,.5);
-    }
-    .card-image {
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      position: relative;
-      background: var(--surface);
-    }
-    .card-image img,
-    .card-image .thumb-art {
-      width: 100%;
-      height: 100%;
-      transition: transform .6s var(--ease);
-    }
-    .product-card:hover .card-image img,
-    .product-card:hover .card-image .thumb-art { transform: scale(1.08); }
-    /* Diorama cards: landscape aspect ratio */
-    #home-dioramas .card-image, #dioramas-grid .card-image { aspect-ratio: 16/9; }
-    /* Modal dark-bg contain class */
-    .modal-gallery img.bg-dark { object-fit: contain; }
-    .modal-thumb.bg-dark img { object-fit: contain; }
-    /* Badge */
-    .card-badge {
-      position: absolute;
-      top: 0; right: 0;
-      padding: 5px 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 8px;
-      font-weight: 500;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-    .badge-new     { background: var(--amber); color: var(--black); }
-    .badge-featured{ background: var(--red);   color: var(--white); }
-    .badge-soon    { background: rgba(30,28,21,.85); color: var(--muted); border: 1px solid var(--border); }
-    /* Card body */
-    .card-body { padding: 18px 20px 22px; border-top: 1px solid var(--border); }
-    .card-series {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 8px;
-    }
-    .card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 6px;
-      line-height: 1.15;
-    }
-    .card-sub {
-      font-size: 14px;
-      color: rgba(248,244,236,.72);
-      margin-bottom: 14px;
-      letter-spacing: .03em;
-    }
-    .card-meta {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .chip {
-      padding: 4px 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* Banner divider */
-    .banner-strip {
-      max-width: 1440px;
-      margin: 0 auto 72px;
-      padding: 0 48px;
-    }
-    .banner-inner {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 21/5;
-      background: var(--surface);
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      border: 1px solid var(--border);
-    }
-    .banner-inner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(12,10,7,.92) 30%, rgba(12,10,7,.2) 100%);
-      z-index: 1;
-    }
-    .banner-art {
-      position: absolute;
-      inset: 0;
-    }
-    .banner-text {
-      position: relative;
-      z-index: 2;
-      padding: 0 64px;
-    }
-    .banner-text .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 10px;
-    }
-    .banner-text h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(26px, 3vw, 48px);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 20px;
-      line-height: 1.0;
-    }
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 26px;
-      border: 1px solid var(--amber);
-      color: var(--amber);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      transition: background .25s, color .25s, gap .25s;
-    }
-    .btn-ghost:hover { background: var(--amber); color: var(--black); gap: 16px; }
-    .btn-ghost svg { width: 13px; }
-
-    /* Two-col banners */
-    .dual-banner {
-      max-width: 1440px;
-      margin: 0 auto 80px;
-      padding: 0 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .dual-card {
-      position: relative;
-      aspect-ratio: 4/3;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .dual-card .thumb-art {
-      width: 100%; height: 100%;
-      transition: transform .6s var(--ease);
-    }
-    .dual-card:hover .thumb-art { transform: scale(1.05); }
-    .dual-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(12,10,7,.92) 0%, rgba(12,10,7,.15) 55%);
-    }
-    .dual-card-text {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 36px;
-      z-index: 2;
-    }
-    .dual-card-text .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 8px;
-    }
-    .dual-card-text h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(22px, 2.5vw, 36px);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 10px;
-      line-height: 1.0;
-    }
-    .dual-card-text p { font-size: 14px; color: rgba(248,244,236,.78); margin-bottom: 18px; font-weight: 400; }
-    .link-arr {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--amber);
-      transition: gap .2s;
-    }
-    .dual-card:hover .link-arr { gap: 14px; }
-    .link-arr svg { width: 13px; }
-
-    /* ════════════════════════
-       COLLECTION PAGE
-    ════════════════════════ */
-    .collection-hero {
-      width: 100%;
-      height: 260px;
-      position: relative;
-      overflow: hidden;
-      background: var(--black);
-    }
-    .collection-hero .hero-art {
-      width: 100%;
-      height: 100%;
-      opacity: .35;
-    }
-    .collection-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, var(--dark) 0%, rgba(12,10,7,.4) 60%);
-    }
-    .collection-hero-text {
-      position: absolute;
-      bottom: 36px; left: 0; right: 0;
-      text-align: center;
-      z-index: 2;
-    }
-    .collection-hero-text .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 10px;
-    }
-    .collection-hero-text h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(32px, 4vw, 56px);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.0;
-    }
-    .collection-hero-text h2 em { font-style: italic; font-weight: 400; color: var(--amber); }
-
-    /* Toolbar */
-    .collection-toolbar {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 28px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      border-bottom: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-    .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
-    .filter-pill {
-      padding: 6px 16px;
-      border: 1px solid var(--border);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: all .2s;
-    }
-    .filter-pill:hover, .filter-pill.active {
-      border-color: var(--amber);
-      color: var(--amber);
-      background: rgba(200,136,42,.07);
-    }
-    .sort-select {
-      padding: 7px 14px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      outline: none;
-    }
-    .sort-select option { background: var(--card); }
-    .count-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    /* Collection grid */
-    .collection-grid-wrap {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 40px 48px 80px;
-    }
-    .collection-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    /* ════════════════════════
-       DETAIL MODAL
-    ════════════════════════ */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 900;
-      background: rgba(0,0,0,.9);
-      backdrop-filter: blur(12px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .3s;
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-top: 2px solid var(--amber);
-      max-width: 1000px;
-      width: 100%;
-      max-height: 92vh;
-      overflow-y: auto;
-      transform: translateY(20px);
-      transition: transform .35s var(--ease);
-    }
-    .modal-overlay.open .modal-box { transform: translateY(0); }
-    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; }
-    .modal-img-wrap {
-      aspect-ratio: 3/4;
-      background: var(--surface);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .modal-img-wrap .thumb-art { width: 100%; flex: 1; }
-    /* Gallery */
-    .modal-gallery { flex: 1; position: relative; overflow: hidden; background: var(--black); }
-    .modal-gallery img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%; object-fit: cover;
-      opacity: 0; transition: opacity .4s;
-    }
-    .modal-gallery img.active { opacity: 1; }
-    .modal-gallery img.bg-white { object-fit: contain; background: #ffffff; padding: 16px; }
-    .modal-thumbs {
-      display: flex; gap: 4px; padding: 6px;
-      background: var(--black);
-      border-top: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-    .modal-thumb {
-      flex: 1; aspect-ratio: 1;
-      overflow: hidden;
-      border: 2px solid transparent;
-      cursor: pointer; transition: border-color .2s;
-      background: var(--surface);
-    }
-    .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .modal-thumb.active { border-color: var(--amber); }
-    .modal-thumb.bg-white img { object-fit: contain; background: #ffffff; }
-    .modal-content { padding: 52px 44px; display: flex; flex-direction: column; overflow-y: auto; }
-    .modal-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 12px;
-    }
-    .modal-content h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 8px;
-      line-height: 1.0;
-    }
-    .modal-series { font-size: 13px; color: rgba(248,244,236,.68); margin-bottom: 24px; letter-spacing: .04em; }
-    .modal-divider { height: 1px; background: var(--border); margin: 22px 0; }
-    .modal-desc { font-size: 15px; color: rgba(248,244,236,.84); line-height: 1.85; flex: 1; font-weight: 400; }
-    .modal-specs-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 26px;
-    }
-    .spec-box { background: var(--surface); border: 1px solid var(--border); padding: 12px 16px; }
-    .spec-box .spec-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 8px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    .spec-box .spec-val {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--white);
-    }
-    .modal-close-btn {
-      position: absolute;
-      top: 14px; right: 14px;
-      width: 32px; height: 32px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted);
-      transition: color .2s, border-color .2s;
-      z-index: 10;
-    }
-    .modal-close-btn:hover { color: var(--white); border-color: var(--amber); }
-    .modal-close-btn svg { width: 13px; }
-    .modal-overlay { position: fixed; }
-
-    /* ════════════════════════
-       CONTACT PAGE
-    ════════════════════════ */
-    .contact-hero {
-      background: var(--black);
-      text-align: center;
-      padding: 88px 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    .contact-hero .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 14px;
-    }
-    .contact-hero h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(32px, 4vw, 56px);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 14px;
-      line-height: 1.0;
-    }
-    .contact-hero p { color: rgba(248,244,236,.80); max-width: 440px; margin: 0 auto; font-size: 15px; font-weight: 400; }
-    .contact-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 72px 48px;
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 80px;
-    }
-    .contact-aside h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 14px;
-    }
-    .contact-aside p { font-size: 13px; color: var(--muted); line-height: 1.9; margin-bottom: 36px; font-weight: 300; }
-    .c-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 22px; }
-    .c-icon {
-      width: 38px; height: 38px; flex-shrink: 0;
-      background: rgba(200,136,42,.07);
-      border: 1px solid rgba(200,136,42,.18);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--amber);
-    }
-    .c-icon svg { width: 17px; }
-    .c-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 8px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    .c-val { font-size: 14px; color: var(--text); }
-    .contact-form { display: flex; flex-direction: column; gap: 18px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .fg { display: flex; flex-direction: column; gap: 7px; }
-    .fg label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 8px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .fg input, .fg select, .fg textarea {
-      padding: 12px 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      outline: none;
-      resize: none;
-      transition: border-color .2s;
-    }
-    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--amber); }
-    .fg input::placeholder, .fg textarea::placeholder { color: var(--muted); }
-    .fg select option { background: var(--card); }
-    .fg textarea { min-height: 120px; }
-    .btn-gold {
-      padding: 13px 34px;
-      background: var(--amber);
-      color: var(--black);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      align-self: flex-start;
-      transition: background .25s, transform .25s;
-    }
-    .btn-gold:hover { background: var(--amber2); transform: translateY(-2px); }
-    .form-ok {
-      display: none;
-      padding: 14px 18px;
-      background: rgba(200,136,42,.07);
-      border: 1px solid rgba(200,136,42,.22);
-      color: var(--amber);
-      font-size: 13px;
-    }
-
-    /* ════════════════════════
-       FOOTER
-    ════════════════════════ */
-    footer {
-      background: var(--black);
-      border-top: 1px solid var(--border);
-    }
-    .footer-top {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 64px 48px;
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 48px;
-    }
-    .footer-brand .logo { font-size: 20px; margin-bottom: 16px; display: block; }
-    .footer-brand p { font-size: 15px; color: var(--muted); line-height: 1.9; max-width: 260px; font-weight: 300; }
-    .footer-col h5 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 18px;
-    }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-    .footer-col ul li a { font-size: 15px; color: var(--muted); transition: color .2s; font-weight: 300; cursor: pointer; }
-    .footer-col ul li a:hover { color: var(--amber); }
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 20px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .footer-bottom p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: .06em;
-    }
-
-    /* ── Thumb art CSS ── */
-    .thumb-art {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .thumb-art::before {
-      content: '';
-      position: absolute;
-      width: 55%;
-      height: 55%;
-      border: 1px solid rgba(200,136,42,.1);
-      border-radius: 50%;
-      animation: spin 25s linear infinite;
-    }
-    .thumb-art::after {
-      content: '';
-      position: absolute;
-      width: 30%;
-      height: 30%;
-      border: 1px solid rgba(200,136,42,.18);
-      border-radius: 50%;
-      animation: spin 12s linear infinite reverse;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .thumb-art .ta-icon {
-      position: relative;
-      z-index: 1;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 400;
-      font-size: 32px;
-      color: rgba(200,136,42,.3);
-      letter-spacing: .1em;
-    }
-    /* Colour variants */
-    .ta-1 { background: linear-gradient(135deg,#131320 0%,#1c1528 60%,#0f1525 100%); }
-    .ta-2 { background: linear-gradient(135deg,#0f1a20 0%,#0e2010 60%,#182010 100%); }
-    .ta-3 { background: linear-gradient(135deg,#20100f 0%,#2a1808 60%,#1a1020 100%); }
-    .ta-4 { background: linear-gradient(135deg,#0e1528 0%,#1e1008 60%,#180e28 100%); }
-    .ta-5 { background: linear-gradient(135deg,#1a1020 0%,#0a1a28 60%,#1a2010 100%); }
-    .ta-6 { background: linear-gradient(135deg,#201510 0%,#100e28 60%,#0e1818 100%); }
-    .ta-7 { background: linear-gradient(135deg,#0e2018 0%,#181028 60%,#2a1808 100%); }
-    .ta-8 { background: linear-gradient(135deg,#100e20 0%,#201810 60%,#0e1820 100%); }
-    .ta-9 { background: linear-gradient(135deg,#1a0e28 0%,#0e2010 60%,#201028 100%); }
-    .ta-10{ background: linear-gradient(135deg,#0a1828 0%,#280e10 60%,#101828 100%); }
-
-    /* ── Hamburger button ── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px 2px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px; height: 2px;
-      background: var(--text);
-      transition: transform .3s var(--ease), opacity .3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
-
-    /* ── Mobile nav overlay ── */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 58px; left: 0; right: 0; bottom: 0;
-      background: var(--black);
-      z-index: 450;
-      flex-direction: column;
-      overflow-y: auto;
-      border-top: 1px solid var(--border);
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav-link {
-      display: block;
-      padding: 18px 24px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      transition: color .2s, background .2s;
-    }
-    .mobile-nav-link:hover, .mobile-nav-link:active { color: var(--amber); background: rgba(200,136,42,.04); }
-    .mobile-nav-sub {
-      display: flex;
-      flex-direction: column;
-      background: var(--surface);
-    }
-    .mobile-nav-sub a {
-      display: block;
-      padding: 12px 24px 12px 36px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: .06em;
-      color: var(--muted);
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      transition: color .2s;
-    }
-    .mobile-nav-sub a:hover { color: var(--amber); }
-    .mobile-nav-contact {
-      padding: 24px;
-      margin-top: auto;
-    }
-    .mobile-nav-contact .btn-gold { width: 100%; text-align: center; justify-content: center; display: flex; }
-
-    /* ── Responsive ── */
-    @media(max-width:1100px) {
-      .product-grid { grid-template-columns: repeat(3,1fr); }
-      .collection-grid { grid-template-columns: repeat(3,1fr); }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-    }
-    @media(max-width:768px) {
-      /* Announcement bar — nascosta su mobile */
-      .announce { display: none; }
-      .mobile-nav { top: 58px; }
-
-      /* Header */
-      .header-inner { padding: 0 16px; gap: 12px; height: 58px; }
-      .main-nav { display: none; }
-      .hamburger { display: flex; }
-      .mobile-nav { top: 58px; }
-
-      /* Hero */
-      .hero-slider { height: 65vh; min-height: 380px; }
-      .slide-content { left: 20px; right: 20px; bottom: 52px; max-width: none; }
-      .slide-content h2 { font-size: clamp(30px, 8.5vw, 50px); }
-      .slide-content p { font-size: 13px; margin-bottom: 22px; }
-      .slide-cta { padding: 11px 24px; font-size: 10px; }
-      .slider-dots { left: 20px; bottom: 24px; }
-      .slider-arrows { right: 14px; bottom: 16px; }
-      .arrow-btn { width: 38px; height: 38px; }
-
-      /* Section head */
-      .section-head { padding: 28px 16px 18px; }
-      .section-head h3 { font-size: clamp(22px, 6.5vw, 34px); }
-
-      /* Product grid */
-      .product-grid { grid-template-columns: repeat(2,1fr); padding: 16px 16px 36px; gap: 10px; }
-
-      /* Banner strip */
-      .banner-strip { padding: 0 16px; margin-bottom: 0; }
-      .banner-inner { aspect-ratio: 16/8; }
-      .banner-text { padding: 0 20px; }
-      .banner-text h3 { font-size: clamp(20px, 5.5vw, 30px); margin-bottom: 14px; }
-      .btn-ghost { padding: 9px 20px; font-size: 9px; }
-
-      /* Collection grid */
-      .collection-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
-      .collection-grid-wrap { padding: 20px 16px 48px; }
-      .collection-toolbar { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
-      .filter-group { gap: 5px; }
-      .count-label { font-size: 10px; }
-
-      /* Collection hero */
-      .collection-hero { height: 180px; }
-
-      /* Dual banner */
-      .dual-banner { grid-template-columns: 1fr; padding: 0 16px; gap: 10px; margin-bottom: 40px; }
-      .dual-card-text { padding: 22px; }
-      .dual-card-text h3 { font-size: clamp(20px, 5.5vw, 28px); }
-      .dual-card-text p { display: none; }
-
-      /* Contact */
-      .contact-hero { padding: 52px 20px; }
-      .contact-hero h2 { font-size: clamp(28px, 7vw, 40px); }
-      .contact-wrap { grid-template-columns: 1fr; gap: 32px; padding: 32px 16px; }
-      .form-row { grid-template-columns: 1fr; }
-
-      /* Footer */
-      .footer-top { grid-template-columns: 1fr; padding: 32px 16px; gap: 28px; }
-      .footer-bottom { padding: 14px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
-
-      /* Modal — immagine grande come desktop */
-      .modal-overlay { padding: 0; align-items: flex-end; }
-      .modal-box {
-        max-height: 96vh; max-height: 96dvh;
-        border-top: 3px solid var(--amber);
-        border-left: none; border-right: none;
-        overflow-y: auto;
-      }
-      .modal-grid { grid-template-columns: 1fr; }
-      .modal-img-wrap {
-        aspect-ratio: 1/1;
-        min-height: 300px;
-      }
-      .modal-close-btn { top: 10px; right: 10px; }
-      .modal-content { padding: 22px 20px 36px; }
-      .modal-content h2 { font-size: 30px; }
-      .modal-specs-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
-      .spec-box { padding: 10px 12px; }
-    }
-    @media(max-width:420px) {
-      .product-grid { grid-template-columns: 1fr; }
-      .collection-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── Zoom Lightbox ── */
-    .zoom-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 1100;
-      background: rgba(0,0,0,.96);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .25s;
-      overflow: hidden;
-    }
-    .zoom-overlay.open { opacity: 1; pointer-events: all; }
-    .zoom-img {
-      max-width: 95vw;
-      max-height: 95vh;
-      object-fit: contain;
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-user-drag: none;
-      will-change: transform;
-      display: block;
-    }
-    .zoom-img.dragging { cursor: grabbing; }
-    .zoom-close-btn {
-      position: absolute;
-      top: 16px; right: 16px;
-      width: 40px; height: 40px;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.15);
-      color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      transition: background .2s, border-color .2s;
-    }
-    .zoom-close-btn:hover { background: rgba(200,136,42,.3); border-color: var(--amber); }
-    .zoom-close-btn svg { width: 14px; }
-    .zoom-scale-badge {
-      position: absolute;
-      top: 18px; left: 18px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .12em;
-      color: rgba(255,255,255,.35);
-      pointer-events: none;
-    }
-    .zoom-hint {
-      position: absolute;
-      bottom: 18px; left: 50%;
-      transform: translateX(-50%);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .15em;
-      color: rgba(255,255,255,.28);
-      text-transform: uppercase;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-    .modal-gallery { cursor: zoom-in; }
-    .modal-gallery img:not(.active) { pointer-events: none; }
-    @media(max-width:768px) { .zoom-hint { display: none; } }
-
-    /* ══════════════════════════
-       WOW EFFECTS
-    ══════════════════════════ */
-
-
-    /* ── Page intro loader ── */
-    .page-loader {
-      position: fixed;
-      inset: 0;
-      background: var(--black);
-      z-index: 9000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 20px;
-      transition: opacity .6s var(--ease), visibility .6s;
-    }
-    .page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .loader-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 96px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--white);
-      opacity: 0;
-      transform: translateY(16px);
-      animation: loaderIn .7s .2s var(--ease) forwards;
-    }
-    .loader-logo em { font-style: italic; color: var(--amber); font-weight: 400; }
-    .loader-bar {
-      width: 120px; height: 1px;
-      background: var(--border);
-      overflow: hidden;
-    }
-    .loader-bar::after {
-      content: '';
-      display: block;
-      height: 100%;
-      background: var(--amber);
-      animation: loaderBar .9s .3s var(--ease) forwards;
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-    @keyframes loaderIn { to { opacity:1; transform:translateY(0); } }
-    @keyframes loaderBar { to { transform:scaleX(1); } }
-
-    /* ── Scroll reveal ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .7s var(--ease), transform .7s var(--ease);
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-    .reveal-delay-4 { transition-delay: .4s; }
-    @media(prefers-reduced-motion:reduce) {
-      .reveal { opacity:1; transform:none; transition:none; }
-    }
-
-    /* ── Card WOW hover ── */
-    .product-card {
-      transition: transform .4s var(--ease), box-shadow .4s var(--ease),
-                  border-color .4s var(--ease);
-    }
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 32px 72px rgba(0,0,0,.6), 0 0 0 1px rgba(200,136,42,.25),
-                  0 0 40px rgba(200,136,42,.08);
-      border-color: rgba(200,136,42,.5);
-    }
-    .product-card:hover .card-image img,
-    .product-card:hover .card-image .thumb-art { transform: scale(1.1); }
-
-    /* Card image overlay on hover */
-    .card-image::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(200,136,42,.18) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity .4s var(--ease);
-      z-index: 2;
-      pointer-events: none;
-    }
-    .product-card:hover .card-image::after { opacity: 1; }
-
-    /* ── Hero canvas particelle ── */
-    #heroCanvas {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
-      opacity: .5;
-    }
-
-    /* ── Hero text animate-in ── */
-    .slide.active .slide-badge {
-      animation: slideUp .5s .1s var(--ease) both;
-    }
-    .slide.active .slide-content h2 {
-      animation: slideUp .6s .2s var(--ease) both;
-    }
-    .slide.active .slide-content p {
-      animation: slideUp .6s .32s var(--ease) both;
-    }
-    .slide.active .slide-cta {
-      animation: slideUp .5s .44s var(--ease) both;
-    }
-    @keyframes slideUp {
-      from { opacity:0; transform:translateY(22px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-
-    /* ── Announce bar shimmer ── */
-    .announce {
-      background: linear-gradient(90deg,
-        var(--black) 0%, #1a150a 50%, var(--black) 100%);
-      background-size: 200% 100%;
-      animation: shimmer 4s linear infinite;
-    }
-    @keyframes shimmer {
-      0%   { background-position: 200% center; }
-      100% { background-position: -200% center; }
-    }
-
-    /* ── Section head line reveal ── */
-    .section-head::after {
-      content: '';
-      display: block;
-      height: 2px;
-      width: 0;
-      background: linear-gradient(90deg, var(--amber), transparent);
-      position: absolute;
-      bottom: -1px; left: 48px;
-      transition: width 1s var(--ease);
-    }
-    .section-head { position: relative; overflow: visible; }
-    .section-head.visible::after { width: 200px; }
-
-    /* ── Dual card WOW ── */
-    .dual-card {
-      transition: transform .45s var(--ease), box-shadow .45s var(--ease);
-    }
-    .dual-card:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 28px 60px rgba(0,0,0,.55), 0 0 30px rgba(200,136,42,.1);
-    }
-
-    /* ── Logo hover pulse ── */
-    .logo {
-      transition: color .2s, text-shadow .3s;
-    }
-    .logo:hover {
-      text-shadow: 0 0 28px rgba(200,136,42,.4);
-    }
-
-    /* ── Btn glow ── */
-    .slide-cta:hover {
-      box-shadow: 0 0 24px rgba(200,136,42,.4);
-    }
-    .btn-gold:hover {
-      box-shadow: 0 0 20px rgba(200,136,42,.35);
-    }
+    .visually-hidden { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0; }
   </style>
 </head>
 <body>
@@ -1364,43 +61,46 @@
 <!-- ── HEADER ── -->
 <header>
   <div class="header-inner">
-    <div class="logo" onclick="showPage('home')">MC<em>3D</em></div>
-    <nav class="main-nav">
+    <a class="logo" href="/">MC<em>3D</em></a>
+    <nav class="main-nav" aria-label="Navigazione principale">
       <div class="nav-item">
-        <a class="nav-link active" id="nav-home" onclick="showPage('home')">Home</a>
+        <a class="nav-link active" id="nav-home" href="/">Home</a>
       </div>
       <div class="nav-item">
-        <a class="nav-link" id="nav-objects" onclick="showPage('objects')">
+        <a class="nav-link" id="nav-objects" href="/oggetti-design/">
           Oggetti 3D
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </a>
         <div class="dropdown">
-          <a onclick="filterAndShow('objects','all')">Tutti gli oggetti</a>
-          <a onclick="filterAndShow('objects','decorativo')">Decorativi</a>
-          <a onclick="filterAndShow('objects','funzionale')">Funzionali</a>
+          <a href="/oggetti-design/">Tutti gli oggetti</a>
+          <a href="/oggetti-design/" onclick="filterAndShow('objects','decorativo');return false;">Decorativi</a>
+          <a href="/oggetti-design/" onclick="filterAndShow('objects','funzionale');return false;">Funzionali</a>
         </div>
       </div>
       <div class="nav-item">
-        <a class="nav-link" id="nav-dioramas" onclick="showPage('dioramas')">
+        <a class="nav-link" id="nav-dioramas" href="/diorami/">
           Diorami 3D
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </a>
         <div class="dropdown">
-          <a onclick="filterAndShow('dioramas','all')">Tutti i diorami</a>
-          <a onclick="filterAndShow('dioramas','shadow-box')">Shadow Box</a>
-          <a onclick="filterAndShow('dioramas','storico')">Storici</a>
+          <a href="/diorami/">Tutti i diorami</a>
+          <a href="/diorami/" onclick="filterAndShow('dioramas','shadow-box');return false;">Shadow Box</a>
+          <a href="/diorami/" onclick="filterAndShow('dioramas','storico');return false;">Storici</a>
         </div>
       </div>
       <div class="nav-item">
-        <a class="nav-link" id="nav-contact" onclick="showPage('contact')">Contatti</a>
+        <a class="nav-link" id="nav-processo" href="/processo/">Il Processo</a>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" id="nav-contact" href="/contatti/">Contatti</a>
       </div>
     </nav>
     <div class="header-actions">
-      <button class="icon-btn" onclick="showPage('contact')" title="Contatti">
+      <a class="icon-btn" href="/contatti/" title="Contatti">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
         </svg>
-      </button>
+      </a>
       <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" title="Menu" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -1410,20 +110,23 @@
 
 <!-- ── MOBILE NAV ── -->
 <div class="mobile-nav" id="mobileNav">
-  <div class="mobile-nav-link" onclick="mobileGo('home')">Home</div>
-  <div class="mobile-nav-link" onclick="mobileGo('objects')">Oggetti 3D</div>
+  <a class="mobile-nav-link" href="/">Home</a>
+  <a class="mobile-nav-link" href="/oggetti-design/">Oggetti 3D</a>
   <div class="mobile-nav-sub">
-    <a onclick="mobileFilter('objects','decorativo')">Decorativi</a>
-    <a onclick="mobileFilter('objects','funzionale')">Funzionali</a>
+    <a href="/oggetti-design/">Tutti</a>
+    <a href="/oggetti-design/">Decorativi</a>
+    <a href="/oggetti-design/">Funzionali</a>
   </div>
-  <div class="mobile-nav-link" onclick="mobileGo('dioramas')">Diorami 3D</div>
+  <a class="mobile-nav-link" href="/diorami/">Diorami 3D</a>
   <div class="mobile-nav-sub">
-    <a onclick="mobileFilter('dioramas','shadow-box')">Shadow Box</a>
-    <a onclick="mobileFilter('dioramas','storico')">Storici</a>
+    <a href="/diorami/">Tutti</a>
+    <a href="/diorami/">Shadow Box</a>
+    <a href="/diorami/">Storici</a>
   </div>
-  <div class="mobile-nav-link" onclick="mobileGo('contact')">Contatti</div>
+  <a class="mobile-nav-link" href="/processo/">Il Processo</a>
+  <a class="mobile-nav-link" href="/contatti/">Contatti</a>
   <div class="mobile-nav-contact">
-    <button class="btn-gold" onclick="mobileGo('contact')">Contattami →</button>
+    <a class="btn-gold" href="/contatti/">Contattami →</a>
   </div>
 </div>
 
@@ -1464,18 +167,22 @@
 ════════════════════════════════ -->
 <div id="home" class="page active">
 
+  <!-- H1 visibile per SEO, nascosto visivamente -->
+  <h1 class="visually-hidden">MC3D Studio — Stampa 3D artigianale: oggetti di design, modellismo automobilistico e diorami</h1>
+
   <!-- Hero Video -->
   <div class="hero-slider" id="heroSlider">
     <canvas id="heroCanvas"></canvas>
-    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+           aria-label="Video di presentazione MC3D Studio: stampa 3D artigianale, diorami e modellismo in scala">
       <source src="img/hero-video.mp4" type="video/mp4">
     </video>
     <div class="hero-video-overlay"></div>
     <div class="slide-content" style="animation: slideUp .6s .2s var(--ease) both;">
       <div class="slide-badge">Design &amp; Stampa 3D</div>
       <h2>Modelli <em>Artigianali</em><br>&amp; Diorami</h2>
-      <p>Scenografie in scala · FDM + diecast + LED<br>Pezzi unici realizzati a mano.</p>
-      <a class="slide-cta" onclick="showPage('objects')">
+      <p>Oggetti di design stampati in 3D · modellismo automobilistico in scala · diorami da collezione. Ogni pezzo nasce da un disegno in Fusion 360.</p>
+      <a class="slide-cta" href="/oggetti-design/">
         Esplora la Collezione
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1486,9 +193,9 @@
   <div class="section-head">
     <div class="section-head-left">
       <div class="section-eyebrow">Collezione — 1:32 Motorsport</div>
-      <h3>Oggetti <em>3D</em></h3>
+      <h3>Oggetti di Design <em>3D</em></h3>
     </div>
-    <a class="view-all" onclick="showPage('objects')">
+    <a class="view-all" href="/oggetti-design/">
       Vedi tutti
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
@@ -1497,28 +204,28 @@
 
   <!-- Banner diorami -->
   <div class="banner-strip">
-    <div class="banner-inner" onclick="showPage('dioramas')">
+    <a class="banner-inner" href="/diorami/" style="display:flex;align-items:center;">
       <div class="banner-art thumb-art ta-7" style="position:absolute;inset:0;height:100%">
         <div class="ta-icon" style="font-size:clamp(100px,14vw,220px);color:rgba(200,136,42,.18);letter-spacing:.12em;font-weight:700;white-space:nowrap">DIORAMI</div>
       </div>
       <div class="banner-text">
         <div class="eyebrow">Collezione</div>
-        <h3>Diorami 3D</h3>
-        <a class="btn-ghost" onclick="showPage('dioramas')">
+        <h3>Diorami in Scala stampati in 3D</h3>
+        <span class="btn-ghost">
           Esplora la Collezione
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        </span>
       </div>
-    </div>
+    </a>
   </div>
 
   <!-- Diorami preview -->
   <div class="section-head">
     <div class="section-head-left">
-      <div class="section-eyebrow">Scenografie — Scala 1:32</div>
+      <div class="section-eyebrow">Scenografie — Scale 1:32 / 1:43</div>
       <h3>Diorami <em>3D</em></h3>
     </div>
-    <a class="view-all" onclick="showPage('dioramas')">
+    <a class="view-all" href="/diorami/">
       Vedi tutti
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
@@ -1527,58 +234,57 @@
 
   <!-- Dual CTA banners -->
   <div class="dual-banner">
-    <div class="dual-card" onclick="showPage('objects')">
-      <img src="img/tribuna2-f1-1.jpg" alt="Oggetti 3D" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+    <a class="dual-card" href="/oggetti-design/">
+      <img src="img/tribuna2-f1-1.jpg" alt="Tribuna F1 in scala 1:32 stampata in 3D — modellismo automobilistico MC3D" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
       <div class="dual-card-text">
         <div class="eyebrow">Portfolio</div>
-        <h3>Oggetti 3D</h3>
-        <p>Pezzi funzionali e decorativi stampati con precisione.</p>
+        <h3>Oggetti di Design 3D</h3>
+        <p>Modellismo automobilistico in scala 1:32 e oggetti decorativi stampati in 3D.</p>
         <span class="link-arr">Vedi la collezione <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
-    </div>
-    <div class="dual-card" onclick="showPage('contact')">
-      <img src="img/barriere-3.jpg" alt="Commissioni" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+    </a>
+    <a class="dual-card" href="/contatti/">
+      <img src="img/barriere-3.jpg" alt="Barriere da circuito in scala 1:32 stampate in 3D — MC3D Studio" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
       <div class="dual-card-text">
         <div class="eyebrow">Informazioni</div>
         <h3>Hai domande?</h3>
         <p>Per qualsiasi informazione sulle opere in collezione, scrivimi.</p>
         <span class="link-arr">Contattami <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
-    </div>
+    </a>
   </div>
 
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="logo">MC<em>3D</em></span>
-        <p>Design e stampa 3D artigianale. Oggetti funzionali, decorativi e diorami da collezione realizzati con cura.</p>
+        <a class="logo" href="/">MC<em>3D</em></a>
+        <p>Design e stampa 3D artigianale. Oggetti di design, modellismo automobilistico in scala e diorami da collezione realizzati con cura.</p>
       </div>
       <div class="footer-col">
         <h5>Collezioni</h5>
         <ul>
-          <li><a onclick="showPage('objects')">Oggetti 3D</a></li>
-          <li><a onclick="filterAndShow('objects','decorativo')">Decorativi</a></li>
-          <li><a onclick="filterAndShow('objects','funzionale')">Funzionali</a></li>
+          <li><a href="/oggetti-design/">Oggetti di Design 3D</a></li>
+          <li><a href="/modellismo-automobilistico/">Modellismo Automobilistico</a></li>
+          <li><a href="/diorami/">Diorami</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Diorami</h5>
+        <h5>Studio</h5>
         <ul>
-          <li><a onclick="showPage('dioramas')">Tutti i Diorami</a></li>
-          <li><a onclick="filterAndShow('dioramas','shadow-box')">Shadow Box</a></li>
-          <li><a onclick="filterAndShow('dioramas','storico')">Storici</a></li>
+          <li><a href="/processo/">Il Processo</a></li>
+          <li><a href="/contatti/">Contatti</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Info</h5>
         <ul>
-          <li><a onclick="showPage('contact')">Contatti</a></li>
-          <li><a onclick="showPage('contact')">Informazioni</a></li>
+          <li><a href="mailto:info@studiomc3d.it">info@studiomc3d.it</a></li>
+          <li><a href="/contatti/">Risposta entro 24h</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+      <p>&copy; <span class="copyright-year">2025</span> MC3D Studio — Design &amp; Stampa 3D Artigianale</p>
       <p>Tutti i diritti riservati</p>
     </div>
   </footer>
@@ -1594,7 +300,7 @@
     </div>
     <div class="collection-hero-text">
       <div class="eyebrow">Portfolio</div>
-      <h2>Oggetti <em>3D</em></h2>
+      <h1>Oggetti di Design stampati in 3D</h1>
     </div>
   </div>
 
@@ -1614,26 +320,27 @@
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="logo">MC<em>3D</em></span>
-        <p>Design e stampa 3D artigianale. Oggetti funzionali, decorativi e diorami da collezione.</p>
+        <a class="logo" href="/">MC<em>3D</em></a>
+        <p>Ogni pezzo nasce da un disegno in Fusion 360. Stampa FDM su Bambu Lab, rifinitura artigianale.</p>
       </div>
       <div class="footer-col">
         <h5>Collezioni</h5>
         <ul>
-          <li><a onclick="showPage('objects')">Oggetti 3D</a></li>
-          <li><a onclick="showPage('dioramas')">Diorami 3D</a></li>
+          <li><a href="/oggetti-design/">Oggetti di Design 3D</a></li>
+          <li><a href="/modellismo-automobilistico/">Modellismo Automobilistico</a></li>
+          <li><a href="/diorami/">Diorami</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Info</h5>
+        <h5>Studio</h5>
         <ul>
-          <li><a onclick="showPage('contact')">Contatti</a></li>
-          <li><a onclick="showPage('contact')">Informazioni</a></li>
+          <li><a href="/processo/">Il Processo</a></li>
+          <li><a href="/contatti/">Contatti</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+      <p>&copy; <span class="copyright-year">2025</span> MC3D Studio — Design &amp; Stampa 3D Artigianale</p>
     </div>
   </footer>
 </div>
@@ -1648,7 +355,7 @@
     </div>
     <div class="collection-hero-text">
       <div class="eyebrow">Portfolio</div>
-      <h2>Diorami <em>3D</em></h2>
+      <h1>Diorami in Scala stampati in 3D</h1>
     </div>
   </div>
 
@@ -1668,25 +375,26 @@
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="logo">MC<em>3D</em></span>
-        <p>Design e stampa 3D artigianale. Diorami da collezione realizzati con cura maniacale.</p>
+        <a class="logo" href="/">MC<em>3D</em></a>
+        <p>Diorami e shadow box da collezione: scenografie con diecast e LED, progettate in Fusion 360 e rifinite a mano.</p>
       </div>
       <div class="footer-col">
         <h5>Collezioni</h5>
         <ul>
-          <li><a onclick="showPage('objects')">Oggetti 3D</a></li>
-          <li><a onclick="showPage('dioramas')">Diorami 3D</a></li>
+          <li><a href="/oggetti-design/">Oggetti di Design 3D</a></li>
+          <li><a href="/diorami/">Diorami</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Info</h5>
+        <h5>Studio</h5>
         <ul>
-          <li><a onclick="showPage('contact')">Contatti</a></li>
+          <li><a href="/processo/">Il Processo</a></li>
+          <li><a href="/contatti/">Contatti</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+      <p>&copy; <span class="copyright-year">2025</span> MC3D Studio — Design &amp; Stampa 3D Artigianale</p>
     </div>
   </footer>
 </div>
@@ -1697,14 +405,14 @@
 <div id="contact" class="page">
   <div class="contact-hero">
     <div class="eyebrow">Contatti</div>
-    <h2>Scrivimi</h2>
+    <h1>Scrivimi</h1>
     <p>Per informazioni sulle opere in collezione o qualsiasi altra curiosità, sono a disposizione.</p>
   </div>
 
   <div class="contact-wrap">
     <div class="contact-aside">
       <h4>Una vetrina artigianale</h4>
-      <p>Oggetti funzionali, sculture decorative, diorami da collezione — ogni pezzo è unico e realizzato con cura artigianale.</p>
+      <p>Oggetti di design stampati in 3D, modellismo automobilistico in scala e diorami da collezione — ogni pezzo è unico e realizzato con cura.</p>
       <div class="c-item">
         <div class="c-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -1774,517 +482,30 @@
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="logo">MC<em>3D</em></span>
-        <p>Design e stampa 3D artigianale. Realizziamo insieme la tua idea.</p>
+        <a class="logo" href="/">MC<em>3D</em></a>
+        <p>Stampa 3D artigianale. Ogni pezzo nasce da un disegno in Fusion 360.</p>
       </div>
       <div class="footer-col">
         <h5>Collezioni</h5>
         <ul>
-          <li><a onclick="showPage('objects')">Oggetti 3D</a></li>
-          <li><a onclick="showPage('dioramas')">Diorami 3D</a></li>
+          <li><a href="/oggetti-design/">Oggetti di Design 3D</a></li>
+          <li><a href="/diorami/">Diorami</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Info</h5>
+        <h5>Studio</h5>
         <ul>
-          <li><a onclick="showPage('contact')">Contatti</a></li>
+          <li><a href="/processo/">Il Processo</a></li>
+          <li><a href="/contatti/">Contatti</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 MC3D — Design &amp; Stampa 3D Artigianale</p>
+      <p>&copy; <span class="copyright-year">2025</span> MC3D Studio — Design &amp; Stampa 3D Artigianale</p>
     </div>
   </footer>
 </div>
 
-<!-- ════ JS ════ -->
-<script>
-/* ── DATA ── */
-const OBJECTS = [
-  { id:'o7', badge:'new', cat:'decorativo', ta:'ta-3',
-    imgs:['img/torre-f1-1.jpg','img/torre-f1-2.jpg','img/torre-f1-3.jpg'], imgfit:'contain',
-    title:'Torre di Controllo F1 Vintage',
-    sub:'Motorsport Collection',
-    short:'Torre box anni \'70 in scala 1:32 con livree Goodyear, Champion, Castrol e Martini.',
-    desc:'Replica della torre di controllo dei box di un circuito F1 degli anni \'70, in scala 1:32. Struttura a tre livelli con texture mattoni stampata direttamente nel PLA. I vari elementi sono stampati in PLA di diversi colori. Le livree vintage (Goodyear, Champion, Castrol, Martini) sono applicate con decalcomanie a immersione. Compatibile con i principali tracciati slot car in scala 1:32.',
-    specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Decalcomanie', Altezza:'~28 cm' }
-  },
-  { id:'o8', badge:'new', cat:'decorativo', ta:'ta-3',
-    imgs:['img/tribuna-f1-1.jpg','img/tribuna-f1-2.jpg','img/tribuna-f1-3.jpg'], imgfit:'cover',
-    title:'Tribuna da Circuito F1',
-    sub:'Motorsport Collection',
-    short:'Tribuna 3 settori in scala 1:32 con sedute in legno, struttura metallica e cartelloni sponsor.',
-    desc:'Tribuna da circuito F1 in scala 1:32 con tre settori indipendenti da 10 gradoni ciascuno. La struttura portante in acciaio verniciato grigio e i gradoni in finitura legno sono stampati separatamente e assemblati. I cartelloni pubblicitari (Firestone, Agip, Jack Daniels) sono stampati in 3D e i banner Ferrari sono applicati con decalcomanie a immersione. La base nera include il logo bandiera a scacchi. Compatibile con tracciati slot car standard in scala 1:32.',
-    specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Decalcomanie', Dimensioni:'45x17x25,5 cm' }
-  },
-  { id:'o9', badge:'new', cat:'decorativo', ta:'ta-5',
-    imgs:['img/tribuna2-f1-1.jpg','img/tribuna2-f1-2.jpg'], imgfit:'cover',
-    title:'Tribuna Compatta Marlboro / Gulf',
-    sub:'Motorsport Collection',
-    short:'Tribuna 2 settori in scala 1:32 con cartelloni Marlboro World Championship Team e Gulf.',
-    desc:'Versione compatta a due settori della tribuna da circuito, in scala 1:32. Stessa costruzione della versione maggiore: struttura portante grigia, gradoni con finitura legno e base nera. I due maxi-cartelloni (Marlboro World Championship Team e Gulf) sono applicati con decalcomanie a immersione su supporto stampato separatamente. Dimensioni ridotte la rendono ideale per angoli stretti del tracciato o come complemento alla tribuna grande.',
-    specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Verniciata + decalcomanie', Dimensioni:'~25x18 cm' }
-  },
-  { id:'o11', badge:'new', cat:'decorativo', ta:'ta-4',
-    imgs:['img/orologio_space_invaders.jpg'], imgfit:'cover',
-    title:'Orologio Space Invaders',
-    sub:'Arcade Collection',
-    short:'Orologio da parete circolare Ø 20 cm ispirato al classico arcade degli anni \'70, stampato in PLA nero e giallo.',
-    desc:'Orologio da parete dal diametro di 20 cm dedicato al celebre gioco arcade Space Invaders, nato nel 1978. Il disco circolare in PLA nero ospita il pixelato alieno giallo al centro del quadrante, con i numeri 12, 3, 6 e 9 in carattere pixel-font a tutto rilievo. La scritta "SPACE INVADERS" campeggia nella metà inferiore in stile retro-gaming. Le lancette grigie completano l\'oggetto, trasformando un\'icona della cultura pop videoludica in un pezzo d\'arredo funzionale. Stampato in PLA bicolore, non richiede verniciatura aggiuntiva.',
-    specs:{ Materiale:'PLA', Diametro:'20 cm', Finitura:'Bicolore nero/giallo', Tema:'Arcade anni \'70' }
-  },
-  { id:'o10', badge:'new', cat:'decorativo', ta:'ta-2',
-    imgs:['img/barriere-1.jpg','img/barriere-2.jpg','img/barriere-3.jpg','img/barriere-4.jpg','img/barriere-5.jpg','img/barriere-6.jpg'], imgfit:'cover',
-    title:'Barriere da Circuito con Reti',
-    sub:'Motorsport Collection',
-    short:'Set di barriere modulari in scala 1:32 con reti di protezione e livree Motul, Dunlop e Bridgestone.',
-    desc:'Set modulare di barriere da bordo pista in scala 1:32, composte da una base bianca con livree sponsor e una rete di protezione stampata in PLA bianco. I moduli sono intercambiabili e componibili per coprire qualsiasi lunghezza di rettilineo o curva. Le decalcomanie riproducono le livree originali di Motul Motor Oil, Dunlop Sport e Bridgestone. Il sistema include anche moduli singoli con unico sponsor per personalizzare la composizione.',
-    specs:{ Materiale:'PLA', Scala:'1:32', Dimensioni:'93x80x3,5 mm', Moduli:'6 intercambiabili' }
-  },
-];
-
-const DIORAMAS = [
-  { id:'d12', badge:'new', cat:'storico', imgs:['img/pullman1-1.jpg','img/pullman1-2.jpg','img/pullman1-3.jpg','img/pullman1-4.jpg','img/pullman1-5.jpg'], imgfit:'cover', landscape:true,
-    title:'Autostazione anni \'70 — Binari 6 e 7',
-    sub:'Diorama di Trasporto Urbano',
-    short:'Terminal autobus italiano con due pullman d\'epoca — Fiat/SITA "Salerno" e Fiat 309 Menarini — tettoia illuminata, orologio a colonna e manifesti d\'epoca.',
-    desc:'Diorama in scala 1:43 che riproduce l\'atmosfera di un\'autostazione italiana degli anni \'70. Sotto la tettoia in lamiera ondulata che copre i binari 6 e 7, due pullman d\'epoca si fronteggiano: a sinistra il Fiat/SITA in livrea blu e gialla con cartello "SALERNO", a destra il Fiat 309 Menarini bianco e azzurro con targhetta "BLAX SAR RENARINI". Sul marciapiede in sampietrini, un palo centrale ospita un orologio a doppia faccia stile Mondaine e una bacheca con manifesti pubblicitari d\'epoca — il celebre poster del rabarbaro Zucco e la campagna "Non accontentarti di niente di meno". Figuranti in scala 1:43 animano la scena: passeggeri in attesa, un viaggiatore seduto e personale di stazione. Sotto la tettoia, una fila di luci LED a incandescenza restituisce l\'illuminazione calda dei terminal di epoca. Pittura a mano con weathering e invecchiamento su strutture e pavimentazione.',
-    specs:{ Scala:'1:43', Tecnica:'Stampa 3D + modelli diecast', Finitura:'Dipinto a mano + LED + weathering', Ambientazione:'Autostazione italiana, anni \'70' }
-  },
-  { id:'d13', badge:'new', cat:'shadow-box', imgs:['img/burano-1.jpg','img/burano-2.jpg','img/burano-3.jpg','img/burano-4.jpg'], imgfit:'contain', landscape:true,
-    title:'Burano: Forme e Colori',
-    sub:'Shadow Box Pop Art',
-    short:'Le casette colorate di Burano reinterpretate in stile pop art e paper craft — shadow box 50×50 cm, stampa 3D.',
-    desc:'Shadow box in cornice nera 50×50 cm che cattura l\'essenza cromatica di Burano, l\'isola veneziana celebre per le sue facciate dipinte con colori primari squillanti. La composizione affianca quattro case contigue — blu, giallo, verde, rosso — reinterpretate in chiave pop art e paper craft: volumi netti, palette ipersatura, dettagli stilizzati. Persiane in legno scuro, comignoli slanciati, antenne TV, cactus in vaso, tende a strisce e sedie da esterno animano la scena con la stessa vivacità pittoresca del borgo lagunare. Il cielo azzurro con nuvole sagomate a strati completa l\'effetto di profondità tipico del shadow box. Un omaggio all\'architettura popolare veneziana tradotto nel linguaggio grafico del paper craft tridimensionale.',
-    specs:{ Formato:'Shadow box 50×50 cm', Tecnica:'Stampa 3D, PLA multicolore', Finitura:'Verniciato a mano', Ispirazione:'Burano, Venezia' }
-  },
-  { id:'d11', badge:'new', cat:'shadow-box', imgs:['img/reina_roja.jpg'], imgfit:'contain', landscape:true,
-    title:'Edificio Reina — Facciata Urbana',
-    sub:'Architettura in Cornice',
-    short:'Facciata multipiano con Hostal Orca e pannello ornamentale — shadow box 50×50 cm, ispirazione: Felix Diaz Escauriaza.',
-    desc:'Shadow box in cornice nera 50×50 cm che riproduce la facciata di un palazzo urbano spagnolo con iscrizione "EDIFICIO REINA ROJA MMXIV". Il lato sinistro restituisce l\'architettura classica del centro storico: cinque piani con persiane in legno marrone, balconi in ferro battuto, vasi fioriti e segnaletica verticale rossa dell\'Hostal Ubeda. Il coronamento superiore è scandito da una terrazza con balaustrata, vasi ornamentali e timpano in mattoni. Il lato destro costituisce un pannello decorativo autonomo: colonne bianche con cornici dorate separano specchi ornamentali ricamati con figure di animali in bordeaux scuro — gatti, uccelli, lucertole, mani — secondo il vocabolario visivo dell\'illustratore Felix Diaz Escauriaza. La composizione dialoga tra rigore architettonico e ornamento tribale, creando un oggetto al confine tra diorama e arte murale tridimensionale.',
-    specs:{ Formato:'Shadow box 50×50 cm', Tecnica:'Stampa 3D, PLA di vari colori', Finitura:'Vasi con rametti veri', Ispirazione:'<a href="https://www.felixdiazescauriaza.com/#/mural-illustration/" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">Felix Diaz Escauriaza</a>' }
-  },
-  { id:'d10', badge:'new', cat:'shadow-box', imgs:['img/farmacia1.jpg'], imgfit:'contain', landscape:true,
-    title:'Farmacia — Palazzo Urbano anni \'60',
-    sub:'Diorama Urbano',
-    short:'Facciata di palazzo italiano con farmacia al piano terra e autobus SGEA — shadow box 25×25 cm, stampa 3D dipinta a mano.',
-    desc:'Diorama urbano in cornice bianca 25×25 cm che riproduce un angolo di città italiana degli anni \'60. La facciata del palazzo in intonaco ocra è scandita da persiane in legno verde scuro e cornici bianche; al piano terra campeggia l\'insegna "FARMACIA" su vetrina scura con allestimento interno visibile. Sul lato destro, balconi in ferro battuto su sei livelli ospitano vasi fioriti e piantine — dettaglio che restituisce la vivacità del quotidiano. Sulla strada, un autobus SGEA blu e bianco — modello diecast selezionato — completa la scena di quartiere. Pittura a mano con washing su intonaco, dry-brushing sulle persiane e invecchiamento delle facciate con polveri pigmentate.',
-    specs:{ Formato:'Shadow box 25×25 cm', Tecnica:'FDM + modello diecast', Finitura:'Dipinto a mano + weathering', Ambientazione:'Città italiana, anni \'60' }
-  },
-  { id:'d5', badge:'new', cat:'shadow-box', imgs:['img/venezia-1.jpg'], imgfit:'contain', landscape:true,
-    title:'Palazzo Veneziano con Motoscafo',
-    sub:'Diorama Veneziano',
-    short:'Quadretto in cornice: facciata veneziana e motoscafo in latta anni \'50 — stampa 3D dipinta e modificata a mano.',
-    desc:'Diorama a cornice che riproduce la facciata di un palazzo veneziano affacciato sul canale. La struttura è stampata in 3D con dettagli architettonici accurati: finestre con persiane, balconi in ferro battuto, portale ad arco con lunetta decorativa e rivestimento in mattoni con effetto intonaco invecchiato. Il motoscafo in latta degli anni \'50 — pezzo vintage selezionato e integrato nella composizione — galleggia sull\'acqua del rio realizzata in resina. Le bricole in legno completano l\'ambientazione lagunare. Pittura a mano con tecniche di washing e dry-brushing per restituire il caratteristico degrado elegante dell\'architettura veneziana.',
-    specs:{ Formato:'Quadretto 30×30 cm', Tecnica:'FDM + Latta vintage', Finitura:'Dipinto a mano + weathering', Ambientazione:'Venezia, anni \'50' }
-  },
-  { id:'d7', badge:'new', cat:'storico', imgs:['img/strada-1.jpg','img/strada-2.jpg'], imgfit:'contain', landscape:true,
-    title:'Casa della Gomma — Borgo anni \'60',
-    sub:'Diorama Stradale',
-    short:'Angolo di paese toscano in scala: pneumatici Pirelli e Michelin, sei auto d\'epoca e sfondo collinare dipinto a mano.',
-    desc:'Diorama stradale che riproduce un angolo di borgo italiano degli anni \'60. La "Casa della Gomma" campeggia con le insegne Pirelli, Michelin, Gulf, Castrol, Texaco e Champion. Sul selciato sfilano sei modelli in scala: Fiat 600 celeste, Fiat 850 Spider bianca, spider bordeaux, berlina grigia, Renault Dauphine blu e il furgone Fiat 238 giallo con livrea a strisce. Lo sfondo riproduce la campagna toscana con cipressi, casolare e strade bianche. Sul lato, un manifesto elettorale del PCI e una bacheca con avvisi di paese completano l\'atmosfera d\'epoca. Albero in resina e panchine in legno arredano il marciapiede in sampietrini.',
-    specs:{ Formato:'Diorama stradale', Tecnica:'FDM + modelli diecast', Finitura:'Dipinto a mano + weathering', Ambientazione:'Borgo toscano, anni \'60' }
-  },
-  { id:'d9', badge:'new', cat:'shadow-box', imgs:['img/calciobalilla-1.jpeg'], imgfit:'contain', landscape:true,
-    title:'Calciatori da Balilla — Shadow Box anni \'40',
-    sub:'Quadretto da Collezione',
-    short:'Tre figurine lignee da calcio balilla anni \'40 su campo da gioco stampato — cornice 23×28 cm con vetro.',
-    desc:'Shadow box in cornice nera 23×28 cm che valorizza tre figurine originali da calcio balilla degli anni \'40. Le statuette in legno intagliato e dipinto a mano — due giocatori in maglia a strisce bianche e nere e uno in maglia rossa, tutti con pantaloncini scuri e calzettoni — sono montate sulla barra metallica originale con i giunti a vite d\'epoca. Il pallone in resina completa la scena. Lo sfondo riproduce grafica di un campo da calcio con linee d\'area su fondo verde, creando profondità e contesto sportivo. Tecnica mista: oggetti vintage originali su stampa fotografica incorniciata.',
-    specs:{ Formato:'Cornice 23×28 cm', Tecnica:'Figurine vintage + sfondo stampato', Finitura:'Shadow box con vetro', Ambientazione:'Campo da calcio, anni \'40' }
-  },
-  { id:'d8', badge:'new', cat:'shadow-box', imgs:['img/fantino-1.png'], imgfit:'contain', landscape:true,
-    title:'Il Fantino Dick — Shadow Box anni \'50',
-    sub:'Quadretto da Collezione',
-    short:'Giocattolo in latta anni \'50 su fotografia vintage in cornice A4 — cavallo e fantino "Dick" in livrea gialla su ippodromo in bianco e nero.',
-    desc:'Shadow box in cornice nera formato A4 (21×29.7 cm) che unisce un oggetto d\'epoca a una fotografia storica. Il cavallo con fantino in livrea gialla — un giocattolo in latta degli anni \'50 con il nome "Dick" impresso sul fianco — è montato in rilievo davanti a una fotografia d\'archivio in bianco e nero che ritrae un ippodromo anni \'30 affollato di spettatori. Il contrasto tra il colore vivace del giocattolo e la fotografia in scala di grigi crea una composizione sospesa nel tempo. Tecnica mista: oggetto vintage originale su stampa fotografica in vetrina con profondità.',
-    specs:{ Formato:'Cornice A4 — 21×29.7 cm', Tecnica:'Oggetto vintage + fotografia d\'archivio', Finitura:'Shadow box con vetro', Ambientazione:'Ippodromo, anni \'30–\'50' }
-  },
-  { id:'d6', badge:'new', cat:'storico', imgs:['img/autosalone-fiat-1.jpg'], imgfit:'contain', landscape:true,
-    title:'Autosalone Fiat anni \'80',
-    sub:'Diorama Automobilistico',
-    short:'Concessionaria Fiat in miniatura: quattro modelli iconici in vetrina — Panda, 127, 1300 e Ferrari 456 — con insegna luminosa e manifesti d\'epoca.',
-    desc:'Diorama architettonico che riproduce un autosalone Fiat degli anni \'80 in piena attività. La facciata a vetrine con insegna "F|I|A|T" e scritta "AUTOSALONE" inquadra un interno accuratamente allestito: quattro modelli in scala — Fiat Panda azzurra, Fiat 127 gialla, berlina anni \'60 bianca e Ferrari 456 verde scuro — su pavimento in cemento levigato. Le pareti ospitano manifesti pubblicitari originali: Fiat 500, Fiat Panda, Fiat 127 e una locandina del Gran Premio di Monaco. Scrivania verde con sedute rosse per l\'accoglienza clienti. Serranda rossa sul fondo e illuminazione al neon completano l\'atmosfera della concessionaria d\'epoca.',
-    specs:{ Formato:'Diorama panoramico', Tecnica:'FDM + modelli diecast', Finitura:'Dipinto a mano + manifesti stampati', Ambientazione:'Concessionaria Fiat, anni \'80' }
-  },
-];
-
-const ALL_ITEMS = [...OBJECTS, ...DIORAMAS];
-
-/* ── Active filters ── */
-let activeFilter = { objects:'all', dioramas:'all' };
-
-/* ── Mobile nav ── */
-function toggleMobileNav() {
-  const nav = document.getElementById('mobileNav');
-  const btn = document.getElementById('hamburgerBtn');
-  nav.classList.toggle('open');
-  btn.classList.toggle('open');
-  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-}
-function closeMobileNav() {
-  document.getElementById('mobileNav').classList.remove('open');
-  document.getElementById('hamburgerBtn').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function mobileGo(id) {
-  closeMobileNav();
-  showPage(id);
-}
-function mobileFilter(section, cat) {
-  closeMobileNav();
-  filterAndShow(section, cat);
-}
-
-/* ── Page nav ── */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-  const el = document.getElementById('nav-' + id);
-  if (el) el.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function filterAndShow(section, cat) {
-  activeFilter[section] = cat;
-  showPage(section);
-  // update pills
-  const container = section === 'objects' ? document.getElementById('obj-filters') : document.getElementById('dio-filters');
-  container.querySelectorAll('.filter-pill').forEach(p => {
-    const pCat = p.getAttribute('onclick').match(/'([^']+)'\)$/)[1];
-    p.classList.toggle('active', pCat === cat);
-  });
-  renderGrid(section);
-}
-
-/* ── Card renderer ── */
-function badgeHTML(badge) {
-  if (!badge) return '';
-  const map = { new:'badge-new', featured:'badge-featured', soon:'badge-soon' };
-  const labels = { new:'Nuovo', featured:'In Evidenza', soon:'Prossimamente' };
-  return `<div class="card-badge ${map[badge]}">${labels[badge]}</div>`;
-}
-
-function renderCard(item) {
-  const thumb = item.imgs
-    ? `<img src="${item.imgs[0]}" alt="${item.title}" loading="lazy" style="height:100%;object-fit:${item.imgfit||'cover'};${item.imgfit==='contain'?`background:${item.imgbg||'#ffffff'};padding:8px`:''}">`
-    : `<div class="thumb-art ${item.ta}" style="height:100%"><div class="ta-icon">${item.ta&&(item.ta.includes('ta-7')||item.ta.includes('ta-8')||item.ta.includes('ta-9')||item.ta.includes('ta-10')) ? '▦' : '3D'}</div></div>`;
-  return `
-    <div class="product-card" onclick="openItemById('${item.id}')">
-      <div class="card-image">
-        ${badgeHTML(item.badge)}
-        ${thumb}
-      </div>
-      <div class="card-body">
-        <div class="card-series">${item.sub}</div>
-        <div class="card-title">${item.title}</div>
-        <div class="card-sub">${item.short}</div>
-        <div class="card-meta">
-          <span class="chip">${item.cat}</span>
-          <span class="chip">${Object.values(item.specs)[0]}</span>
-        </div>
-      </div>
-    </div>`;
-}
-
-function renderGrid(section) {
-  const data   = section === 'objects' ? OBJECTS : DIORAMAS;
-  const filter = activeFilter[section];
-  const items  = filter === 'all' ? data : data.filter(i => i.cat === filter);
-  document.getElementById(section + '-grid').innerHTML = items.map(renderCard).join('');
-  const countEl = document.getElementById(section === 'objects' ? 'obj-count' : 'dio-count');
-  if (countEl) countEl.textContent = items.length + ' ' + (items.length === 1 ? 'modello' : 'modelli');
-}
-
-function filterCards(btn, section, cat) {
-  activeFilter[section] = cat;
-  btn.closest('.filter-group').querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  renderGrid(section);
-}
-
-/* Home previews — show 4 items each */
-function renderHomePreviews() {
-  document.getElementById('home-objects').innerHTML   = OBJECTS.slice(0,4).map(renderCard).join('');
-  document.getElementById('home-dioramas').innerHTML  = DIORAMAS.slice(0,4).map(renderCard).join('');
-}
-
-/* ── Modal ── */
-function openModal(item) {
-  document.getElementById('modal-cat').textContent   = item.sub;
-  document.getElementById('modal-title').textContent = item.title;
-  document.getElementById('modal-sub').textContent   = item.cat.charAt(0).toUpperCase() + item.cat.slice(1);
-  document.getElementById('modal-desc').textContent  = item.desc;
-
-  const wrap = document.getElementById('modal-img-wrap');
-  if (item.imgs && item.imgs.length) {
-    const isFit = item.imgfit === 'contain' && !item.landscape;
-    const isDark = item.landscape;
-    const galleryBg = isFit ? `background:${item.imgbg||'#ffffff'};` : '';
-    wrap.innerHTML = `
-      <div class="modal-gallery" id="mgallery" style="${galleryBg}" onclick="(function(){var a=document.querySelector('#mgallery img.active');if(a)openZoom(a.src,a.alt)})()">
-        ${item.imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''} ${isDark?'bg-dark':''}" style="${isFit?'object-fit:contain;':''}" alt="${item.title} ${i+1}">`).join('')}
-      </div>
-      ${item.imgs.length > 1 ? `<div class="modal-thumbs">
-        ${item.imgs.map((src,i) => `<div class="modal-thumb ${i===0?'active':''} ${isDark?'bg-dark':''}" style="${isFit?`background:${item.imgbg||'#ffffff'};`:''}" onclick="gallerySel(${i})"><img src="${src}" style="${isFit?'object-fit:contain;':''}" alt=""></div>`).join('')}
-      </div>` : ''}`;
-  } else {
-    const ta = item.ta || 'ta-1';
-    const icon = ta.match(/ta-(7|8|9|10)$/) ? '▦' : '3D';
-    wrap.innerHTML = `<div class="thumb-art ${ta}" style="height:100%"><div class="ta-icon" style="font-size:64px">${icon}</div></div>`;
-  }
-
-  document.getElementById('modal-specs').innerHTML = Object.entries(item.specs).map(([k,v]) => `
-    <div class="spec-box">
-      <div class="spec-label">${k}</div>
-      <div class="spec-val">${v}</div>
-    </div>`).join('');
-  document.getElementById('modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function gallerySel(idx) {
-  document.querySelectorAll('#mgallery img').forEach((img,i) => img.classList.toggle('active', i===idx));
-  document.querySelectorAll('.modal-thumbs .modal-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
-}
-
-function openItemById(id) {
-  const item = ALL_ITEMS.find(i => i.id === id);
-  if (item) openModal(item);
-}
-
-function handleModalClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-
-/* ── Contact form ── */
-async function handleSubmit(e) {
-  e.preventDefault();
-  const btn  = e.target.querySelector('.btn-gold');
-  const ok   = document.getElementById('formOk');
-  const err  = document.getElementById('formErr');
-  ok.style.display = 'none';
-  err.style.display = 'none';
-  btn.textContent = 'Invio in corso…'; btn.disabled = true;
-  try {
-    const res = await fetch('https://formspree.io/f/xlgvqerd', {
-      method: 'POST',
-      body: new FormData(e.target),
-      headers: { 'Accept': 'application/json' }
-    });
-    if (res.ok) {
-      ok.style.display = 'block';
-      e.target.reset();
-    } else {
-      err.style.display = 'block';
-    }
-  } catch (_) {
-    err.style.display = 'block';
-  }
-  btn.textContent = 'Invia Messaggio'; btn.disabled = false;
-}
-
-/* ── Zoom Lightbox ── */
-(function () {
-  let zScale = 1, zTx = 0, zTy = 0;
-  let zDrag = false, zLastX = 0, zLastY = 0;
-  const MIN_S = 1, MAX_S = 6;
-
-  const zOverlay = document.getElementById('zoomOverlay');
-  const zImg     = document.getElementById('zoomImg');
-  const zBadge   = document.getElementById('zoomScaleBadge');
-  const zClose   = document.getElementById('zoomCloseBtn');
-
-  function zApply() {
-    zImg.style.transform = `translate(${zTx}px,${zTy}px) scale(${zScale})`;
-    zBadge.textContent   = zScale.toFixed(1) + '×';
-  }
-  function zClamp() {
-    if (zScale <= MIN_S) { zTx = 0; zTy = 0; return; }
-    const mX = window.innerWidth  * (zScale - 1) / 2;
-    const mY = window.innerHeight * (zScale - 1) / 2;
-    zTx = Math.max(-mX, Math.min(mX, zTx));
-    zTy = Math.max(-mY, Math.min(mY, zTy));
-  }
-
-  window.openZoom = function (src, alt) {
-    zImg.src = src; zImg.alt = alt || '';
-    zScale = 1; zTx = 0; zTy = 0;
-    zApply();
-    zOverlay.classList.add('open');
-  };
-  function closeZoom() { zOverlay.classList.remove('open'); }
-  window.closeZoom = closeZoom;
-
-  zClose.addEventListener('click', e => { e.stopPropagation(); closeZoom(); });
-  zOverlay.addEventListener('click', e => { if (e.target === zOverlay) closeZoom(); });
-
-  /* Rotella: zoom */
-  zOverlay.addEventListener('wheel', e => {
-    e.preventDefault();
-    zScale = Math.min(MAX_S, Math.max(MIN_S, zScale * (e.deltaY > 0 ? 0.85 : 1.18)));
-    zClamp(); zApply();
-  }, { passive: false });
-
-  /* Mouse drag */
-  zOverlay.addEventListener('mousedown', e => {
-    if (zClose.contains(e.target)) return;
-    if (zScale > 1) { zDrag = true; zLastX = e.clientX; zLastY = e.clientY; zImg.classList.add('dragging'); }
-  });
-  window.addEventListener('mousemove', e => {
-    if (!zDrag) return;
-    zTx += e.clientX - zLastX; zTy += e.clientY - zLastY;
-    zLastX = e.clientX; zLastY = e.clientY;
-    zClamp(); zApply();
-  });
-  window.addEventListener('mouseup', () => { zDrag = false; zImg.classList.remove('dragging'); });
-
-  /* Doppio clic: zoom 2.5× / reset */
-  zImg.addEventListener('dblclick', () => {
-    zScale = zScale < 2 ? 2.5 : MIN_S;
-    if (zScale === MIN_S) { zTx = 0; zTy = 0; } else zClamp();
-    zApply();
-  });
-
-  /* Touch: drag + pinch */
-  let tPinch0 = 0, tScale0 = 1, tX0 = 0, tY0 = 0, tTx0 = 0, tTy0 = 0;
-  zOverlay.addEventListener('touchstart', e => {
-    const t = e.touches;
-    if (t.length === 2) {
-      tPinch0 = Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
-      tScale0 = zScale;
-    } else {
-      tX0 = t[0].clientX; tY0 = t[0].clientY; tTx0 = zTx; tTy0 = zTy;
-    }
-  }, { passive: true });
-  zOverlay.addEventListener('touchmove', e => {
-    e.preventDefault();
-    const t = e.touches;
-    if (t.length === 2) {
-      const d = Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
-      zScale = Math.min(MAX_S, Math.max(MIN_S, tScale0 * d / tPinch0));
-    } else if (t.length === 1 && zScale > 1) {
-      zTx = tTx0 + t[0].clientX - tX0;
-      zTy = tTy0 + t[0].clientY - tY0;
-    }
-    zClamp(); zApply();
-  }, { passive: false });
-
-  /* ESC chiude lo zoom prima del modal (capture phase) */
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && zOverlay.classList.contains('open')) {
-      closeZoom(); e.stopPropagation();
-    }
-  }, true);
-})();
-
-/* ── Init ── */
-renderGrid('objects');
-renderGrid('dioramas');
-renderHomePreviews();
-
-/* ══════════════════════════════════════
-   WOW EFFECTS — loader, cursor, reveal, particles
-══════════════════════════════════════ */
-
-/* ── Page Loader ── */
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('pageLoader').classList.add('hidden');
-  }, 1100);
-});
-
-
-/* ── Scroll Reveal ── */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      revealObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-function initReveal() {
-  /* Section heads */
-  document.querySelectorAll('.section-head').forEach(el => {
-    el.classList.add('reveal');
-    revealObserver.observe(el);
-  });
-  /* Card grids — stagger */
-  document.querySelectorAll('.product-card, .dual-card').forEach((el, i) => {
-    el.classList.add('reveal');
-    el.style.transitionDelay = (0.08 * (i % 4)) + 's';
-    revealObserver.observe(el);
-  });
-  /* Banner strip */
-  document.querySelectorAll('.banner-strip, .dual-banner').forEach(el => {
-    el.classList.add('reveal');
-    revealObserver.observe(el);
-  });
-}
-/* Esegui dopo che le grid sono renderizzate */
-setTimeout(initReveal, 200);
-
-/* ── Particles Hero ── */
-const canvas = document.getElementById('heroCanvas');
-if (canvas) {
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-
-  function resizeCanvas() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  const COLORS = ['rgba(200,136,42,', 'rgba(232,170,74,', 'rgba(248,220,140,'];
-  for (let i = 0; i < 55; i++) {
-    particles.push({
-      x: Math.random() * (typeof W !== 'undefined' ? W : 1400),
-      y: Math.random() * (typeof H !== 'undefined' ? H : 700),
-      r: Math.random() * 1.8 + 0.4,
-      dx: (Math.random() - 0.5) * 0.3,
-      dy: -(Math.random() * 0.4 + 0.15),
-      alpha: Math.random() * 0.5 + 0.15,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)]
-    });
-  }
-
-  function drawParticles() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + p.alpha + ')';
-      ctx.fill();
-      p.x += p.dx;
-      p.y += p.dy;
-      if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; }
-      if (p.x < -4) p.x = W + 4;
-      if (p.x > W + 4) p.x = -4;
-    });
-    requestAnimationFrame(drawParticles);
-  }
-  drawParticles();
-}
-
-/* ── Hero Parallax leggero ── */
-const heroSlider = document.getElementById('heroSlider');
-if (heroSlider && window.matchMedia('(pointer:fine)').matches) {
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    heroSlider.querySelectorAll('.slide-bg img').forEach(img => {
-      img.style.transform = `scale(1.05) translateY(${y * 0.18}px)`;
-    });
-  }, { passive: true });
-}
-</script>
+<script src="/assets/app.js"></script>
 </body>
 </html>

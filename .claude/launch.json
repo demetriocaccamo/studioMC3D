@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "MC3D Static Server",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "C:\\Users\\demet\\portfolio-3d"],
+      "port": 8080
+    },
+    {
+      "name": "Dieta",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "C:\\Users\\demet\\Dieta", "-p", "5173", "--no-clipboard"],
+      "port": 5173
+    },
+    {
+      "name": "Biblioteca",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "3456", "--directory", "C:\\Users\\demet\\Desktop\\Biblioteca"],
+      "port": 3456
+    }
+  ]
+}

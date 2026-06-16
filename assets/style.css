@@ -67,16 +67,8 @@
       align-items: center;
       gap: 48px;
     }
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      white-space: nowrap;
-      cursor: pointer;
-      text-transform: uppercase;
-    }
-    .logo em { font-style: italic; color: var(--amber); font-weight: 400; }
+    .logo { white-space: nowrap; cursor: pointer; display: flex; align-items: center; }
+    .logo img { height: 28px; width: auto; display: block; }
     .main-nav { display: flex; gap: 0; flex: 1; }
     .nav-item { position: relative; }
     .nav-link {
@@ -854,7 +846,8 @@
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
       gap: 48px;
     }
-    .footer-brand .logo { font-size: 20px; margin-bottom: 16px; display: block; }
+    .footer-brand .logo { margin-bottom: 16px; display: block; }
+    .footer-brand .logo img { height: 24px; }
     .footer-brand p { font-size: 15px; color: var(--muted); line-height: 1.9; max-width: 260px; font-weight: 300; }
     .footer-col h5 {
       font-family: 'JetBrains Mono', monospace;
@@ -1181,17 +1174,11 @@
     }
     .page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     .loader-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 96px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--white);
       opacity: 0;
       transform: translateY(16px);
       animation: loaderIn .7s .2s var(--ease) forwards;
     }
-    .loader-logo em { font-style: italic; color: var(--amber); font-weight: 400; }
+    .loader-logo img { height: 90px; width: auto; display: block; }
     .loader-bar {
       width: 120px; height: 1px;
       background: var(--border);
@@ -1318,12 +1305,8 @@
     }
 
     /* ── Logo hover pulse ── */
-    .logo {
-      transition: color .2s, text-shadow .3s;
-    }
-    .logo:hover {
-      text-shadow: 0 0 28px rgba(200,136,42,.4);
-    }
+    .logo { transition: opacity .2s; }
+    .logo:hover { opacity: .8; }
 
     /* ── Btn glow ── */
     .slide-cta:hover {

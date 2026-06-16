@@ -19,6 +19,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <style>
+    .processo-hero-video {
+      position: relative;
+      width: 100%;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .processo-hero-video video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .processo-hero-video::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,.55) 0%, rgba(10,10,10,.72) 100%);
+      z-index: 1;
+    }
+    .processo-hero-video .contact-hero {
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      padding: 120px 24px 100px;
+    }
+    @media(max-width:768px) {
+      .processo-hero-video { min-height: 360px; }
+      .processo-hero-video .contact-hero { padding: 80px 16px 60px; }
+    }
     .processo-wrap { max-width: 860px; margin: 0 auto; padding: 80px 48px 100px; }
     .processo-step { display: grid; grid-template-columns: 60px 1fr; gap: 0 32px; margin-bottom: 64px; align-items: start; }
     .step-num { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 700; color: rgba(200,136,42,.15); line-height: 1; margin-top: -8px; }
@@ -73,10 +107,15 @@
 </div>
 
 <main>
-  <div class="contact-hero">
-    <div class="eyebrow">Il Processo</div>
-    <h1>Dal disegno in Fusion 360<br>alla stampa 3D</h1>
-    <p>Come nasce ogni pezzo MC3D Studio, dal modello digitale al pezzo finito.</p>
+  <div class="processo-hero-video">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="/processo/video_processo.mp4" type="video/mp4">
+    </video>
+    <div class="contact-hero">
+      <div class="eyebrow">Il Processo</div>
+      <h1>Dal disegno in Fusion 360<br>alla stampa 3D</h1>
+      <p>Come nasce ogni pezzo MC3D Studio, dal modello digitale al pezzo finito.</p>
+    </div>
   </div>
 
   <div class="processo-wrap">

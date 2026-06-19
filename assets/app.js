@@ -17,7 +17,7 @@ const OBJECTS = [
     specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Decalcomanie', Dimensioni:'45x17x25,5 cm' }
   },
   { id:'o9', badge:'new', cat:'decorativo', ta:'ta-5',
-    imgs:['img/tribuna2-f1-1.jpg','img/tribuna2-f1-2.jpg'], imgfit:'cover',
+    imgs:['img/tribuna2-f1-1.jpg','img/tribuna2-f1-2.jpg','img/trib_6.jpg'], imgfit:'cover',
     title:'Tribuna Compatta Marlboro / Gulf',
     sub:'Motorsport Collection',
     short:'Tribuna 2 settori in scala 1:32 con cartelloni Marlboro World Championship Team e Gulf.',
@@ -473,6 +473,10 @@ function initReveal() {
   /* Banner strip */
   document.querySelectorAll('.banner-strip, .dual-banner').forEach(el => {
     el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
+  /* Stats + process strips */
+  document.querySelectorAll('.stats-strip, .process-strip').forEach(el => {
     revealObserver.observe(el);
   });
 }

@@ -187,6 +187,32 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <!-- Marquee ticker -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">Stampa 3D Artigianale<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Modellismo Scala 1:32<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Diorami da Collezione<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Fusion 360<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Rifinitura a Mano<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Shadow Box<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Decalcomanie<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Bambu Lab FDM<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Stampa 3D Artigianale<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Modellismo Scala 1:32<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Diorami da Collezione<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Fusion 360<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Rifinitura a Mano<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Shadow Box<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Decalcomanie<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Bambu Lab FDM<span class="marquee-dot"></span></span>
+    </div>
   </div>
 
   <!-- Oggetti in evidenza -->
@@ -200,13 +226,39 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
-  <div class="product-grid" id="home-objects"></div>
+  <div class="bento-grid" id="home-objects"></div>
+
+  <!-- Stats strip -->
+  <div class="stats-strip reveal">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="20">0</span><em>+</em></div>
+        <div class="stat-label">Opere in Collezione</div>
+        <div class="stat-sub">Ogni pezzo unico e firmato</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="5">0</span><em>+</em></div>
+        <div class="stat-label">Anni di Esperienza</div>
+        <div class="stat-sub">Stampa FDM e design CAD</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1<em>:32</em></div>
+        <div class="stat-label">Scala di Riferimento</div>
+        <div class="stat-sub">Compatible slot car standard</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="360">0</span><em>°</em></div>
+        <div class="stat-label">Design Fusion 360</div>
+        <div class="stat-sub">Ogni pezzo disegnato in CAD</div>
+      </div>
+    </div>
+  </div>
 
   <!-- Banner diorami -->
   <div class="banner-strip">
     <a class="banner-inner" href="/diorami/" style="display:flex;align-items:center;">
       <div class="banner-art thumb-art ta-7" style="position:absolute;inset:0;height:100%">
-        <div class="ta-icon" style="font-size:clamp(100px,14vw,220px);color:rgba(200,136,42,.18);letter-spacing:.12em;font-weight:700;white-space:nowrap">DIORAMI</div>
+        <div class="ta-icon" style="font-size:clamp(100px,14vw,220px);color:rgba(139,92,246,.18);letter-spacing:.12em;font-weight:700;white-space:nowrap">DIORAMI</div>
       </div>
       <div class="banner-text">
         <div class="eyebrow">Collezione</div>
@@ -230,7 +282,41 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
-  <div class="product-grid" id="home-dioramas"></div>
+  <div class="bento-grid" id="home-dioramas"></div>
+
+  <!-- Process teaser -->
+  <div class="process-strip reveal">
+    <div class="process-inner">
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Concept &amp; Design</div>
+          <div class="step-desc">Ogni pezzo nasce da un disegno parametrico in Fusion 360.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Stampa FDM</div>
+          <div class="step-desc">Produzione con Bambu Lab su filamenti PLA selezionati.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Rifinitura</div>
+          <div class="step-desc">Verniciatura, decalcomanie e weathering artigianale.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">Pezzo Unico</div>
+          <div class="step-desc">Ogni opera è un esemplare firmato, realizzato con cura.</div>
+        </div>
+      </div>
+      <div class="process-cta">
+        <a class="btn-ghost" href="/processo/">
+          Il Processo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- Dual CTA banners -->
   <div class="dual-banner">
@@ -296,7 +382,7 @@
 <div id="objects" class="page">
   <div class="collection-hero">
     <div class="hero-art thumb-art ta-4" style="height:100%;opacity:.35">
-      <div class="ta-icon" style="font-size:100px;color:rgba(200,136,42,.07)">OBJ</div>
+      <div class="ta-icon" style="font-size:100px;color:rgba(139,92,246,.07)">OBJ</div>
     </div>
     <div class="collection-hero-text">
       <div class="eyebrow">Portfolio</div>
@@ -351,7 +437,7 @@
 <div id="dioramas" class="page">
   <div class="collection-hero">
     <div class="hero-art thumb-art ta-7" style="height:100%;opacity:.35">
-      <div class="ta-icon" style="font-size:100px;color:rgba(200,136,42,.07)">DIO</div>
+      <div class="ta-icon" style="font-size:100px;color:rgba(139,92,246,.07)">DIO</div>
     </div>
     <div class="collection-hero-text">
       <div class="eyebrow">Portfolio</div>
@@ -507,5 +593,29 @@
 </div>
 
 <script src="/assets/app.js"></script>
+<script>
+  // Counter animation for stats strip
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1400;
+    const start = performance.now();
+    function step(now) {
+      const elapsed = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - elapsed, 3);
+      el.textContent = Math.round(ease * target);
+      if (elapsed < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.counter[data-target]').forEach(animateCounter);
+        statsObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.stats-strip').forEach(el => statsObs.observe(el));
+</script>
 </body>
 </html>

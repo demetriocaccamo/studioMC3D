@@ -9,7 +9,7 @@ const OBJECTS = [
     specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Decalcomanie', Altezza:'~28 cm' }
   },
   { id:'o8', badge:'new', cat:'decorativo', ta:'ta-3',
-    imgs:['img/tribuna-f1-1.jpg','img/tribuna-f1-2.jpg','img/tribuna-f1-3.jpg'], imgfit:'cover',
+    imgs:['img/tribuna-f1-1.jpg','img/tribuna-f1-2.jpg','img/tribuna-f1-3.jpg','img/tribuna-f1-4.jpg'], imgfit:'cover',
     title:'Tribuna da Circuito F1',
     sub:'Motorsport Collection',
     short:'Tribuna 3 settori in scala 1:32 con sedute in legno, struttura metallica e cartelloni sponsor.',

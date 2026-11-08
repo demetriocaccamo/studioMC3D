@@ -5,8 +5,8 @@ const OBJECTS = [
     title:'Lampada Spot Vintage — Restyling 3D',
     sub:'Second Life Collection',
     short:'Lampada da tavolo anni \'70 trovata al mercatino di Gonzaga e riportata in vita con parti stampate in 3D, rosso lucido e bianco.',
-    desc:'Una lampada da tavolo a sfera orientabile, tipica del design degli anni \'70, recuperata in pessime condizioni al mercatino dell\'antiquariato di Gonzaga. Invece di restaurarla com\'era, l\'abbiamo ripensata: le parti sono state ridisegnate e stampate in 3D, con la ghiera frontale a ciambella, la base svuotatasche arrotondata e il pressacavo in rosso lucido che contrastano con la sfera e il supporto a cavalletto bianchi. Il riflettore interno diffonde una luce calda e morbida. La vaschetta della base può ospitare piccoli oggetti, oppure diventare un piccolo palcoscenico: nella foto un marinaio in miniatura, illuminato come da un faro. Pezzo unico.',
-    specs:{ Tipo:'Lampada da tavolo', Origine:'Mercatino di Gonzaga', Tecnica:'Restyling con stampa 3D', Finitura:'Rosso lucido / bianco' }
+    desc:'Una lampada da tavolo a sfera orientabile, tipica del design degli anni \'70, recuperata in pessime condizioni al mercatino dell\'antiquariato di Gonzaga. Invece di restaurarla com\'era, l\'abbiamo ripensata: le parti sono state ridisegnate, stampate in 3D in PLA e verniciate in rosso: la ghiera frontale a ciambella, la base svuotatasche arrotondata e il pressacavo, che contrastano con la sfera e il supporto a cavalletto bianchi. Il riflettore interno diffonde una luce calda e morbida. La vaschetta della base può ospitare piccoli oggetti, oppure diventare un piccolo palcoscenico: nella foto un marinaio in miniatura, illuminato come da un faro. Pezzo unico.',
+    specs:{ Tipo:'Lampada da tavolo', Origine:'Mercatino di Gonzaga', Materiale:'PLA', Finitura:'Verniciata in rosso' }
   },
   { id:'o7', cat:'decorativo', ta:'ta-3',
     imgs:['img/torre-f1-1.jpg','img/torre-f1-2.jpg','img/torre-f1-3.jpg'], imgfit:'contain',

@@ -1,5 +1,13 @@
 /* ── DATA ── */
 const OBJECTS = [
+  { id:'o12', badge:'new', cat:'funzionale', ta:'ta-6',
+    imgs:['img/lampada-gonzaga-1.jpg','img/lampada-gonzaga-2.jpg','img/lampada-gonzaga-3.jpg'], imgfit:'cover',
+    title:'Lampada Spot Vintage — Restyling 3D',
+    sub:'Second Life Collection',
+    short:'Lampada da tavolo anni \'70 trovata al mercatino di Gonzaga e riportata in vita con parti stampate in 3D, rosso lucido e bianco.',
+    desc:'Una lampada da tavolo a sfera orientabile, tipica del design degli anni \'70, recuperata in pessime condizioni al mercatino dell\'antiquariato di Gonzaga. Invece di restaurarla com\'era, l\'abbiamo ripensata: le parti sono state ridisegnate e stampate in 3D, con la ghiera frontale a ciambella, la base svuotatasche arrotondata e il pressacavo in rosso lucido che contrastano con la sfera e il supporto a cavalletto bianchi. Il riflettore interno diffonde una luce calda e morbida. La vaschetta della base può ospitare piccoli oggetti, oppure diventare un piccolo palcoscenico: nella foto un marinaio in miniatura, illuminato come da un faro. Pezzo unico.',
+    specs:{ Tipo:'Lampada da tavolo', Origine:'Mercatino di Gonzaga', Tecnica:'Restyling con stampa 3D', Finitura:'Rosso lucido / bianco' }
+  },
   { id:'o7', cat:'decorativo', ta:'ta-3',
     imgs:['img/torre-f1-1.jpg','img/torre-f1-2.jpg','img/torre-f1-3.jpg'], imgfit:'contain',
     title:'Torre di Controllo F1 Vintage',
@@ -43,7 +51,7 @@ const OBJECTS = [
 ];
 
 const DIORAMAS = [
-  { id:'d12', badge:'new', cat:'storico', imgs:['img/pullman1-1.jpg','img/pullman1-2.jpg','img/pullman1-3.jpg','img/pullman1-4.jpg','img/pullman1-5.jpg'], imgfit:'cover', landscape:true,
+  { id:'d12', cat:'storico', imgs:['img/pullman1-1.jpg','img/pullman1-2.jpg','img/pullman1-3.jpg','img/pullman1-4.jpg','img/pullman1-5.jpg'], imgfit:'cover', landscape:true,
     title:'Autostazione anni \'70 — Binari 6 e 7',
     sub:'Diorama storico in scala 1:43',
     short:'Un terminal autobus italiano come se ne vedevano negli anni \'70. Tettoia in lamiera ondulata, due pullman d\'epoca, orologio Mondaine, manifesti d\'epoca e figuranti in scala.',

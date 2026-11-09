@@ -1684,3 +1684,17 @@
     .product-card:hover {
       background: #231f17;
     }
+
+    /* ════════════════════════
+       MOBILE — anteprime card intere, senza ritagli
+       (l'img ha object-fit inline da app.js, serve !important)
+    ════════════════════════ */
+    @media(max-width:768px) {
+      .card-image { background: var(--surface); }
+      .card-image img { object-fit: contain !important; }
+      .bento-grid .product-card:first-child .card-image { aspect-ratio: 4/5; }
+      /* riquadri più vicini alle foto (molte quadrate o verticali) */
+      #home-dioramas .card-image, #dioramas-grid .card-image,
+      #home-objects .product-card:last-child .card-image { aspect-ratio: 4/3; }
+      #home-dioramas .product-card:first-child .card-image { aspect-ratio: 16/9; }
+    }

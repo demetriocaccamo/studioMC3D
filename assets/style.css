@@ -1123,9 +1123,11 @@
       }
       .modal-grid { grid-template-columns: 1fr; }
       .modal-img-wrap {
-        aspect-ratio: 1/1;
+        aspect-ratio: 4/5;
         min-height: 300px;
       }
+      /* Su telefono la foto si vede sempre intera, senza ritagli */
+      .modal-gallery img { object-fit: contain; }
       .modal-close-btn { top: 10px; right: 10px; }
       .modal-content { padding: 22px 20px 36px; }
       .modal-content h2 { font-size: 30px; }

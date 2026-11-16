@@ -1,6 +1,6 @@
 /* ── DATA ── */
 const OBJECTS = [
-  { id:'o13', badge:'new', cat:'decorativo', ta:'ta-3',
+  { id:'o13', slug:'lanterne-di-burano', badge:'new', cat:'decorativo', ta:'ta-3',
     imgs:['img/burano-lanterne-1.jpg','img/burano-lanterne-2.jpg','img/burano-lanterne-3.jpg','img/burano-lanterne-4.jpg','img/burano-lanterne-5.jpg','img/burano-lanterne-6.jpg'], imgfit:'cover',
     title:'Lanterne di Burano — Case per lumini LED',
     sub:'Christmas Collection',
@@ -8,7 +8,7 @@ const OBJECTS = [
     desc:'Nel mio ultimo viaggio a Venezia ho fotografato una piazzetta di Burano con quattro case colorate una accanto all\'altra. Da quelle foto era nato lo shadow box "Burano: Forme e Colori"; questa volta le case sono uscite dal quadro: portate a metà scala e trasformate ciascuna in una lanterna per un lumino LED. Ca\' Blu, la più alta, con il timpano curvo e il comignolo sulla spalla sinistra; Ca\' Gialla, con il grande comignolo a scarpa lungo la facciata; Ca\' Verde, con la porta vetrata sotto la piccola pensilina; Ca\' Rossa, che chiude la fila con la portafinestra e il balconcino bianco. Ogni casa ha il tetto in coppi veneziani, i telai di porte e finestre con un sottile "vetro smerigliato" bianco che lascia passare la luce e un cassetto sul retro che ospita il lumino. Le case gialla e rossa si illuminano in tutta la parete, quelle verde e blu restano piene e si accendono solo alle finestre. Accostate nell\'ordine della piazzetta vera — blu, gialla, verde, rossa — diventano un villaggio di Natale più caldo delle solite casette innevate.',
     specs:{ Materiale:'PLA opaco, pareti piene', Dimensioni:'da 56×56×114 a 69×56×165 mm', Luce:'Lumino LED Ø 38 mm', Pezzi:'4 case, 8–11 parti ciascuna', File:'<a href="https://makerworld.com/it/models/3589443-burano-tea-light-houses-christmas-led-lanterns" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">Gratis su MakerWorld</a>' }
   },
-  { id:'o12', badge:'new', cat:'funzionale', ta:'ta-6',
+  { id:'o12', slug:'lampada-spot-vintage', badge:'new', cat:'funzionale', ta:'ta-6',
     imgs:['img/lampada-gonzaga-1.jpg','img/lampada-gonzaga-2.jpg','img/lampada-gonzaga-3.jpg'], imgfit:'cover',
     title:'Lampada Spot Vintage — Restyling 3D',
     sub:'Second Life Collection',
@@ -16,7 +16,7 @@ const OBJECTS = [
     desc:'Una lampada da tavolo a sfera orientabile, tipica del design degli anni \'70, recuperata in pessime condizioni al mercatino dell\'antiquariato di Gonzaga. Invece di restaurarla com\'era, l\'abbiamo ripensata: le parti sono state ridisegnate, stampate in 3D in PLA e verniciate in rosso: la ghiera frontale a ciambella, la base svuotatasche arrotondata e il pressacavo, che contrastano con la sfera e il supporto a cavalletto bianchi. Il riflettore interno diffonde una luce calda e morbida. La vaschetta della base può ospitare piccoli oggetti, oppure diventare un piccolo palcoscenico: nella foto un marinaio in miniatura, illuminato come da un faro. Pezzo unico.',
     specs:{ Tipo:'Lampada da tavolo', Origine:'Mercatino di Gonzaga', Materiale:'PLA', Finitura:'Verniciata in rosso' }
   },
-  { id:'o7', cat:'decorativo', ta:'ta-3',
+  { id:'o7', slug:'torre-di-controllo-f1', cat:'decorativo', ta:'ta-3',
     imgs:['img/torre-f1-1.jpg','img/torre-f1-2.jpg','img/torre-f1-3.jpg'], imgfit:'contain',
     title:'Torre di Controllo F1 Vintage',
     sub:'Motorsport Collection',
@@ -24,7 +24,7 @@ const OBJECTS = [
     desc:'Replica della torre di controllo dei box di un circuito F1 degli anni \'70, in scala 1:32. Struttura a tre livelli con texture mattoni stampata direttamente nel PLA. I vari elementi sono stampati in PLA di diversi colori. Le livree vintage (Goodyear, Champion, Castrol, Martini) sono applicate con decalcomanie a immersione. Compatibile con i principali tracciati slot car in scala 1:32.',
     specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Decalcomanie', Altezza:'~28 cm' }
   },
-  { id:'o8', cat:'decorativo', ta:'ta-3',
+  { id:'o8', slug:'tribuna-circuito-f1', cat:'decorativo', ta:'ta-3',
     imgs:['img/tribuna-f1-1.jpg','img/tribuna-f1-2.jpg','img/tribuna-f1-3.jpg','img/tribuna-f1-4.jpg'], imgfit:'cover',
     title:'Tribuna da Circuito F1',
     sub:'Motorsport Collection',
@@ -32,7 +32,7 @@ const OBJECTS = [
     desc:'Tribuna da circuito F1 in scala 1:32 con tre settori indipendenti da 10 gradoni ciascuno. La struttura portante in acciaio verniciato grigio e i gradoni in finitura legno sono stampati separatamente e assemblati. I cartelloni pubblicitari (Firestone, Agip, Jack Daniels) sono stampati in 3D e i banner Ferrari sono applicati con decalcomanie a immersione. La base nera include il logo bandiera a scacchi. Compatibile con tracciati slot car standard in scala 1:32.',
     specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Decalcomanie', Dimensioni:'45x17x25,5 cm' }
   },
-  { id:'o9', cat:'decorativo', ta:'ta-5',
+  { id:'o9', slug:'tribuna-compatta-marlboro-gulf', cat:'decorativo', ta:'ta-5',
     imgs:['img/tribuna2-f1-1.jpg','img/tribuna2-f1-2.jpg','img/trib_6.jpg'], imgfit:'cover',
     title:'Tribuna Compatta Marlboro / Gulf',
     sub:'Motorsport Collection',
@@ -40,7 +40,7 @@ const OBJECTS = [
     desc:'Versione compatta a due settori della tribuna da circuito, in scala 1:32. Stessa costruzione della versione maggiore: struttura portante grigia, gradoni con finitura legno e base nera. I due maxi-cartelloni (Marlboro World Championship Team e Gulf) sono applicati con decalcomanie a immersione su supporto stampato separatamente. Dimensioni ridotte la rendono ideale per angoli stretti del tracciato o come complemento alla tribuna grande.',
     specs:{ Materiale:'PLA', Scala:'1:32', Finitura:'Verniciata + decalcomanie', Dimensioni:'~25x18 cm' }
   },
-  { id:'o11', cat:'decorativo', ta:'ta-4',
+  { id:'o11', slug:'orologio-space-invaders', cat:'decorativo', ta:'ta-4',
     imgs:['img/orologio_space_invaders.jpg'], imgfit:'cover',
     title:'Orologio Space Invaders',
     sub:'Arcade Collection',
@@ -48,7 +48,7 @@ const OBJECTS = [
     desc:'Orologio da parete dal diametro di 20 cm dedicato al celebre gioco arcade Space Invaders, nato nel 1978. Il disco circolare in PLA nero ospita il pixelato alieno giallo al centro del quadrante, con i numeri 12, 3, 6 e 9 in carattere pixel-font a tutto rilievo. La scritta "SPACE INVADERS" campeggia nella metà inferiore in stile retro-gaming. Le lancette grigie completano l\'oggetto, trasformando un\'icona della cultura pop videoludica in un pezzo d\'arredo funzionale. Stampato in PLA bicolore, non richiede verniciatura aggiuntiva.',
     specs:{ Materiale:'PLA', Diametro:'20 cm', Finitura:'Bicolore nero/giallo', Tema:'Arcade anni \'70' }
   },
-  { id:'o10', cat:'decorativo', ta:'ta-2',
+  { id:'o10', slug:'barriere-circuito-reti', cat:'decorativo', ta:'ta-2',
     imgs:['img/barriere-1.jpg','img/barriere-2.jpg','img/barriere-3.jpg','img/barriere-4.jpg','img/barriere-5.jpg','img/barriere-6.jpg'], imgfit:'cover',
     title:'Barriere da Circuito con Reti',
     sub:'Motorsport Collection',
@@ -59,63 +59,63 @@ const OBJECTS = [
 ];
 
 const DIORAMAS = [
-  { id:'d12', cat:'storico', imgs:['img/pullman1-1.jpg','img/pullman1-2.jpg','img/pullman1-3.jpg','img/pullman1-4.jpg','img/pullman1-5.jpg'], imgfit:'cover', landscape:true,
+  { id:'d12', slug:'autostazione-anni-70', cat:'storico', imgs:['img/pullman1-1.jpg','img/pullman1-2.jpg','img/pullman1-3.jpg','img/pullman1-4.jpg','img/pullman1-5.jpg'], imgfit:'cover', landscape:true,
     title:'Autostazione anni \'70 — Binari 6 e 7',
     sub:'Diorama storico in scala 1:43',
     short:'Un terminal autobus italiano come se ne vedevano negli anni \'70. Tettoia in lamiera ondulata, due pullman d\'epoca, orologio Mondaine, manifesti d\'epoca e figuranti in scala.',
     desc:'Diorama storico in scala 1:43. Un terminal autobus italiano come se ne vedevano negli anni \'70. Sotto la tettoia in lamiera ondulata che copre i binari 6 e 7, due pullman d\'epoca si fronteggiano: il Fiat/SITA in livrea blu e gialla diretto a Salerno e il Fiat 309 Menarini bianco e azzurro. Sul marciapiede in sampietrini, un palo centrale regge l\'orologio a doppia faccia in stile Mondaine e una bacheca di manifesti d\'epoca — dal rabarbaro Zucco alle réclame del periodo. Intorno, i figuranti animano la scena: passeggeri in attesa, un viaggiatore seduto, il personale di stazione. Sotto la tettoia, una fila di LED a luce calda restituisce l\'illuminazione dei terminal di allora. Strutture e pavimentazione dipinte a mano, con weathering e invecchiamento.',
     specs:{ Scala:'1:43', Tecnica:'Stampa 3D + modelli diecast', Finitura:'Dipinto a mano + LED + weathering', Ambientazione:'Autostazione italiana, anni \'70' }
   },
-  { id:'d13', cat:'shadow-box', imgs:['img/burano-1.jpg','img/burano-2.jpg','img/burano-3.jpg','img/burano-4.jpg'], imgfit:'contain', landscape:true,
+  { id:'d13', slug:'burano-forme-e-colori', cat:'shadow-box', imgs:['img/burano-1.jpg','img/burano-2.jpg','img/burano-3.jpg','img/burano-4.jpg'], imgfit:'contain', landscape:true,
     title:'Burano: Forme e Colori',
     sub:'Shadow Box Pop Art',
     short:'Le casette colorate di Burano reinterpretate in stile pop art e paper craft — shadow box 50×50 cm, stampa 3D.',
     desc:'Shadow box in cornice nera 50×50 cm che cattura l\'essenza cromatica di Burano, l\'isola veneziana celebre per le sue facciate dipinte con colori primari squillanti. La composizione affianca quattro case contigue — blu, giallo, verde, rosso — reinterpretate in chiave pop art e paper craft: volumi netti, palette ipersatura, dettagli stilizzati. Persiane in legno scuro, comignoli slanciati, antenne TV, cactus in vaso, tende a strisce e sedie da esterno animano la scena con la stessa vivacità pittoresca del borgo lagunare. Il cielo azzurro con nuvole sagomate a strati completa l\'effetto di profondità tipico del shadow box. Un omaggio all\'architettura popolare veneziana tradotto nel linguaggio grafico del paper craft tridimensionale.',
     specs:{ Formato:'Shadow box 50×50 cm', Tecnica:'Stampa 3D, PLA multicolore', Finitura:'Verniciato a mano', Ispirazione:'Burano, Venezia' }
   },
-  { id:'d11', cat:'shadow-box', imgs:['img/reina_roja.jpg'], imgfit:'contain', landscape:true,
+  { id:'d11', slug:'edificio-reina', cat:'shadow-box', imgs:['img/reina_roja.jpg'], imgfit:'contain', landscape:true,
     title:'Edificio Reina — Facciata Urbana',
     sub:'Architettura in Cornice',
     short:'Facciata multipiano con Hostal Orca e pannello ornamentale — shadow box 50×50 cm, ispirazione: Felix Diaz Escauriaza.',
     desc:'Shadow box in cornice nera 50×50 cm che riproduce la facciata di un palazzo urbano spagnolo con iscrizione "EDIFICIO REINA ROJA MMXIV". Il lato sinistro restituisce l\'architettura classica del centro storico: cinque piani con persiane in legno marrone, balconi in ferro battuto, vasi fioriti e segnaletica verticale rossa dell\'Hostal Ubeda. Il coronamento superiore è scandito da una terrazza con balaustrata, vasi ornamentali e timpano in mattoni. Il lato destro costituisce un pannello decorativo autonomo: colonne bianche con cornici dorate separano specchi ornamentali ricamati con figure di animali in bordeaux scuro — gatti, uccelli, lucertole, mani — secondo il vocabolario visivo dell\'illustratore Felix Diaz Escauriaza. La composizione dialoga tra rigore architettonico e ornamento tribale, creando un oggetto al confine tra diorama e arte murale tridimensionale.',
     specs:{ Formato:'Shadow box 50×50 cm', Tecnica:'Stampa 3D, PLA di vari colori', Finitura:'Vasi con rametti veri', Ispirazione:'<a href="https://www.felixdiazescauriaza.com/#/mural-illustration/" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">Felix Diaz Escauriaza</a>' }
   },
-  { id:'d10', cat:'shadow-box', imgs:['img/farmacia1.jpg'], imgfit:'contain', landscape:true,
+  { id:'d10', slug:'farmacia-palazzo-anni-60', cat:'shadow-box', imgs:['img/farmacia1.jpg'], imgfit:'contain', landscape:true,
     title:'Farmacia — Palazzo Urbano anni \'60',
     sub:'Diorama Urbano',
     short:'Facciata di palazzo italiano con farmacia al piano terra e autobus SGEA — shadow box 25×25 cm, stampa 3D dipinta a mano.',
     desc:'Diorama urbano in cornice bianca 25×25 cm che riproduce un angolo di città italiana degli anni \'60. La facciata del palazzo in intonaco ocra è scandita da persiane in legno verde scuro e cornici bianche; al piano terra campeggia l\'insegna "FARMACIA" su vetrina scura con allestimento interno visibile. Sul lato destro, balconi in ferro battuto su sei livelli ospitano vasi fioriti e piantine — dettaglio che restituisce la vivacità del quotidiano. Sulla strada, un autobus SGEA blu e bianco — modello diecast selezionato — completa la scena di quartiere. Pittura a mano con washing su intonaco, dry-brushing sulle persiane e invecchiamento delle facciate con polveri pigmentate.',
     specs:{ Formato:'Shadow box 25×25 cm', Tecnica:'FDM + modello diecast', Finitura:'Dipinto a mano + weathering', Ambientazione:'Città italiana, anni \'60' }
   },
-  { id:'d5', cat:'shadow-box', imgs:['img/venezia-1.jpg'], imgfit:'contain', landscape:true,
+  { id:'d5', slug:'palazzo-veneziano-motoscafo', cat:'shadow-box', imgs:['img/venezia-1.jpg'], imgfit:'contain', landscape:true,
     title:'Palazzo Veneziano con Motoscafo',
     sub:'Diorama Veneziano',
     short:'Quadretto in cornice: facciata veneziana e motoscafo in latta anni \'50 — stampa 3D dipinta e modificata a mano.',
     desc:'Diorama a cornice che riproduce la facciata di un palazzo veneziano affacciato sul canale. La struttura è stampata in 3D con dettagli architettonici accurati: finestre con persiane, balconi in ferro battuto, portale ad arco con lunetta decorativa e rivestimento in mattoni con effetto intonaco invecchiato. Il motoscafo in latta degli anni \'50 — pezzo vintage selezionato e integrato nella composizione — galleggia sull\'acqua del rio realizzata in resina. Le bricole in legno completano l\'ambientazione lagunare. Pittura a mano con tecniche di washing e dry-brushing per restituire il caratteristico degrado elegante dell\'architettura veneziana.',
     specs:{ Formato:'Quadretto 30×30 cm', Tecnica:'FDM + Latta vintage', Finitura:'Dipinto a mano + weathering', Ambientazione:'Venezia, anni \'50' }
   },
-  { id:'d7', cat:'storico', imgs:['img/strada-1.jpg','img/strada-2.jpg'], imgfit:'contain', landscape:true,
+  { id:'d7', slug:'casa-della-gomma-anni-60', cat:'storico', imgs:['img/strada-1.jpg','img/strada-2.jpg'], imgfit:'contain', landscape:true,
     title:'Casa della Gomma — Borgo anni \'60',
     sub:'Diorama Stradale',
     short:'Angolo di paese toscano in scala: pneumatici Pirelli e Michelin, sei auto d\'epoca e sfondo collinare dipinto a mano.',
     desc:'Diorama stradale che riproduce un angolo di borgo italiano degli anni \'60. La "Casa della Gomma" campeggia con le insegne Pirelli, Michelin, Gulf, Castrol, Texaco e Champion. Sul selciato sfilano sei modelli in scala: Fiat 600 celeste, Fiat 850 Spider bianca, spider bordeaux, berlina grigia, Renault Dauphine blu e il furgone Fiat 238 giallo con livrea a strisce. Lo sfondo riproduce la campagna toscana con cipressi, casolare e strade bianche. Sul lato, un manifesto elettorale del PCI e una bacheca con avvisi di paese completano l\'atmosfera d\'epoca. Albero in resina e panchine in legno arredano il marciapiede in sampietrini.',
     specs:{ Formato:'Diorama stradale', Tecnica:'FDM + modelli diecast', Finitura:'Dipinto a mano + weathering', Ambientazione:'Borgo toscano, anni \'60' }
   },
-  { id:'d9', cat:'shadow-box', imgs:['img/calciobalilla-1.jpeg'], imgfit:'contain', landscape:true,
+  { id:'d9', slug:'calciatori-balilla-anni-40', cat:'shadow-box', imgs:['img/calciobalilla-1.jpeg'], imgfit:'contain', landscape:true,
     title:'Calciatori da Balilla — Shadow Box anni \'40',
     sub:'Quadretto da Collezione',
     short:'Tre figurine lignee da calcio balilla anni \'40 su campo da gioco stampato — cornice 23×28 cm con vetro.',
     desc:'Shadow box in cornice nera 23×28 cm che valorizza tre figurine originali da calcio balilla degli anni \'40. Le statuette in legno intagliato e dipinto a mano — due giocatori in maglia a strisce bianche e nere e uno in maglia rossa, tutti con pantaloncini scuri e calzettoni — sono montate sulla barra metallica originale con i giunti a vite d\'epoca. Il pallone in resina completa la scena. Lo sfondo riproduce grafica di un campo da calcio con linee d\'area su fondo verde, creando profondità e contesto sportivo. Tecnica mista: oggetti vintage originali su stampa fotografica incorniciata.',
     specs:{ Formato:'Cornice 23×28 cm', Tecnica:'Figurine vintage + sfondo stampato', Finitura:'Shadow box con vetro', Ambientazione:'Campo da calcio, anni \'40' }
   },
-  { id:'d8', cat:'shadow-box', imgs:['img/fantino-1.png'], imgfit:'contain', landscape:true,
+  { id:'d8', slug:'fantino-dick-anni-50', cat:'shadow-box', imgs:['img/fantino-1.png'], imgfit:'contain', landscape:true,
     title:'Il Fantino Dick — Shadow Box anni \'50',
     sub:'Quadretto da Collezione',
     short:'Giocattolo in latta anni \'50 su fotografia vintage in cornice A4 — cavallo e fantino "Dick" in livrea gialla su ippodromo in bianco e nero.',
     desc:'Shadow box in cornice nera formato A4 (21×29.7 cm) che unisce un oggetto d\'epoca a una fotografia storica. Il cavallo con fantino in livrea gialla — un giocattolo in latta degli anni \'50 con il nome "Dick" impresso sul fianco — è montato in rilievo davanti a una fotografia d\'archivio in bianco e nero che ritrae un ippodromo anni \'30 affollato di spettatori. Il contrasto tra il colore vivace del giocattolo e la fotografia in scala di grigi crea una composizione sospesa nel tempo. Tecnica mista: oggetto vintage originale su stampa fotografica in vetrina con profondità.',
     specs:{ Formato:'Cornice A4 — 21×29.7 cm', Tecnica:'Oggetto vintage + fotografia d\'archivio', Finitura:'Shadow box con vetro', Ambientazione:'Ippodromo, anni \'30–\'50' }
   },
-  { id:'d6', cat:'storico', imgs:['img/autosalone-fiat-1.jpg'], imgfit:'contain', landscape:true,
+  { id:'d6', slug:'autosalone-fiat-anni-80', cat:'storico', imgs:['img/autosalone-fiat-1.jpg'], imgfit:'contain', landscape:true,
     title:'Autosalone Fiat anni \'80',
     sub:'Diorama Automobilistico',
     short:'Concessionaria Fiat in miniatura: quattro modelli iconici in vetrina — Panda, 127, 1300 e Ferrari 456 — con insegna luminosa e manifesti d\'epoca.',
@@ -279,17 +279,44 @@ function gallerySel(idx) {
   document.querySelectorAll('.modal-thumbs .modal-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
 }
 
-function openItemById(id) {
+/* ── Indirizzo di ogni scheda: /oggetti-design/<slug>/ e /diorami/<slug>/ ── */
+function sectionUrl(item) { return OBJECTS.includes(item) ? '/oggetti-design/' : '/diorami/'; }
+function itemUrl(item)    { return sectionUrl(item) + item.slug + '/'; }
+const pageTitle = window.__sectionTitle || document.title;
+let modalPushed = false;   // true se l'apertura ha aggiunto una voce alla cronologia
+
+function openItemById(id, push = true) {
   const item = ALL_ITEMS.find(i => i.id === id);
-  if (item) openModal(item);
+  if (!item) return;
+  openModal(item);
+  document.title = item.title + ' — MC3D Studio';
+  const url = itemUrl(item);
+  if (push && location.pathname !== url) {
+    history.pushState({ item: id }, '', url);
+    modalPushed = true;
+  }
 }
 
 function handleModalClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
-function closeModal() {
+function closeModal(fromHistory) {
   const m = document.getElementById('modal');
-  if (m) m.classList.remove('open');
+  if (!m || !m.classList.contains('open')) return;
+  m.classList.remove('open');
   document.body.style.overflow = '';
+  document.title = pageTitle;
+  if (fromHistory === true) { modalPushed = false; return; }
+  if (modalPushed) {
+    modalPushed = false;
+    history.back();                       // torna all'indirizzo di prima
+  } else if (window.__openItem) {
+    const item = ALL_ITEMS.find(i => i.id === window.__openItem);
+    if (item && location.pathname === itemUrl(item)) history.replaceState(null, '', sectionUrl(item));
+  }
 }
+window.addEventListener('popstate', e => {
+  if (e.state && e.state.item) { openItemById(e.state.item, false); modalPushed = true; }
+  else closeModal(true);
+});
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 
@@ -436,6 +463,8 @@ renderHomePreviews();
   if (window.__initialPage && window.__initialPage !== 'home') {
     showPage(window.__initialPage);
   }
+  /* Pagina di una singola scheda: apre subito il dettaglio */
+  if (window.__openItem) openItemById(window.__openItem, false);
   if (window.__initialFilter) {
     Object.entries(window.__initialFilter).forEach(([sec, cat]) => {
       activeFilter[sec] = cat;

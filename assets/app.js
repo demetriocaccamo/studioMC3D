@@ -1,5 +1,13 @@
 /* ── DATA ── */
 const OBJECTS = [
+  { id:'o13', badge:'new', cat:'decorativo', ta:'ta-3',
+    imgs:['img/burano-lanterne-1.jpg','img/burano-lanterne-2.jpg','img/burano-lanterne-3.jpg','img/burano-lanterne-4.jpg','img/burano-lanterne-5.jpg','img/burano-lanterne-6.jpg'], imgfit:'cover',
+    title:'Lanterne di Burano — Case per lumini LED',
+    sub:'Christmas Collection',
+    short:'Le quattro case colorate di una piazzetta di Burano trasformate in lanterne per lumini LED: un piccolo villaggio di Natale veneziano.',
+    desc:'Nel mio ultimo viaggio a Venezia ho fotografato una piazzetta di Burano con quattro case colorate una accanto all\'altra. Da quelle foto era nato lo shadow box "Burano: Forme e Colori"; questa volta le case sono uscite dal quadro: portate a metà scala e trasformate ciascuna in una lanterna per un lumino LED. Ca\' Blu, la più alta, con il timpano curvo e il comignolo sulla spalla sinistra; Ca\' Gialla, con il grande comignolo a scarpa lungo la facciata; Ca\' Verde, con la porta vetrata sotto la piccola pensilina; Ca\' Rossa, che chiude la fila con la portafinestra e il balconcino bianco. Ogni casa ha il tetto in coppi veneziani, i telai di porte e finestre con un sottile "vetro smerigliato" bianco che lascia passare la luce e un cassetto sul retro che ospita il lumino. Le case gialla e rossa si illuminano in tutta la parete, quelle verde e blu restano piene e si accendono solo alle finestre. Accostate nell\'ordine della piazzetta vera — blu, gialla, verde, rossa — diventano un villaggio di Natale più caldo delle solite casette innevate.',
+    specs:{ Materiale:'PLA opaco, pareti piene', Dimensioni:'da 56×56×114 a 69×56×165 mm', Luce:'Lumino LED Ø 38 mm', Pezzi:'4 case, 8–11 parti ciascuna', File:'<a href="https://makerworld.com/it/models/3589443-burano-tea-light-houses-christmas-led-lanterns" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">Gratis su MakerWorld</a>' }
+  },
   { id:'o12', badge:'new', cat:'funzionale', ta:'ta-6',
     imgs:['img/lampada-gonzaga-1.jpg','img/lampada-gonzaga-2.jpg','img/lampada-gonzaga-3.jpg'], imgfit:'cover',
     title:'Lampada Spot Vintage — Restyling 3D',
